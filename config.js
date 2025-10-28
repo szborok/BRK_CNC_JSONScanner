@@ -46,12 +46,12 @@ const config = {
   paths: {
     // Test mode paths (for development and testing)
     test: {
-      autoPath: path.join(__dirname, "data", "testPathHumming_auto"),
-      manualPath: path.join(__dirname, "data", "testPathOne_manual"),
+      testDataPathAuto: path.join(__dirname, "data", "testPathHumming_auto"),
+      testDataPathManual: path.join(__dirname, "data", "testPathOne_manual"),
     },
     // Production mode paths (for live operation)
     production: {
-      autoPath: path.join(__dirname, "data", "production"), // Will be created if doesn't exist
+      productionDataPath: path.join(__dirname, "data", "production"), // Will be created if doesn't exist
       manualPath: null, // Will be provided by user in manual mode
     },
     // General paths
@@ -209,13 +209,13 @@ config.getScanPath = function(manualPath = null) {
   
   if (autorun) {
     // Auto mode: use predefined paths
-    return testMode ? this.paths.test.autoPath : this.paths.production.autoPath;
+    return testMode ? this.paths.test.testDataPathAuto : this.paths.production.productionDataPath;
   } else {
     // Manual mode: use provided path or fallback to test manual path
     if (manualPath) {
       return manualPath;
     }
-    return testMode ? this.paths.test.manualPath : null;
+    return testMode ? this.paths.test.testDataPathManual : null;
   }
 };
 

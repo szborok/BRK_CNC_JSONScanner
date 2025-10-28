@@ -1,0 +1,987 @@
+{
+  "system": "hyperMILL 2025",
+  "postProcessor": "",
+  "version": "",
+  "cadPart": "P:/Project/5270_Sumiriko_Pin_01_31406/CAM/W5270NS01_001/W5270NS01001.hmc",
+  "operator": "szborok",
+  "machine": "DMC 105 V Linear",
+  "control": "",
+  "usesToolNames": true,
+  "programLevels": "1",
+  "mainProgramName": "",
+  "operationArea": {
+    "min": {
+      "x": -177.25,
+      "y": -257.61,
+      "z": -61.85
+    },
+    "max": {
+      "x": 177.25,
+      "y": 257.97,
+      "z": 6
+    }
+  },
+  "clamping": {
+    "pallet": "",
+    "fixture": "",
+    "viewerFiles": [
+      "W5270NS01001A_ERB.pdf",
+      "W5270NS01001A_WDB.pdf"
+    ],
+    "pictureFiles": [
+      "38E8_48410E1.gif",
+      "38E8_484121A.gif"
+    ]
+  },
+  "operations": [
+    {
+      "number": 1,
+      "operationPictureFile": "38E8_48413B0.gif",
+      "programName": "W5270NS01001A1.h",
+      "description": "1: EF_D42CIÁN_KOM-U11-TF39_Top:0|0_Bot:0|0_TÚL:5 ||| ",
+      "operation": "openMIND Drilling Cycle",
+      "operationTime": 157.11450107428573,
+      "toolName": "KOM-U11-TF39_H63ABS50",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841381.gif",
+        "holder": "H63ABS50",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-U11-TF39_H63ABS50",
+        "unclampedLength": 167,
+        "diameter": 39,
+        "shankDiameter": 50,
+        "edgeLength": 130.68,
+        "totalLength": 227
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -162,
+          "y": -212,
+          "z": -61.85
+        },
+        "max": {
+          "x": 162,
+          "y": 212,
+          "z": 5
+        }
+      },
+      "maxSpeed": 900,
+      "maxFeed": 105,
+      "maxFeedAxis": 105,
+      "reference": "Spitze"
+    },
+    {
+      "number": 2,
+      "operationPictureFile": "38E8_4841527.gif",
+      "programName": "W5270NS01001A1.h",
+      "description": "2: EF_D69_KOM-U11-TF39_Top:1|0_Bot:-56|0_TÚL:5 ||| ",
+      "operation": "openMIND Drilling Cycle",
+      "operationTime": 39.239553,
+      "toolName": "KOM-U11-TF39_H63ABS50",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841508.gif",
+        "holder": "H63ABS50",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-U11-TF39_H63ABS50",
+        "unclampedLength": 167,
+        "diameter": 39,
+        "shankDiameter": 50,
+        "edgeLength": 130.68,
+        "totalLength": 227
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": 0,
+          "y": 0,
+          "z": -61.85
+        },
+        "max": {
+          "x": 0,
+          "y": 0,
+          "z": 6
+        }
+      },
+      "maxSpeed": 900,
+      "maxFeed": 105,
+      "maxFeedAxis": 105,
+      "reference": "Spitze"
+    },
+    {
+      "number": 3,
+      "operationPictureFile": "38E8_48416AD.gif",
+      "programName": "W5270NS01001A2.h",
+      "description": "3: D17,5CSF_TGT-TOP5-TF17.5_Top:0|0_Bot:0|0_TÚL:5 ||| ",
+      "operation": "openMIND Drilling Cycle",
+      "operationTime": 286.19117011764706,
+      "toolName": "TGT-TOP5-TF17.5_H63W25L90",
+      "toolDetails": {
+        "toolPictureFile": "38E8_484167F.gif",
+        "holder": "H63W25L90",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "TGT-TOP5-TF17.5_H63W25L90",
+        "unclampedLength": 110.9,
+        "diameter": 17.5,
+        "shankDiameter": 32,
+        "edgeLength": 94.93,
+        "totalLength": 200.9
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -162,
+          "y": -165,
+          "z": -61.38
+        },
+        "max": {
+          "x": 162,
+          "y": 165,
+          "z": 5
+        }
+      },
+      "maxSpeed": 1819,
+      "maxFeed": 85,
+      "maxFeedAxis": 85,
+      "reference": "Spitze"
+    },
+    {
+      "number": 4,
+      "operationPictureFile": "38E8_4841844.gif",
+      "programName": "W5270NS01001A3.h",
+      "description": "4: NA_TGT-VLM42-L_DL:0_DR:0+-0.1_ap:0.5_ae:30 ||| ",
+      "operation": "openMIND 3D Optimized Rest Roughing",
+      "operationTime": 817.8736400553132,
+      "toolName": "TGT-VLM42-L_H63M16L75",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841824.gif",
+        "holder": "H63M16L75",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "TGT-VLM42-L_H63M16L75",
+        "unclampedLength": 42.7,
+        "diameter": 42,
+        "shankDiameter": 42,
+        "edgeLength": 42.7,
+        "cornerRadius": 2,
+        "totalLength": 143.7
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": -0.1,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -48.13,
+          "y": -213.13,
+          "z": -30
+        },
+        "max": {
+          "x": 103.43,
+          "y": 89.13,
+          "z": 2.31
+        }
+      },
+      "maxSpeed": 1515,
+      "maxFeed": 9091,
+      "maxFeedAxis": 3000,
+      "reference": "Spitze",
+      "offsetHorizontal": -0.1
+    },
+    {
+      "number": 5,
+      "operationPictureFile": "38E8_4841A18.gif",
+      "programName": "W5270NS01001A4.h",
+      "description": "5: NA_TGT-VLM16-L70-L_DL:0_DR:0+-0.1_ap:0.4_ae:8 ||| ",
+      "operation": "openMIND 3D Optimized Rest Roughing",
+      "operationTime": 445.92064491479687,
+      "toolName": "TGT-VLM16-L70-L_H63Z16L95X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_48419EA.gif",
+        "holder": "H63Z16L95X",
+        "extension": "40 08 606",
+        "extensionLength": 45,
+        "tool": "TGT-VLM16-L70-L_H63Z16L95X",
+        "unclampedLength": 25,
+        "diameter": 16,
+        "shankDiameter": 16,
+        "edgeLength": 25,
+        "cornerRadius": 1.5,
+        "totalLength": 165
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": -0.1,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -61.13,
+          "y": -226.29,
+          "z": -52
+        },
+        "max": {
+          "x": 116.39,
+          "y": 102.13,
+          "z": 1.79
+        }
+      },
+      "maxSpeed": 3778,
+      "maxFeed": 7556,
+      "maxFeedAxis": 2519,
+      "reference": "Spitze",
+      "offsetHorizontal": -0.1
+    },
+    {
+      "number": 6,
+      "operationPictureFile": "38E8_4841B9F.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "6: NA_JJ-T8R1-N-ES_DL:0_DR:0+-0.1_ap:0.22_ae:3.4 ||| ",
+      "operation": "openMIND 3D Optimized Rest Roughing",
+      "operationTime": 62.40781884099514,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841B80.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": -0.1,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -99.3,
+          "y": -257.61,
+          "z": -3
+        },
+        "max": {
+          "x": -26.2,
+          "y": -206.44,
+          "z": 1.98
+        }
+      },
+      "maxSpeed": 5961,
+      "maxFeed": 4530,
+      "maxFeedAxis": 8355,
+      "reference": "Spitze",
+      "offsetHorizontal": -0.1
+    },
+    {
+      "number": 7,
+      "operationPictureFile": "38E8_4841D16.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "7: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 23.70948495120688,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841CF7.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -105.13,
+          "y": -253.1,
+          "z": -3.25
+        },
+        "max": {
+          "x": -39.58,
+          "y": -218.74,
+          "z": 1.95
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 8,
+      "operationPictureFile": "38E8_4841E9D.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "8: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 19.367731264120575,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841E6E.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -102.95,
+          "y": -253.21,
+          "z": -5.42
+        },
+        "max": {
+          "x": -48.22,
+          "y": -246.81,
+          "z": 0.38
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 9,
+      "operationPictureFile": "38E8_4842014.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "9: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 2.7953161209104134,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4841FF4.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -6.85,
+          "y": 102.96,
+          "z": -4.92
+        },
+        "max": {
+          "x": 4.3,
+          "y": 106.46,
+          "z": -0.62
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 10,
+      "operationPictureFile": "38E8_484219A.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "10: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 2.7901031347035294,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_484216B.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -4.22,
+          "y": 249.54,
+          "z": -4.92
+        },
+        "max": {
+          "x": 6.7,
+          "y": 253.18,
+          "z": -0.62
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 11,
+      "operationPictureFile": "38E8_4842311.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "11: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 5.8092686721849915,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_48422F2.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -52.51,
+          "y": 88.58,
+          "z": -31.42
+        },
+        "max": {
+          "x": -36.08,
+          "y": 102.26,
+          "z": -28.12
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 12,
+      "operationPictureFile": "38E8_4842498.gif",
+      "programName": "W5270NS01001A5.h",
+      "description": "12: ZÖLD_LT_JJ-T8R1-N-ES_DL:0_DR:0+0 ||| ",
+      "operation": "openMIND 3D Z-Level Shape Finishing Cycle",
+      "operationTime": 6.816095039501042,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842469.gif",
+        "holder": "H63ZM8L80",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "JJ-T8R1-N-ES_H63ZM8L80",
+        "unclampedLength": 36,
+        "diameter": 8.01,
+        "shankDiameter": null,
+        "edgeLength": 30,
+        "cornerRadius": 1,
+        "totalLength": 116
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -35.09,
+          "y": 55.73,
+          "z": -39.42
+        },
+        "max": {
+          "x": -20.95,
+          "y": 67.12,
+          "z": -33.32
+        }
+      },
+      "maxSpeed": 11127,
+      "maxFeed": 6231,
+      "maxFeedAxis": 3100,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 13,
+      "operationPictureFile": "38E8_484261F.gif",
+      "programName": "W5270NS01001A6.h",
+      "description": "13: NA_FRA-P8420-S11.4R0_DL:0.1_DR:0.1+0_ap:63_ae:0.15 ||| ",
+      "operation": "openMIND 3D Optimized Rest Roughing",
+      "operationTime": 38.28757780354617,
+      "toolName": "FRA-P8420-S11.4R0_H63WM12L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_48425FF.gif",
+        "holder": "H63WM12L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "FRA-P8420-S11.4R0_H63WM12L80X",
+        "unclampedLength": 69.3,
+        "diameter": 11.4,
+        "shankDiameter": null,
+        "edgeLength": 66,
+        "totalLength": 149.3
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0.1,
+      "floorStock": 0.1,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -177.18,
+          "y": -227.18,
+          "z": -57
+        },
+        "max": {
+          "x": 177.17,
+          "y": 227.18,
+          "z": -46
+        }
+      },
+      "maxSpeed": 7427,
+      "maxFeed": 8824,
+      "maxFeedAxis": 4572,
+      "reference": "Spitze",
+      "offsetHorizontal": 0
+    },
+    {
+      "number": 14,
+      "operationPictureFile": "38E8_4842796.gif",
+      "programName": "W5270NS01001A6.h",
+      "description": "14: ESIM_D42_CIÁN_FRA-P8420-S11.4R0_DL:0_DR:0.05 ||| CYCL208",
+      "operation": "openMIND Simple Helical Drilling Cycle",
+      "operationTime": 380.99568962602257,
+      "toolName": "FRA-P8420-S11.4R0_H63WM12L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842767.gif",
+        "holder": "H63WM12L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "FRA-P8420-S11.4R0_H63WM12L80X",
+        "unclampedLength": 69.3,
+        "diameter": 11.4,
+        "shankDiameter": 12,
+        "edgeLength": 66,
+        "totalLength": 149.3
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0.05,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -177.25,
+          "y": -227.25,
+          "z": -57
+        },
+        "max": {
+          "x": 177.25,
+          "y": 227.25,
+          "z": -56
+        }
+      },
+      "maxSpeed": 1536,
+      "maxFeed": 264,
+      "maxFeedAxis": 264,
+      "reference": "Spitze"
+    },
+    {
+      "number": 15,
+      "operationPictureFile": "38E8_484291C.gif",
+      "programName": "W5270NS01001A7.h",
+      "description": "15: NA_ZÖLD_GUH-6736-S8R0_DL:0.1_DR:0.1 ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 34.829021067129865,
+      "toolName": "GUH-6736-S8R0_H63WM8L65X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_48428ED.gif",
+        "holder": "H63WM8L65X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "GUH-6736-S8R0_H63WM8L65X",
+        "unclampedLength": 27,
+        "diameter": 8,
+        "shankDiameter": 7.85,
+        "edgeLength": 26,
+        "totalLength": 92
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0.1,
+      "floorStock": 0.1,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -9.67,
+          "y": 98.03,
+          "z": -2.4
+        },
+        "max": {
+          "x": 9.67,
+          "y": 257.97,
+          "z": -0.4
+        }
+      },
+      "maxSpeed": 4377,
+      "maxFeed": 595,
+      "maxFeedAxis": 298,
+      "reference": "Spitze",
+      "offsetZ": 0.1
+    },
+    {
+      "number": 16,
+      "operationPictureFile": "38E8_4842A93.gif",
+      "programName": "W5270NS01001A7.h",
+      "description": "16: SIM_ZÖLD_R0_2x_GUH-6736-S8R0_DL:0_DR:0 ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 36.722036776487414,
+      "toolName": "GUH-6736-S8R0_H63WM8L65X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842A74.gif",
+        "holder": "H63WM8L65X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "GUH-6736-S8R0_H63WM8L65X",
+        "unclampedLength": 27,
+        "diameter": 8,
+        "shankDiameter": 7.85,
+        "edgeLength": 26,
+        "totalLength": 92
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -9.74,
+          "y": 98.1,
+          "z": -2.5
+        },
+        "max": {
+          "x": 9.74,
+          "y": 257.9,
+          "z": -0.5
+        }
+      },
+      "maxSpeed": 5570,
+      "maxFeed": 1159,
+      "maxFeedAxis": 579,
+      "reference": "Spitze",
+      "offsetZ": 0
+    },
+    {
+      "number": 17,
+      "operationPictureFile": "38E8_4842C1A.gif",
+      "programName": "W5270NS01001A8.h",
+      "description": "17: LT_D42CIÁN_KOM-VL-Letoro ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 18.334119434829276,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842BEB.gif",
+        "holder": "H63W16L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-VL-Letoro_H63W16L80X",
+        "unclampedLength": 48,
+        "diameter": 19,
+        "shankDiameter": null,
+        "edgeLength": 10,
+        "totalLength": 128
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -175.5,
+          "y": -225.5,
+          "z": -5
+        },
+        "max": {
+          "x": 175.5,
+          "y": 225.5,
+          "z": 0
+        }
+      },
+      "maxSpeed": 5142,
+      "maxFeed": 2262,
+      "maxFeedAxis": 754,
+      "reference": "Spitze",
+      "offsetZ": 0
+    },
+    {
+      "number": 18,
+      "operationPictureFile": "38E8_4842D91.gif",
+      "programName": "W5270NS01001A8.h",
+      "description": "18: LT_D17,5_KOM-VL-Letoro ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 13.778590202687568,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842D72.gif",
+        "holder": "H63W16L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-VL-Letoro_H63W16L80X",
+        "unclampedLength": 48,
+        "diameter": 19,
+        "shankDiameter": null,
+        "edgeLength": 10,
+        "totalLength": 128
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -164.25,
+          "y": -167.25,
+          "z": -3.5
+        },
+        "max": {
+          "x": 164.25,
+          "y": 167.25,
+          "z": 5.99
+        }
+      },
+      "maxSpeed": 5142,
+      "maxFeed": 2262,
+      "maxFeedAxis": 754,
+      "reference": "Spitze",
+      "offsetZ": 0
+    },
+    {
+      "number": 19,
+      "operationPictureFile": "38E8_4842F17.gif",
+      "programName": "W5270NS01001A8.h",
+      "description": "19: LT_Nagy_ZSEB_KOM-VL-Letoro ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 26.495987665313688,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_4842EE9.gif",
+        "holder": "H63W16L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-VL-Letoro_H63W16L80X",
+        "unclampedLength": 48,
+        "diameter": 19,
+        "shankDiameter": null,
+        "edgeLength": 10,
+        "totalLength": 128
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": -1,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -61.5,
+          "y": -226.5,
+          "z": -4
+        },
+        "max": {
+          "x": 116.8,
+          "y": 102.5,
+          "z": 1
+        }
+      },
+      "maxSpeed": 5142,
+      "maxFeed": 2262,
+      "maxFeedAxis": 754,
+      "reference": "Spitze",
+      "offsetZ": -1
+    },
+    {
+      "number": 20,
+      "operationPictureFile": "38E8_484308E.gif",
+      "programName": "W5270NS01001A8.h",
+      "description": "21: LT_Horony_KOM-VL-Letoro ||| ",
+      "operation": "openMIND 2D Contour Milling Cycle",
+      "operationTime": 8.970740053050399,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_484306F.gif",
+        "holder": "H63W16L80X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "KOM-VL-Letoro_H63W16L80X",
+        "unclampedLength": 48,
+        "diameter": 19,
+        "shankDiameter": null,
+        "edgeLength": 10,
+        "totalLength": 128
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": 0,
+          "y": 100,
+          "z": -2
+        },
+        "max": {
+          "x": 0,
+          "y": 256,
+          "z": 3
+        }
+      },
+      "maxSpeed": 5142,
+      "maxFeed": 2262,
+      "maxFeedAxis": 754,
+      "reference": "Spitze",
+      "offsetZ": 0
+    },
+    {
+      "number": 21,
+      "operationPictureFile": "38E8_4843215.gif",
+      "programName": "W5270NS01001A9.h",
+      "description": "20: SIM_D42_CIÁN_M110_FRA-P15254-S15.2R0_DL:0_DR:0 ||| CYCL208",
+      "operation": "openMIND Simple Helical Drilling Cycle",
+      "operationTime": 204.94632033778774,
+      "toolName": "FRA-P15254-S15.2R0_H63ZM16L95X",
+      "toolDetails": {
+        "toolPictureFile": "38E8_48431E6.gif",
+        "holder": "H63ZM16L95X",
+        "extension": "",
+        "extensionLength": 0,
+        "tool": "FRA-P15254-S15.2R0_H63ZM16L95X",
+        "unclampedLength": 83,
+        "diameter": 15.2,
+        "shankDiameter": 16,
+        "edgeLength": 63,
+        "totalLength": 178
+      },
+      "toolMagazinePosition": -1,
+      "multiAxis": "false",
+      "ncStop": "false",
+      "sideStock": 0,
+      "floorStock": 0,
+      "zeroPoint": "",
+      "spindleName": "",
+      "operationArea": {
+        "min": {
+          "x": -175.4,
+          "y": -225.4,
+          "z": -57
+        },
+        "max": {
+          "x": 175.4,
+          "y": 225.4,
+          "z": -56
+        }
+      },
+      "maxSpeed": 1675,
+      "maxFeed": 739,
+      "maxFeedAxis": 739,
+      "reference": "Spitze"
+    }
+  ]
+}

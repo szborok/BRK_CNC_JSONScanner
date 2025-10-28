@@ -41,10 +41,9 @@ class Scanner {
   /**
    * Perform one scan of the data directory.
    * Detects new project folders matching the naming pattern.
-   * @param {string} operatorFilter - Optional operator name to filter projects
    * @param {string} customPath - Custom path for manual mode (optional)
    */
-  performScan(operatorFilter = null, customPath = null) {
+  performScan(customPath = null) {
     try {
       // Get the appropriate scan path based on mode and test settings
       const scanPath = customPath || config.getScanPath();
@@ -104,12 +103,6 @@ class Scanner {
             // Load JSON data directly
             const loaded = project.loadJsonData();
             if (loaded) {
-              // Apply operator filter if specified
-              if (operatorFilter && project.operator !== operatorFilter) {
-                logInfo(`Skipped project "${jsonFile.projectName}" - operator "${project.operator}" doesn't match filter "${operatorFilter}"`);
-                continue;
-              }
-              
               // Check if already processed (unless force reprocessing is enabled)
               if (project.isAlreadyProcessed() && !config.app.forceReprocess) {
                 logInfo(`⏭️  Skipping project "${jsonFile.projectName}" - already processed (result file exists)`);
@@ -137,18 +130,15 @@ class Scanner {
   /**
    * Trigger a manual scan for a single project path (used when autorun is off).
    * @param {string} projectPath - Path to the project to scan.
-   * @param {string} operatorFilter - Optional operator name to filter projects
    */
-  scanProject(projectPath, operatorFilter = null) {
+  scanProject(projectPath) {
     try {
       const project = new Project(projectPath);
-      const initialized = project.initialize(operatorFilter);
+      const initialized = project.initialize();
       
       if (initialized && project.isValid) {
         this.projects.push(project);
         logInfo(`Manually added project "${project.name}" with ${project.compoundJobs.size} NC file(s)`);
-      } else if (operatorFilter) {
-        logInfo(`Project "${project.name}" has no files for operator "${operatorFilter}"`);
       } else {
         logWarn(`Project "${project.name}" has no valid target JSON files`);
       }
@@ -189,11 +179,10 @@ class Scanner {
 
   /**
    * Scan with automatic path resolution or user prompt if needed.
-   * @param {string} operatorFilter - Optional operator filter
    * @param {string} providedPath - Optional path provided externally
    * @returns {Promise<void>}
    */
-  async scanWithPathResolution(operatorFilter = null, providedPath = null) {
+  async scanWithPathResolution(providedPath = null) {
     try {
       let scanPath = providedPath;
 
@@ -208,7 +197,7 @@ class Scanner {
       }
 
       // Perform the scan
-      this.performScan(operatorFilter, scanPath);
+      this.performScan(scanPath);
       
     } catch (err) {
       logError(`Path resolution failed: ${err.message}`);

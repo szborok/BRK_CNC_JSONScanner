@@ -1,0 +1,616 @@
+{
+  "project": "W5270NS01003A",
+  "operator": "aszilagyi",
+  "machine": "DMU 100P duoblock Minus",
+  "position": "A",
+  "hypermillFilePath": "P:/Project/5270_Sumiriko_Pin_01_31406/CAM/W5270NS01_003/W5270NS01003.hmc",
+  "summary": {
+    "overallStatus": "passed"
+  },
+  "rules": [
+    {
+      "name": "AutoCorrectionContour",
+      "description": "Auto correction validation for contour operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "AutoCorrectionPlane",
+      "description": "Auto correction validation for plane operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "GunDrill60MinLimit",
+      "description": "Gundrill tools should not exceed 60 minutes per NC file",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Contour",
+      "description": "M110 contour operations must have RL compensation",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Helical",
+      "description": "M110 command required for helical drilling operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "ReconditionedTool",
+      "description": "Validate reconditioned tool usage",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "tool",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "SingleToolInNC",
+      "description": "Each NC file should use only one tool",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    }
+  ],
+  "compoundJobs": [
+    {
+      "programName": "W5270NS01003A1.h",
+      "jobCount": 2,
+      "totalTime": 24.36,
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A2.h",
+      "jobCount": 1,
+      "totalTime": 113.40509793116094,
+      "toolName": "KOM-U11-TF21_H63ABS50",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A3.h",
+      "jobCount": 1,
+      "totalTime": 165.18496506195777,
+      "toolName": "TGT-TOP4-TF19_H63W25L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A4.h",
+      "jobCount": 3,
+      "totalTime": 77.14934549775693,
+      "toolName": "ISC-CSF14-8xD_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A5.h",
+      "jobCount": 1,
+      "totalTime": 14.904096685773004,
+      "toolName": "GUH-6713-D12_H63ZM12L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A6.h",
+      "jobCount": 1,
+      "totalTime": 29.987697478991596,
+      "toolName": "GUH-4630-MF_M16_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A7.h",
+      "jobCount": 2,
+      "totalTime": 61.846381046511624,
+      "toolName": "ISC-CSF11-8xD_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A8.h",
+      "jobCount": 3,
+      "totalTime": 56.46652916215342,
+      "toolName": "ISC-CSF10.3-8xD_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A9.h",
+      "jobCount": 4,
+      "totalTime": 172.05796479789447,
+      "toolName": "D10_HSS_CSFH_10xD_H63T-D3-D16",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A10.h",
+      "jobCount": 1,
+      "totalTime": 10.39319954237288,
+      "toolName": "GUH-5512-BHF9_H63Z10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A11.h",
+      "jobCount": 1,
+      "totalTime": 9.6633792972973,
+      "toolName": "GUH-5512-BHF8.6_H63Z10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A12.h",
+      "jobCount": 2,
+      "totalTime": 58.43505778723356,
+      "toolName": "D8.1_HSS_CSF_H63T-D3-D16",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A13.h",
+      "jobCount": 2,
+      "totalTime": 130.39595400000016,
+      "toolName": "D8_HSS_CSF_H63T-D3-D16",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A14.h",
+      "jobCount": 1,
+      "totalTime": 195.65180161481106,
+      "toolName": "GUH-5512-BHF6_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A15.h",
+      "jobCount": 1,
+      "totalTime": 5.518053240506327,
+      "toolName": "GUH-5512-BHF4.3_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A16.h",
+      "jobCount": 1,
+      "totalTime": 3.264938547486034,
+      "toolName": "GUH-5510-BHF4_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A17.h",
+      "jobCount": 1,
+      "totalTime": 27.2101768172888,
+      "toolName": "GUH-5525-BHF4_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A18.h",
+      "jobCount": 4,
+      "totalTime": 1310.3133681879299,
+      "toolName": "TGT-VLM20-L75-L_H63Z20L100X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A19.h",
+      "jobCount": 1,
+      "totalTime": 707.2330108809806,
+      "toolName": "TGT-VLM16-L70-L_H63Z16L95X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A20.h",
+      "jobCount": 3,
+      "totalTime": 300.557481051253,
+      "toolName": "FRA-P8201-S15.6R0_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A21.h",
+      "jobCount": 10,
+      "totalTime": 433.3626054432452,
+      "toolName": "FRA-P8211-S9.4R0_H63W10L65",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A22.h",
+      "jobCount": 9,
+      "totalTime": 267.7650866866383,
+      "toolName": "FRA-P8201-S5.7R0_H63W6L65",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A23.h",
+      "jobCount": 16,
+      "totalTime": 220.74755674960068,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A24.h",
+      "jobCount": 2,
+      "totalTime": 63.26835520104221,
+      "toolName": "GUH-6713-D12_H63ZM12L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A25.h",
+      "jobCount": 12,
+      "totalTime": 338.53496604259107,
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A26.h",
+      "jobCount": 1,
+      "totalTime": 18.505327571599594,
+      "toolName": "FRA-P15251-S9.7R0_H63ZM10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A27.h",
+      "jobCount": 1,
+      "totalTime": 31.192135148900796,
+      "toolName": "FRA-P15251-S9.7R0_H63ZM10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A28.h",
+      "jobCount": 7,
+      "totalTime": 266.2791099476438,
+      "toolName": "GUH-965-MF-G3_8_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A29.h",
+      "jobCount": 1,
+      "totalTime": 42.494945007190886,
+      "toolName": "ISC-CSF14-8xD_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A30.h",
+      "jobCount": 1,
+      "totalTime": 101.42117713022878,
+      "toolName": "GUH-4630-MF_M16_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A31.h",
+      "jobCount": 2,
+      "totalTime": 21.99704347826087,
+      "toolName": "ISC-CSF10.3-8xD_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A32.h",
+      "jobCount": 3,
+      "totalTime": 109.94845750622937,
+      "toolName": "GUH-4630-MF_M12_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A33.h",
+      "jobCount": 1,
+      "totalTime": 8.491718918918922,
+      "toolName": "GUH-5512-BHF8.6_H63Z10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A34.h",
+      "jobCount": 1,
+      "totalTime": 19.753476439790585,
+      "toolName": "GUH-4630-MF_M10_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A35.h",
+      "jobCount": 6,
+      "totalTime": 24.624049823321556,
+      "toolName": "FRA-EH1260091-MF-M9x1_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A36.h",
+      "jobCount": 1,
+      "totalTime": 4.78746835443038,
+      "toolName": "GUH-5512-BHF4.3_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A37.h",
+      "jobCount": 1,
+      "totalTime": 11.918764397905758,
+      "toolName": "GUH-4630-MF_M5_H63PL100-MF",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A38.h",
+      "jobCount": 1,
+      "totalTime": 11.3596301978634,
+      "toolName": "FRA-SP0140-G2R1-N-ES-L25_H63K6L120X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01003A39.h",
+      "jobCount": 1,
+      "totalTime": 17.910116787529702,
+      "toolName": "FRA-SP0140-N-ES-G1R0.5-L25_H63K6L120X",
+      "hasIssues": false
+    }
+  ],
+  "tools": [
+    {
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 362.8949660425911,
+      "programCount": 2,
+      "diameter": 16,
+      "totalLength": 143
+    },
+    {
+      "toolName": "KOM-U11-TF21_H63ABS50",
+      "category": "unknown",
+      "totalTime": 113.40509793116094,
+      "programCount": 1,
+      "diameter": 21,
+      "totalLength": 158
+    },
+    {
+      "toolName": "TGT-TOP4-TF19_H63W25L90",
+      "category": "tgt",
+      "totalTime": 165.18496506195777,
+      "programCount": 1,
+      "diameter": 19,
+      "totalLength": 187
+    },
+    {
+      "toolName": "ISC-CSF14-8xD_H63H16L95",
+      "category": "unknown",
+      "totalTime": 119.6442905049478,
+      "programCount": 2,
+      "diameter": 14,
+      "totalLength": 227.1
+    },
+    {
+      "toolName": "GUH-6713-D12_H63ZM12L90",
+      "category": "unknown",
+      "totalTime": 78.17245188681522,
+      "programCount": 2,
+      "diameter": 12,
+      "totalLength": 130
+    },
+    {
+      "toolName": "GUH-4630-MF_M16_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 131.4088746092204,
+      "programCount": 2,
+      "diameter": 16,
+      "totalLength": 177.5
+    },
+    {
+      "toolName": "ISC-CSF11-8xD_H63H16L95",
+      "category": "unknown",
+      "totalTime": 61.846381046511624,
+      "programCount": 1,
+      "diameter": 11,
+      "totalLength": 199
+    },
+    {
+      "toolName": "ISC-CSF10.3-8xD_H63H16L95",
+      "category": "unknown",
+      "totalTime": 78.46357264041428,
+      "programCount": 2,
+      "diameter": 10.3,
+      "totalLength": 191
+    },
+    {
+      "toolName": "D10_HSS_CSFH_10xD_H63T-D3-D16",
+      "category": "unknown",
+      "totalTime": 172.05796479789447,
+      "programCount": 1,
+      "diameter": 10,
+      "totalLength": 239.2
+    },
+    {
+      "toolName": "GUH-5512-BHF9_H63Z10L85",
+      "category": "unknown",
+      "totalTime": 10.39319954237288,
+      "programCount": 1,
+      "diameter": 9,
+      "totalLength": 178
+    },
+    {
+      "toolName": "GUH-5512-BHF8.6_H63Z10L85",
+      "category": "unknown",
+      "totalTime": 18.155098216216224,
+      "programCount": 2,
+      "diameter": 8.6,
+      "totalLength": 178
+    },
+    {
+      "toolName": "D8.1_HSS_CSF_H63T-D3-D16",
+      "category": "unknown",
+      "totalTime": 58.43505778723356,
+      "programCount": 1,
+      "diameter": 8.1,
+      "totalLength": 197.2
+    },
+    {
+      "toolName": "D8_HSS_CSF_H63T-D3-D16",
+      "category": "unknown",
+      "totalTime": 130.39595400000016,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 197.2
+    },
+    {
+      "toolName": "GUH-5512-BHF6_H63Z6L80",
+      "category": "unknown",
+      "totalTime": 195.65180161481106,
+      "programCount": 1,
+      "diameter": 6,
+      "totalLength": 143
+    },
+    {
+      "toolName": "GUH-5512-BHF4.3_H63Z6L80",
+      "category": "unknown",
+      "totalTime": 10.305521594936707,
+      "programCount": 2,
+      "diameter": 4.3,
+      "totalLength": 131
+    },
+    {
+      "toolName": "GUH-5510-BHF4_H63Z6L80",
+      "category": "unknown",
+      "totalTime": 3.264938547486034,
+      "programCount": 1,
+      "diameter": 4,
+      "totalLength": 115
+    },
+    {
+      "toolName": "GUH-5525-BHF4_H63Z6L80",
+      "category": "unknown",
+      "totalTime": 27.2101768172888,
+      "programCount": 1,
+      "diameter": 4,
+      "totalLength": 148
+    },
+    {
+      "toolName": "TGT-VLM20-L75-L_H63Z20L100X",
+      "category": "tgt",
+      "totalTime": 1310.3133681879299,
+      "programCount": 1,
+      "diameter": 20,
+      "totalLength": 175
+    },
+    {
+      "toolName": "TGT-VLM16-L70-L_H63Z16L95X",
+      "category": "tgt",
+      "totalTime": 707.2330108809806,
+      "programCount": 1,
+      "diameter": 16,
+      "totalLength": 165
+    },
+    {
+      "toolName": "FRA-P8201-S15.6R0_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 300.557481051253,
+      "programCount": 1,
+      "diameter": 15.6,
+      "totalLength": 123
+    },
+    {
+      "toolName": "FRA-P8211-S9.4R0_H63W10L65",
+      "category": "unknown",
+      "totalTime": 433.3626054432452,
+      "programCount": 1,
+      "diameter": 9.4,
+      "totalLength": 107
+    },
+    {
+      "toolName": "FRA-P8201-S5.7R0_H63W6L65",
+      "category": "unknown",
+      "totalTime": 267.7650866866383,
+      "programCount": 1,
+      "diameter": 5.7,
+      "totalLength": 85
+    },
+    {
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 220.74755674960068,
+      "programCount": 1,
+      "diameter": 19,
+      "totalLength": 128
+    },
+    {
+      "toolName": "FRA-P15251-S9.7R0_H63ZM10L85",
+      "category": "endmill_finish",
+      "totalTime": 49.69746272050039,
+      "programCount": 2,
+      "diameter": 9.7,
+      "totalLength": 129
+    },
+    {
+      "toolName": "GUH-965-MF-G3_8_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 266.2791099476438,
+      "programCount": 1,
+      "diameter": 16.66,
+      "totalLength": 169.5
+    },
+    {
+      "toolName": "GUH-4630-MF_M12_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 109.94845750622937,
+      "programCount": 1,
+      "diameter": 12,
+      "totalLength": 180.5
+    },
+    {
+      "toolName": "GUH-4630-MF_M10_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 19.753476439790585,
+      "programCount": 1,
+      "diameter": 10,
+      "totalLength": 166
+    },
+    {
+      "toolName": "FRA-EH1260091-MF-M9x1_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 24.624049823321556,
+      "programCount": 1,
+      "diameter": 9,
+      "totalLength": 163
+    },
+    {
+      "toolName": "GUH-4630-MF_M5_H63PL100-MF",
+      "category": "unknown",
+      "totalTime": 11.918764397905758,
+      "programCount": 1,
+      "diameter": 5,
+      "totalLength": 146
+    },
+    {
+      "toolName": "FRA-SP0140-G2R1-N-ES-L25_H63K6L120X",
+      "category": "unknown",
+      "totalTime": 11.3596301978634,
+      "programCount": 1,
+      "diameter": 2,
+      "totalLength": 145
+    },
+    {
+      "toolName": "FRA-SP0140-N-ES-G1R0.5-L25_H63K6L120X",
+      "category": "unknown",
+      "totalTime": 17.910116787529702,
+      "programCount": 1,
+      "diameter": 1,
+      "totalLength": 145
+    }
+  ],
+  "processedAt": "2025-10-28T13:12:42.275Z",
+  "status": "completed"
+}

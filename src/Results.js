@@ -1,19 +1,19 @@
 // path: src/Results.js
 /**
- * Handles saving of rule check results and summaries.
- * Creates a result file beside the project's JSON file.
+ * Handles saving of rule check results to disk.
+ * Pure data persistence layer - no UI concerns.
  */
 
 const fs = require("fs");
 const path = require("path");
 const { logInfo, logError } = require("../utils/Logger");
-const config = require("../config");
 
 class Results {
   /**
    * Saves project analysis results to disk beside the original JSON.
    * @param {Project} project - The project instance
    * @param {Object} analysisResults - Analysis results from project.getAnalysisResults()
+   * @returns {string|null} - Path to saved file or null if failed
    */
   saveProjectResults(project, analysisResults) {
     try {
@@ -30,11 +30,10 @@ class Results {
         fs.mkdirSync(dir, { recursive: true });
       }
 
-      // Write results to file
+      // Write clean, structured results to file
       fs.writeFileSync(resultPath, JSON.stringify(analysisResults, null, 2), "utf8");
 
       logInfo(`✅ Result file saved: ${path.basename(resultPath)}`);
-      this.printSummary(analysisResults);
       
       return resultPath;
     } catch (err) {
@@ -44,35 +43,52 @@ class Results {
   }
 
   /**
-   * Prints a readable summary of the analysis results to the console.
-   * @param {Object} analysisResults - Analysis results object
+   * Loads analysis results from disk.
+   * @param {string} resultPath - Path to the result file
+   * @returns {Object|null} - Parsed results or null if failed
    */
-  printSummary(analysisResults) {
-    const { project, summary, rules } = analysisResults;
-
-    logInfo(`\n📋 Analysis Summary for ${project}`);
-    logInfo(`  Overall Status: ${summary?.overallStatus?.toUpperCase() || 'UNKNOWN'}`);
-    
-    if (rules && rules.length > 0) {
-      const passed = rules.filter(r => r.status === 'passed').length;
-      const failed = rules.filter(r => r.status === 'failed').length;
-      const skipped = rules.filter(r => r.status === 'not_applicable').length;
-      
-      logInfo(`  Rules: ${passed} passed, ${failed} failed, ${skipped} not applicable`);
-      
-      // Show failed rules
-      const failedRules = rules.filter(r => r.status === 'failed');
-      if (failedRules.length > 0) {
-        logInfo(`  Failed Rules:`);
-        failedRules.forEach(rule => {
-          logInfo(`    ❌ ${rule.name}: ${rule.violationCount} violation(s)`);
-        });
+  loadProjectResults(resultPath) {
+    try {
+      if (!fs.existsSync(resultPath)) {
+        return null;
       }
-    } else {
-      logInfo(`  Rules: No rules executed`);
+
+      const content = fs.readFileSync(resultPath, 'utf8');
+      return JSON.parse(content);
+    } catch (err) {
+      logError(`Failed to load result file ${resultPath}: ${err.message}`);
+      return null;
     }
+  }
+
+  /**
+   * Gets all result files in a directory.
+   * @param {string} scanPath - Directory to scan for result files
+   * @returns {Array} - Array of result file paths
+   */
+  getAllResultFiles(scanPath) {
+    const resultFiles = [];
     
-    logInfo(`  Project Stats: ${analysisResults.compoundJobs?.length || 0} NC files, ${analysisResults.tools?.length || 0} tools`);
+    const scanDirectory = (dirPath) => {
+      try {
+        const items = fs.readdirSync(dirPath, { withFileTypes: true });
+        
+        for (const item of items) {
+          const fullPath = path.join(dirPath, item.name);
+          
+          if (item.isDirectory()) {
+            scanDirectory(fullPath);
+          } else if (item.isFile() && item.name.endsWith('_BRK_result.json')) {
+            resultFiles.push(fullPath);
+          }
+        }
+      } catch (err) {
+        logError(`Cannot scan directory ${dirPath}: ${err.message}`);
+      }
+    };
+    
+    scanDirectory(scanPath);
+    return resultFiles;
   }
 }
 

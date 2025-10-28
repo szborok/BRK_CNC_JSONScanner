@@ -1,0 +1,401 @@
+{
+  "project": "W5270NS01060A",
+  "operator": "anemet",
+  "machine": "DMU 85 monoblock MINUS",
+  "position": "A",
+  "hypermillFilePath": "P:/Project/5270_Sumiriko_Pin_01_31406/CAM/W5270NS01_060/W5270NS01060.hmc",
+  "summary": {
+    "overallStatus": "passed"
+  },
+  "rules": [
+    {
+      "name": "AutoCorrectionContour",
+      "description": "Auto correction validation for contour operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "AutoCorrectionPlane",
+      "description": "Auto correction validation for plane operations",
+      "shouldRun": false,
+      "run": false,
+      "passed": null,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "not_applicable"
+    },
+    {
+      "name": "GunDrill60MinLimit",
+      "description": "Gundrill tools should not exceed 60 minutes per NC file",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Contour",
+      "description": "M110 contour operations must have RL compensation",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Helical",
+      "description": "M110 command required for helical drilling operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "ReconditionedTool",
+      "description": "Validate reconditioned tool usage",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "tool",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "SingleToolInNC",
+      "description": "Each NC file should use only one tool",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    }
+  ],
+  "compoundJobs": [
+    {
+      "programName": "W5270NS01060A1.h",
+      "jobCount": 2,
+      "totalTime": 10.26758011173184,
+      "toolName": "GUH-5510-BHF8_H63Z8L120X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A2.h",
+      "jobCount": 1,
+      "totalTime": 247.89939999999996,
+      "toolName": "GUH-5640-AF8_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A3.h",
+      "jobCount": 1,
+      "totalTime": 1785.614,
+      "toolName": "GUH-AF8x420_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A4.h",
+      "jobCount": 1,
+      "totalTime": 208.89939999999996,
+      "toolName": "GUH-5640-AF8_H63H16L95",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A5.h",
+      "jobCount": 1,
+      "totalTime": 27.64984909421028,
+      "toolName": "D10_HSS_CSF_H63T-D3-D16",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A6.h",
+      "jobCount": 2,
+      "totalTime": 30.176249999999996,
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A7.h",
+      "jobCount": 2,
+      "totalTime": 15.750459010600704,
+      "toolName": "FRA-EH1260091-MF_M9x1_hosszabbitoban_H63PL100X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A8.h",
+      "jobCount": 1,
+      "totalTime": 42.91881650349651,
+      "toolName": "GUH-5510-BHF12_H63Z12L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A9.h",
+      "jobCount": 1,
+      "totalTime": 1572.6381999999999,
+      "toolName": "GUH-5639-AF12_H63H20L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A10.h",
+      "jobCount": 2,
+      "totalTime": 363.6671403524353,
+      "toolName": "GUH-6961-S6R0_H63WM6L120",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A11.h",
+      "jobCount": 1,
+      "totalTime": 29.362142903111227,
+      "toolName": "GUH-6713-D12_H63ZM12L120X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A12.h",
+      "jobCount": 1,
+      "totalTime": 94.13863157894735,
+      "toolName": "GUH-5740-MF_M14x1.50_hosszabbitoban_H63W20L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A13.h",
+      "jobCount": 1,
+      "totalTime": 19.376165206879605,
+      "toolName": "GUH-5512-BHF5_H63Z6L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A14.h",
+      "jobCount": 1,
+      "totalTime": 5.044725667048286,
+      "toolName": "GUH-5512-BHF7_H63Z8L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A15.h",
+      "jobCount": 1,
+      "totalTime": 17.583000000000002,
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A16.h",
+      "jobCount": 1,
+      "totalTime": 75.69295400000007,
+      "toolName": "D8_HSS_CSF_H63T-D3-D16",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A17.h",
+      "jobCount": 1,
+      "totalTime": 49.89974378173798,
+      "toolName": "GUH-5512-BHF9_H63Z10L85",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A18.h",
+      "jobCount": 1,
+      "totalTime": 17.576223513351263,
+      "toolName": "FRA-P8221-S5.7R0_H63W6L65",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A19.h",
+      "jobCount": 1,
+      "totalTime": 157.471084,
+      "toolName": "TGT-TOP5-TF25_H63W25L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A20.h",
+      "jobCount": 1,
+      "totalTime": 183.9648578960908,
+      "toolName": "FRA-X7624-HF8R1.5-L56_H63ZM8L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A21.h",
+      "jobCount": 1,
+      "totalTime": 134.29296638831278,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01060A22.h",
+      "jobCount": 1,
+      "totalTime": 77.63581607746178,
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "hasIssues": false
+    }
+  ],
+  "tools": [
+    {
+      "toolName": "GUH-5510-BHF8_H63Z8L120X",
+      "category": "unknown",
+      "totalTime": 10.26758011173184,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 165
+    },
+    {
+      "toolName": "GUH-5640-AF8_H63H16L95",
+      "category": "gundrill",
+      "totalTime": 456.7987999999999,
+      "programCount": 2,
+      "diameter": 8,
+      "totalLength": 357
+    },
+    {
+      "toolName": "GUH-AF8x420_H63H16L95",
+      "category": "unknown",
+      "totalTime": 1785.614,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 456
+    },
+    {
+      "toolName": "D10_HSS_CSF_H63T-D3-D16",
+      "category": "unknown",
+      "totalTime": 27.64984909421028,
+      "programCount": 1,
+      "diameter": 10,
+      "totalLength": 211.2
+    },
+    {
+      "toolName": "GUH-5678-KPF16_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 125.39506607746178,
+      "programCount": 3,
+      "diameter": 16,
+      "totalLength": 147
+    },
+    {
+      "toolName": "FRA-EH1260091-MF_M9x1_hosszabbitoban_H63PL100X",
+      "category": "unknown",
+      "totalTime": 15.750459010600704,
+      "programCount": 1,
+      "diameter": 9,
+      "totalLength": 259
+    },
+    {
+      "toolName": "GUH-5510-BHF12_H63Z12L90",
+      "category": "unknown",
+      "totalTime": 42.91881650349651,
+      "programCount": 1,
+      "diameter": 12,
+      "totalLength": 148
+    },
+    {
+      "toolName": "GUH-5639-AF12_H63H20L90",
+      "category": "gundrill",
+      "totalTime": 1572.6381999999999,
+      "programCount": 1,
+      "diameter": 12,
+      "totalLength": 400
+    },
+    {
+      "toolName": "GUH-6961-S6R0_H63WM6L120",
+      "category": "endmill_roughing",
+      "totalTime": 363.6671403524353,
+      "programCount": 1,
+      "diameter": 6,
+      "totalLength": 149
+    },
+    {
+      "toolName": "GUH-6713-D12_H63ZM12L120X",
+      "category": "unknown",
+      "totalTime": 29.362142903111227,
+      "programCount": 1,
+      "diameter": 12,
+      "totalLength": 160
+    },
+    {
+      "toolName": "GUH-5740-MF_M14x1.50_hosszabbitoban_H63W20L80X",
+      "category": "unknown",
+      "totalTime": 94.13863157894735,
+      "programCount": 1,
+      "diameter": 14,
+      "totalLength": 251
+    },
+    {
+      "toolName": "GUH-5512-BHF5_H63Z6L80",
+      "category": "unknown",
+      "totalTime": 19.376165206879605,
+      "programCount": 1,
+      "diameter": 5,
+      "totalLength": 136
+    },
+    {
+      "toolName": "GUH-5512-BHF7_H63Z8L80",
+      "category": "unknown",
+      "totalTime": 5.044725667048286,
+      "programCount": 1,
+      "diameter": 7,
+      "totalLength": 162
+    },
+    {
+      "toolName": "D8_HSS_CSF_H63T-D3-D16",
+      "category": "unknown",
+      "totalTime": 75.69295400000007,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 197.2
+    },
+    {
+      "toolName": "GUH-5512-BHF9_H63Z10L85",
+      "category": "unknown",
+      "totalTime": 49.89974378173798,
+      "programCount": 1,
+      "diameter": 9,
+      "totalLength": 178
+    },
+    {
+      "toolName": "FRA-P8221-S5.7R0_H63W6L65",
+      "category": "unknown",
+      "totalTime": 17.576223513351263,
+      "programCount": 1,
+      "diameter": 5.7,
+      "totalLength": 101
+    },
+    {
+      "toolName": "TGT-TOP5-TF25_H63W25L90",
+      "category": "tgt",
+      "totalTime": 157.471084,
+      "programCount": 1,
+      "diameter": 25,
+      "totalLength": 237
+    },
+    {
+      "toolName": "FRA-X7624-HF8R1.5-L56_H63ZM8L80",
+      "category": "xfeed",
+      "totalTime": 183.9648578960908,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 136
+    },
+    {
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 134.29296638831278,
+      "programCount": 1,
+      "diameter": 19,
+      "totalLength": 128
+    }
+  ],
+  "processedAt": "2025-10-28T13:12:42.319Z",
+  "status": "completed"
+}

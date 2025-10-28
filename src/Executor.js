@@ -23,7 +23,7 @@ class Executor {
 
   /**
    * Start the entire process (autorun or manual).
-   * @param {Object} options - Command line options including operator filter
+   * @param {Object} options - Command line options
    */
   async start(options = {}) {
     if (this.isRunning) {
@@ -32,13 +32,8 @@ class Executor {
     }
 
     this.isRunning = true;
-    this.operatorFilter = options.operator || null;
     
     logInfo(`Executor started (${config.app.autorun ? "AUTO" : "MANUAL"} mode).`);
-    
-    if (this.operatorFilter) {
-      logInfo(`Filtering projects for operator: "${this.operatorFilter}"`);
-    }
 
     this.scanner.start();
 
@@ -66,9 +61,9 @@ class Executor {
       
       logInfo(`🔄 Auto Scan #${scanCount} - Starting at ${scanStartTime.toLocaleTimeString()}`);
       
-      // Clear previous projects and scan with operator filter
+      // Clear previous projects and scan
       this.scanner.projects = [];
-      this.scanner.performScan(this.operatorFilter);
+      this.scanner.performScan();
       
       const projects = this.scanner.getProjects();
       const scanEndTime = new Date();
@@ -127,6 +122,9 @@ class Executor {
       
       // Step 4: Save results to file
       this.results.saveProjectResults(project, project.getAnalysisResults());
+      
+      // Step 5: Log summary for monitoring
+      this.logProjectSummary(project, ruleResults);
 
       logInfo(`Project completed: ${project.getFullName()} - Status: ${project.analysisResults.summary.overallStatus}`);
       project.status = "completed";
@@ -152,27 +150,22 @@ class Executor {
    * Queue a manual project for execution.
    * Will pause autorun after the current project.
    * @param {string} projectPath - Path to project or URL to process
-   * @param {string} operatorFilter - Optional operator filter for manual processing
    */
-  async runManualProject(projectPath, operatorFilter = null) {
+  async runManualProject(projectPath) {
     logInfo(`Manual run requested for: ${projectPath}`);
-    
-    if (operatorFilter) {
-      logInfo(`Manual run with operator filter: "${operatorFilter}"`);
-    }
 
     if (config.app.autorun) {
       logWarn("Autorun active — will pause after current project.");
       config.app.autorun = false;
     }
 
-    this.manualQueue.push({ path: projectPath, operator: operatorFilter });
+    this.manualQueue.push({ path: projectPath });
 
     // Wait for any running project to finish
     while (this.isRunning) await new Promise((res) => setTimeout(res, 1000));
 
     try {
-      this.scanner.scanProject(projectPath, operatorFilter);
+      this.scanner.scanProject(projectPath);
       const projects = this.scanner.getProjects();
       
       // Process the most recently added project
@@ -188,7 +181,7 @@ class Executor {
 
     logInfo("Manual project finished. Resuming autorun...");
     config.app.autorun = true;
-    await this.start({ operator: this.operatorFilter });
+    await this.start();
   }
 
   /**
@@ -199,7 +192,7 @@ class Executor {
       logInfo(`Starting manual mode (${config.app.testMode ? 'TEST' : 'PRODUCTION'})`);
       
       // Use the scanner's path resolution method
-      await this.scanner.scanWithPathResolution(this.operatorFilter);
+      await this.scanner.scanWithPathResolution();
       
       const projects = this.scanner.getProjects();
       
@@ -257,6 +250,29 @@ class Executor {
     
     if (this.isRunning && config.app.autorun) {
       logInfo(`🎯 Starting scan #${scanCount + 1} now...`);
+    }
+  }
+
+  /**
+   * Logs a concise summary of project processing results.
+   * @param {Project} project - The processed project
+   * @param {Object} ruleResults - Rule execution results
+   */
+  logProjectSummary(project, ruleResults) {
+    const { summary } = ruleResults;
+    const status = summary?.overallStatus?.toUpperCase() || 'UNKNOWN';
+    
+    logInfo(`\n📋 Analysis Summary for ${project.getFullName()}`);
+    logInfo(`  Overall Status: ${status}`);
+    
+    if (summary) {
+      logInfo(`  Rules: ${summary.rulesPassed || 0} passed, ${summary.rulesFailed || 0} failed, ${(summary.rulesRun || 0) - (summary.rulesPassed || 0) - (summary.rulesFailed || 0)} not applicable`);
+      logInfo(`  Project Stats: ${project.compoundJobs.size} NC files, ${project.tools.size} tools`);
+      
+      // Show failed rules for immediate attention
+      if (summary.rulesFailed > 0) {
+        logInfo(`  ❌ Failed Rules: Check result file for details`);
+      }
     }
   }
 

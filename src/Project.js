@@ -52,11 +52,9 @@ class Project {
   /**
    * Scans subdirectories to find target JSON files and loads project data.
    * Target files must match pattern: ProjectName + PositionLetter + .json
-   * Optionally filters by operator field in JSON content.
-   * @param {string} operatorFilter - Optional operator name to filter by
    * @returns {boolean} - True if initialization successful and files found
    */
-  initialize(operatorFilter = null) {
+  initialize() {
     try {
       // Extract project base name (e.g., "W5270NS01003" from full path)
       const projectBaseName = this.name;
@@ -73,7 +71,7 @@ class Project {
             this.position = positionMatch[2]; // A
             
             const positionFolder = path.join(this.projectPath, dir.name);
-            const targetJsonPath = this.findTargetJsonFile(positionFolder, positionName, operatorFilter);
+            const targetJsonPath = this.findTargetJsonFile(positionFolder, positionName);
             
             if (targetJsonPath) {
               this.jsonFilePath = targetJsonPath;
@@ -111,10 +109,9 @@ class Project {
    * Finds target JSON file in a position folder that matches the naming pattern.
    * @param {string} positionFolder - Path to position folder (e.g., W5270NS01003A)
    * @param {string} expectedName - Expected JSON filename (e.g., W5270NS01003A)
-   * @param {string} operatorFilter - Optional operator name to filter by
    * @returns {string|null} - Path to target JSON file or null if not found
    */
-  findTargetJsonFile(positionFolder, expectedName, operatorFilter) {
+  findTargetJsonFile(positionFolder, expectedName) {
     try {
       // Look in machine subfolders for the target JSON file
       const machineDirs = fs.readdirSync(positionFolder, { withFileTypes: true });
@@ -131,24 +128,9 @@ class Project {
               continue;
             }
             
-            // If operator filter is specified, check JSON content
-            if (operatorFilter) {
-              try {
-                const rawJsonContent = fs.readFileSync(targetJsonPath, 'utf8');
-                const sanitizedJsonContent = Project.sanitizeJsonContent(rawJsonContent);
-                const jsonContent = JSON.parse(sanitizedJsonContent);
-                if (jsonContent.operator && jsonContent.operator === operatorFilter) {
-                  logInfo(`Found target JSON for operator "${operatorFilter}": ${path.basename(targetJsonPath)}`);
-                  return targetJsonPath;
-                }
-              } catch (parseErr) {
-                logError(`Failed to parse JSON for operator check: ${targetJsonPath} - ${parseErr.message}`);
-              }
-            } else {
-              // No operator filter, return the file
-              logInfo(`Found target JSON: ${path.basename(targetJsonPath)}`);
-              return targetJsonPath;
-            }
+            // No operator filter needed, return the file
+            logInfo(`Found target JSON: ${path.basename(targetJsonPath)}`);
+            return targetJsonPath;
           }
         }
       }
@@ -580,8 +562,9 @@ class Project {
       hypermillFilePath: this.hypermillFilePath,
       summary: this.analysisResults.summary,
       rules: this.getRulesForDisplay(),
-      compoundJobs: this.getCompoundJobsSummary(),
-      tools: this.getToolsSummary(),
+      // Removed compoundJobs and tools arrays to keep result files clean
+      // compoundJobs: this.getCompoundJobsSummary(),
+      // tools: this.getToolsSummary(),
       processedAt: this.analysisResults.processedAt,
       status: this.analysisResults.status
     };

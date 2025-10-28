@@ -1,0 +1,230 @@
+{
+  "project": "W5270NS01001A",
+  "operator": "szborok",
+  "machine": "DMC 105 V Linear",
+  "position": "A",
+  "hypermillFilePath": "P:/Project/5270_Sumiriko_Pin_01_31406/CAM/W5270NS01_001/W5270NS01001.hmc",
+  "summary": {
+    "overallStatus": "passed"
+  },
+  "rules": [
+    {
+      "name": "AutoCorrectionContour",
+      "description": "Auto correction validation for contour operations",
+      "shouldRun": false,
+      "run": false,
+      "passed": null,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "not_applicable"
+    },
+    {
+      "name": "AutoCorrectionPlane",
+      "description": "Auto correction validation for plane operations",
+      "shouldRun": false,
+      "run": false,
+      "passed": null,
+      "failureType": "project",
+      "violationCount": 0,
+      "failures": [],
+      "status": "not_applicable"
+    },
+    {
+      "name": "GunDrill60MinLimit",
+      "description": "Gundrill tools should not exceed 60 minutes per NC file",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Contour",
+      "description": "M110 contour operations must have RL compensation",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "M110Helical",
+      "description": "M110 command required for helical drilling operations",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    },
+    {
+      "name": "ReconditionedTool",
+      "description": "Validate reconditioned tool usage",
+      "shouldRun": false,
+      "run": false,
+      "passed": null,
+      "failureType": "tool",
+      "violationCount": 0,
+      "failures": [],
+      "status": "not_applicable"
+    },
+    {
+      "name": "SingleToolInNC",
+      "description": "Each NC file should use only one tool",
+      "shouldRun": true,
+      "run": true,
+      "passed": true,
+      "failureType": "ncfile",
+      "violationCount": 0,
+      "failures": [],
+      "status": "passed"
+    }
+  ],
+  "compoundJobs": [
+    {
+      "programName": "W5270NS01001A1.h",
+      "jobCount": 2,
+      "totalTime": 196.35405407428573,
+      "toolName": "KOM-U11-TF39_H63ABS50",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A2.h",
+      "jobCount": 1,
+      "totalTime": 286.19117011764706,
+      "toolName": "TGT-TOP5-TF17.5_H63W25L90",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A3.h",
+      "jobCount": 1,
+      "totalTime": 817.8736400553132,
+      "toolName": "TGT-VLM42-L_H63M16L75",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A4.h",
+      "jobCount": 1,
+      "totalTime": 445.92064491479687,
+      "toolName": "TGT-VLM16-L70-L_H63Z16L95X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A5.h",
+      "jobCount": 7,
+      "totalTime": 123.69581802362258,
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A6.h",
+      "jobCount": 2,
+      "totalTime": 419.28326742956875,
+      "toolName": "FRA-P8420-S11.4R0_H63WM12L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A7.h",
+      "jobCount": 2,
+      "totalTime": 71.55105784361729,
+      "toolName": "GUH-6736-S8R0_H63WM8L65X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A8.h",
+      "jobCount": 4,
+      "totalTime": 67.57943735588094,
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "hasIssues": false
+    },
+    {
+      "programName": "W5270NS01001A9.h",
+      "jobCount": 1,
+      "totalTime": 204.94632033778774,
+      "toolName": "FRA-P15254-S15.2R0_H63ZM16L95X",
+      "hasIssues": false
+    }
+  ],
+  "tools": [
+    {
+      "toolName": "KOM-U11-TF39_H63ABS50",
+      "category": "unknown",
+      "totalTime": 196.35405407428573,
+      "programCount": 1,
+      "diameter": 39,
+      "totalLength": 227
+    },
+    {
+      "toolName": "TGT-TOP5-TF17.5_H63W25L90",
+      "category": "tgt",
+      "totalTime": 286.19117011764706,
+      "programCount": 1,
+      "diameter": 17.5,
+      "totalLength": 200.9
+    },
+    {
+      "toolName": "TGT-VLM42-L_H63M16L75",
+      "category": "tgt",
+      "totalTime": 817.8736400553132,
+      "programCount": 1,
+      "diameter": 42,
+      "totalLength": 143.7
+    },
+    {
+      "toolName": "TGT-VLM16-L70-L_H63Z16L95X",
+      "category": "tgt",
+      "totalTime": 445.92064491479687,
+      "programCount": 1,
+      "diameter": 16,
+      "totalLength": 165
+    },
+    {
+      "toolName": "JJ-T8R1-N-ES_H63ZM8L80",
+      "category": "jjtools",
+      "totalTime": 123.69581802362258,
+      "programCount": 1,
+      "diameter": 8.01,
+      "totalLength": 116
+    },
+    {
+      "toolName": "FRA-P8420-S11.4R0_H63WM12L80X",
+      "category": "endmill_roughing",
+      "totalTime": 419.28326742956875,
+      "programCount": 1,
+      "diameter": 11.4,
+      "totalLength": 149.3
+    },
+    {
+      "toolName": "GUH-6736-S8R0_H63WM8L65X",
+      "category": "endmill_roughing",
+      "totalTime": 71.55105784361729,
+      "programCount": 1,
+      "diameter": 8,
+      "totalLength": 92
+    },
+    {
+      "toolName": "KOM-VL-Letoro_H63W16L80X",
+      "category": "unknown",
+      "totalTime": 67.57943735588094,
+      "programCount": 1,
+      "diameter": 19,
+      "totalLength": 128
+    },
+    {
+      "toolName": "FRA-P15254-S15.2R0_H63ZM16L95X",
+      "category": "endmill_finish",
+      "totalTime": 204.94632033778774,
+      "programCount": 1,
+      "diameter": 15.2,
+      "totalLength": 178
+    }
+  ],
+  "processedAt": "2025-10-28T13:12:42.226Z",
+  "status": "completed"
+}
