@@ -1,0 +1,1626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VcProject Version="9.4" Unit="millimeter" ProductName="Vericut" UseLicenseMachSim="yes">
+  <Information>
+    <InfoUserName>tszabari</InfoUserName>
+    <InfoDateTime>Fri Jun 13 09:14:33 2025</InfoDateTime>
+    <InfoVericutVersion>9.4.1</InfoVericutVersion>
+    <InfoBuildDate>December 08, 2023 </InfoBuildDate>
+    <InfoLibraryDate>12/08/23</InfoLibraryDate>
+    <InfoCustomerName>107429_Euroform</InfoCustomerName>
+    <InfoCustomerID>107429</InfoCustomerID>
+    <InfoServerID>001</InfoServerID>
+    <InfoHostID>F079595DCDE8</InfoHostID>
+  </Information>
+  <Log>vericut.log</Log>
+  <Display Resolution="auto" />
+  <Message>*** VERICUT VcProject File Issued to #107429 Euroform 28-10-2015 ***</Message>
+  <Comment>28-10-2015 - Updated collision entries as required</Comment>
+  <Export Process="features">
+    <Output Type="IGES" Format="binary" Color="green" ACISSolid="off" Axes="stock" Unit="inch" ReduceSw2="on" ReduceTol2="0.1" OffsetSw="off" OffsetTol="0" Stitching="off" ModelType="vericut_model" />
+    <File></File>
+    <Stock></Stock>
+    <Grid Count="1" Angle="30" Tol="0.05" ByColor="off" Scallop="off" Preview="on" Plane="33" Cone="33" Cylinder="33" Sphere="33" Torus="33" TorusSweep="33" Ellipse="33" />
+    <Slice Direction="X" Count="100" Angle="30" Tol="0.005" />
+  </Export>
+  <STLOutput Type="STL" Format="binary" Axes="active" Unit="millimeter">
+    <File></File>
+    <Stock></Stock>
+  </STLOutput>
+  <Color Hues="85" Wrap="on" Method="next">
+    <Hue R="255" G="0" B="0">Red</Hue>
+    <Hue R="147" G="112" B="219">Medium Purple</Hue>
+    <Hue R="255" G="222" B="173">Navajo White</Hue>
+    <Hue R="160" G="82" B="45">Sienna</Hue>
+    <Hue R="105" G="105" B="105">Dim Gray</Hue>
+    <Hue R="255" G="215" B="0">Gold</Hue>
+    <Hue R="32" G="178" B="170">Light Sea Green</Hue>
+    <Hue R="70" G="70" B="70">Custom Gray</Hue>
+    <Hue R="255" G="255" B="255">White</Hue>
+    <Hue R="238" G="130" B="238">Violet</Hue>
+    <Hue R="208" G="32" B="144">Violet Red</Hue>
+    <Hue R="216" G="191" B="216">Thistle</Hue>
+    <Hue R="0" G="255" B="255">Cyan</Hue>
+    <Hue R="0" G="255" B="0">Green</Hue>
+    <Hue R="0" G="0" B="255">Blue</Hue>
+    <Hue R="184" G="134" B="11">Dark Goldenrod</Hue>
+    <Hue R="255" G="0" B="255">Magenta</Hue>
+    <Hue R="255" G="228" B="181">Moccasin</Hue>
+    <Hue R="218" G="165" B="32">Goldenrod</Hue>
+    <Hue R="127" G="255" B="212">Aquamarine</Hue>
+    <Hue R="240" G="230" B="140">Khaki</Hue>
+    <Hue R="0" G="255" B="127">Spring Green</Hue>
+    <Hue R="0" G="206" B="209">Dark Turquoise</Hue>
+    <Hue R="72" G="61" B="139">Dark Slate Blue</Hue>
+    <Hue R="124" G="252" B="0">Lawn Green</Hue>
+    <Hue R="0" G="250" B="154">Medium Spring Green</Hue>
+    <Hue R="255" G="160" B="122">Light Salmon</Hue>
+    <Hue R="30" G="144" B="255">Dodger Blue</Hue>
+    <Hue R="148" G="0" B="211">Dark Violet</Hue>
+    <Hue R="0" G="206" B="209">Dark Turquoise</Hue>
+    <Hue R="160" G="32" B="240">Purple</Hue>
+    <Hue R="173" G="255" B="47">Green Yellow</Hue>
+    <Hue R="0" G="0" B="205">Medium Blue</Hue>
+    <Hue R="218" G="165" B="32">Goldenrod</Hue>
+    <Hue R="255" G="99" B="71">Tomato</Hue>
+    <Hue R="138" G="43" B="226">Blue Violet</Hue>
+    <Hue R="210" G="105" B="30">Chocolate</Hue>
+    <Hue R="199" G="21" B="133">Medium Violet Red</Hue>
+    <Hue R="208" G="32" B="144">Violet Red</Hue>
+    <Hue R="184" G="134" B="11">Dark Goldenrod</Hue>
+    <Hue R="64" G="224" B="208">Turquoise</Hue>
+    <Hue R="65" G="105" B="225">Royal Blue</Hue>
+    <Hue R="154" G="205" B="50">Yellow Green</Hue>
+    <Hue R="50" G="205" B="50">Lime Green</Hue>
+    <Hue R="153" G="50" B="204">Dark Orchid</Hue>
+    <Hue R="255" G="105" B="180">Hot Pink</Hue>
+    <Hue R="244" G="164" B="96">Sandy Brown</Hue>
+    <Hue R="32" G="178" B="170">Light Sea Green</Hue>
+    <Hue R="178" G="34" B="34">Firebrick</Hue>
+    <Hue R="132" G="112" B="255">Light Slate Blue</Hue>
+    <Hue R="255" G="255" B="0">AutoDiff_G1</Hue>
+    <Hue R="255" G="205" B="0">AutoDiff_G2</Hue>
+    <Hue R="255" G="155" B="0">AutoDiff_G3</Hue>
+    <Hue R="205" G="105" B="0">AutoDiff_G4</Hue>
+    <Hue R="105" G="0" B="0">AutoDiff_G5</Hue>
+    <Hue R="0" G="255" B="0">AutoDiff_E1</Hue>
+    <Hue R="0" G="180" B="0">AutoDiff_E2</Hue>
+    <Hue R="0" G="130" B="100">AutoDiff_E3</Hue>
+    <Hue R="0" G="130" B="175">AutoDiff_E4</Hue>
+    <Hue R="0" G="25" B="175">AutoDiff_E5</Hue>
+    <Hue R="75" G="75" B="75">Machine_1</Hue>
+    <Hue R="150" G="150" B="150">Machine_2</Hue>
+    <Hue R="200" G="200" B="200">Machine_3</Hue>
+    <Hue R="0" G="0" B="100">Machine_4</Hue>
+    <Hue R="0" G="0" B="150">Machine_5</Hue>
+    <Hue R="0" G="0" B="200">Machine_6</Hue>
+    <Hue R="100" G="0" B="150">Machine_7</Hue>
+    <Hue R="100" G="0" B="175">Machine_8</Hue>
+    <Hue R="150" G="0" B="205">Machine_9</Hue>
+    <Hue R="150" G="0" B="155">Machine_10</Hue>
+    <Hue R="245" G="222" B="179">Machine_11</Hue>
+    <Hue R="222" G="184" B="135">Machine_12</Hue>
+    <Hue R="244" G="164" B="96">Machine_13</Hue>
+    <Hue R="189" G="183" B="107">Machine_14</Hue>
+    <Hue R="75" G="105" B="125">Machine_15</Hue>
+    <Hue R="25" G="55" B="75">Machine_16</Hue>
+    <Hue R="25" G="30" B="50">Machine_17</Hue>
+    <Hue R="255" G="165" B="0">Machine_18</Hue>
+    <Hue R="255" G="255" B="255">Machine_19</Hue>
+    <Hue R="0" G="0" B="0">Machine_20</Hue>
+    <Hue R="135" G="206" B="250">Machine_21</Hue>
+    <Hue R="0" G="81" B="129">Machine_22</Hue>
+    <Hue R="230" G="228" B="229">Machine_23</Hue>
+    <Hue R="254" G="110" B="26">Machine_24</Hue>
+    <Hue R="31" G="31" B="31">Machine_25</Hue>
+    <Hue R="255" G="228" B="181">Moccasin</Hue>
+    <Hue R="255" G="182" B="193">Light Pink</Hue>
+    <Hue R="255" G="218" B="185">Peach Puff</Hue>
+    <Hue R="210" G="180" B="140">Tan</Hue>
+    <Hue R="238" G="232" B="170">Pale Goldenrod</Hue>
+    <Hue R="245" G="222" B="179">Wheat</Hue>
+    <Hue R="95" G="158" B="160">Cadet Blue</Hue>
+    <Hue R="255" G="192" B="203">Pink</Hue>
+    <Hue R="175" G="238" B="238">Pale Turquoise</Hue>
+    <Hue R="85" G="107" B="47">Dark Olive Green</Hue>
+    <Hue R="255" G="228" B="196">Bisque</Hue>
+    <Hue R="173" G="216" B="230">Light Blue</Hue>
+    <Hue R="176" G="224" B="230">Powder Blue</Hue>
+    <Hue R="255" G="250" B="205">Lemon Chiffon</Hue>
+    <Hue R="255" G="235" B="205">Blanched Almond</Hue>
+    <Hue R="188" G="143" B="143">Rosy Brown</Hue>
+    <Hue R="143" G="188" B="143">Dark Sea Green</Hue>
+    <Hue R="255" G="239" B="213">Papaya Whip</Hue>
+    <Hue R="250" G="250" B="210">Light Goldenrod Yellow</Hue>
+    <Hue R="255" G="248" B="220">Cornsilk</Hue>
+    <Hue R="250" G="235" B="215">Antique White</Hue>
+    <Hue R="119" G="136" B="153">Light Slate Gray</Hue>
+    <Hue R="112" G="128" B="144">Slate Gray</Hue>
+    <Hue R="47" G="79" B="79">Dark Slate Gray</Hue>
+    <Hue R="255" G="255" B="224">Light Yellow</Hue>
+    <Hue R="224" G="255" B="255">Light Cyan</Hue>
+    <Hue R="216" G="191" B="216">Thistle</Hue>
+    <Hue R="253" G="245" B="230">Old Lace</Hue>
+    <Hue R="230" G="230" B="250">Lavender</Hue>
+    <Hue R="250" G="240" B="230">Linen</Hue>
+    <Hue R="255" G="245" B="238">Seashell</Hue>
+    <Hue R="255" G="240" B="245">Lavender Blush</Hue>
+    <Hue R="240" G="248" B="255">Alice Blue</Hue>
+    <Hue R="240" G="255" B="255">Azure</Hue>
+    <Hue R="240" G="255" B="240">Honeydew</Hue>
+    <Hue R="255" G="255" B="240">Ivory</Hue>
+    <Hue R="255" G="250" B="240">Floral White</Hue>
+    <Hue R="245" G="255" B="250">Mint Cream</Hue>
+    <Hue R="248" G="248" B="255">Ghost White</Hue>
+    <Hue R="211" G="211" B="211">Light Gray</Hue>
+    <Hue R="192" G="192" B="192">Gray</Hue>
+    <Hue R="220" G="220" B="220">Gainsboro</Hue>
+    <Hue R="0" G="0" B="192">Background Blue</Hue>
+    <Error Hue="0" />
+    <Reset Hue="5" />
+    <Background Color="13158600" Color2="-10197916" />
+    <CourseEdge XRGB="0x00000000" />
+    <DrawingColor XRGB="0x00FF00FF" />
+    <TowEdge XRGB="0x00C0C0C0" />
+    <CenterpathNormal XRGB="0x00FF00FF" />
+    <Cut Sequence="1" Hue="13" />
+    <Cut Sequence="2" Hue="1" />
+    <Cut Sequence="3" Hue="12" />
+    <Cut Sequence="4" Hue="26" />
+    <Cut Sequence="5" Hue="6" />
+    <Cut Sequence="6" Hue="21" />
+    <Cut Sequence="7" Hue="14" />
+    <Cut Sequence="8" Hue="15" />
+    <Cut Sequence="9" Hue="16" />
+    <Cut Sequence="10" Hue="11" />
+    <Cut Sequence="11" Hue="19" />
+    <Cut Sequence="12" Hue="23" />
+    <Cut Sequence="13" Hue="20" />
+    <Cut Sequence="14" Hue="35" />
+    <Cut Sequence="15" Hue="22" />
+    <Feed Value="0" Hue="50" />
+    <Feed Value="100" Hue="51" />
+    <Feed Value="200" Hue="52" />
+    <Feed Value="300" Hue="53" />
+    <Feed Value="400" Hue="54" />
+    <Feed Value="500" Hue="55" />
+    <Feed Value="600" Hue="56" />
+    <Feed Value="700" Hue="57" />
+    <Feed Value="800" Hue="58" />
+    <Feed Value="900" Hue="59" />
+    <Feed Value="1000" Hue="50" />
+    <Feed Value="1500" Hue="51" />
+    <Feed Value="2000" Hue="52" />
+    <Feed Value="2500" Hue="53" />
+    <Feed Value="3000" Hue="54" />
+    <Feed Value="3500" Hue="55" />
+    <Feed Value="4000" Hue="56" />
+    <Feed Value="4500" Hue="57" />
+    <Feed Value="5000" Hue="58" />
+    <Feed Value="5500" Hue="59" />
+    <Feed Value="6000" Hue="50" />
+    <Feed Value="6500" Hue="51" />
+    <Feed Value="7000" Hue="52" />
+    <Feed Value="7500" Hue="53" />
+    <Feed Value="8000" Hue="54" />
+    <Feed Value="8500" Hue="55" />
+    <Feed Value="9000" Hue="56" />
+    <Feed Value="9500" Hue="57" />
+    <Feed Value="10000" Hue="58" />
+    <Feed Value="10500" Hue="59" />
+    <Back R="0" G="0" B="128">Navy</Back>
+    <Fore R="0" G="255" B="255">Cyan</Fore>
+  </Color>
+  <Report Auto="off" When="all" View="off" Format="html">
+    <File></File>
+  </Report>
+  <MetricsDelim Auto="off" Overwrite="off" Separator="comma">
+    <File>*_metrics.csv</File>
+  </MetricsDelim>
+  <Picture Type="JPEG" Style="palette" Shading="color" Orientation="portrait" Result="on" Render="off">
+    <File>vericut</File>
+    <Script Margin="off" Left="0" Right="0" Top="0" Bottom="0" Size="letter" Annotate="off"></Script>
+    <Render Size="off" Width="640" Height="480" Shadow="on" Angle="15" Location="2" Override="false" Color="16777215" />
+  </Picture>
+  <AutoSave>
+    <IP Change="off" Cuts="off" Count="1000" DoText="off" End="off" When="each" Error="off" Maximum="off" Value="1" Type="0">
+      <Save>autosav.ip</Save>
+      <Oops>autoerr.ip</Oops>
+      <Text></Text>
+    </IP>
+    <VcSolid Change="off" Cuts="off" Count="0" DoText="off" End="off" When="each" Error="off" Maximum="off" Value="1" Type="0">
+      <Save></Save>
+      <Oops></Oops>
+      <Text></Text>
+    </VcSolid>
+    <Picture Change="off" Cuts="off" Count="1000" DoText="off" End="off" When="each" Error="off" Maximum="off" Value="1" Type="0">
+      <Save>autosav</Save>
+      <Oops>autoerr</Oops>
+      <Text></Text>
+    </Picture>
+    <Review Change="off" Cuts="off" Count="1000" DoText="off" End="off" When="all" Error="off" Maximum="off" Value="1" Type="0">
+      <Save></Save>
+      <Oops></Oops>
+      <Text></Text>
+    </Review>
+  </AutoSave>
+  <Views CutStockQuality="best" AutoCutStockQuality="on" NonCutStockQuality="best" AutoNonCutStockQuality="on">
+    <ViewPrimary Name="Machine_View" ID="0" Type="machine">
+      <Options Scale="11.6750103727" UseSpinCenter="off" Back="shaded" Inherit="true" Color="0" Color2="0" Draw="shaded edges" Translucency="46" SpunToolDisp="on" SpunPartDisp="on" UseAO="on" />
+      <Position X="0" Y="0" Z="0" />
+      <Rotation I="-56.309932474" J="-25.6589062733" K="-16.102113752" />
+      <SpinCenter X="0" Y="0" Z="0" />
+      <Attach>Base</Attach>
+    </ViewPrimary>
+  </Views>
+  <Start Type="start" Line="1" Tool="" Index="0">
+    <File></File>
+    <Text></Text>
+  </Start>
+  <Breakpoints>
+    <Breakpoint Type="each setup" Enabled="1" Count="-1" Text="" Index="-1" Value="" />
+    <Breakpoint Type="errors" Enabled="0" Count="1" Text="" Index="-1" Value="" />
+    <Breakpoint Type="warnings" Enabled="0" Count="1" Text="" Index="-1" Value="" />
+    <Breakpoint Type="line number" Enabled="1" Count="50" Text="sample_milling_100P.h" Index="0" Value="0" />
+  </Breakpoints>
+  <Cycles>
+    <Line></Line>
+    <Line>$$ ACL.</Line>
+    <Line></Line>
+    <Line>CYCLE/DRILL,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/REAM,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/FACE,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/TAP,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/BORE,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/MILL,#fedto,IPM,#fedupm,#rapto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/CSINK,#fedto,#,IPM,#fedupm,#rapto</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/CSINK,#cskdia,IPM,#fedupm,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/CSINK,#cskdia,RAPTO,#rapto,RTRCTO,#rtrcto,TLANGL,#tlangl, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/DEEP,#fedlist,IPM,#fedupm,#rapto,#steprap</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/DEEP,#fedto,INCR,#step,IPM,#fedupm,#rapto,#steprap</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line>CYCLE/THRU,#fedlist,IPM,#fedupm,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:ACL</Line>
+    <Line></Line>
+    <Line>$$ VERICUT, CADRA and CV (Generic).</Line>
+    <Line></Line>
+    <Line>CYCLE/DRILL,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/FACE,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/FACE,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/FACE,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/TAP,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,ORIENT,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/BORE,ORIENT,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/MILL,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/MILL,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/MILL,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DEEP,#fedto,#fedupm,IPM,#rapto,#step</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#fedto,STEP,#step</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#fedto,STEP,#step,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/THRU,RAPTO,#rapto,FEDTO,#fedto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line>CYCLE/THRU,RAPTO,#rapto,FEDTO,#fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:VERICUT,CADRA,CV</Line>
+    <Line></Line>
+    <Line>$$ Pro/Manufacturing</Line>
+    <Line></Line>
+    <Line>CYCLE/DRILL,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DRILL,DEPTH,#fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DRILL,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DRILL,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,#fedto,#fedupm,IPM,#rapto,#step</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedlist,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedto,STEP,#step,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedto,STEP,#step,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/DEEP,DEPTH,#fedto,STEP,#step,IPM,#fedupm,CLEAR,#rapto, $</Line>
+    <Line>RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedlist,IPM,#fedupm</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto, $</Line>
+    <Line>RETURN,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedto,STEP,#step,IPM,#fedupm</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedto,STEP,#step,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BRKCHP,DEPTH,#fedto,STEP,#step,IPM,#fedupm,CLEAR,#rapto, $</Line>
+    <Line>RETURN,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/THRU,DEPTH,#fedlist,IPM,#fedupm</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/THRU,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/THRU,DEPTH,#fedlist,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/FACE,DEPTH,#fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/FACE,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/FACE,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BORE,DEPTH,#fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BORE,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/BORE,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/CSINK,DIAMET,#cskdia,TLANGL,#tlangl,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/CSINK,DIAMET,#cskdia,TLANGL,#tlangl,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/CSINK,DIAMET,#cskdia,TLANGL,#tlangl,IPM,#fedupm,CLEAR,#rapto, $</Line>
+    <Line>RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/REAM,DEPTH,#fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/REAM,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/REAM,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/TAP,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/TAP,DEPTH,#fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/TAP,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line>CYCLE/TAP,DEPTH,#fedto,IPM,#fedupm,CLEAR,#rapto,RETURN,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:PTC</Line>
+    <Line></Line>
+    <Line>$$ UniGraphics (CLS).</Line>
+    <Line></Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DWELL,REV,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,CSINK,CSKDIA,#cskdia,TLANGL,#tlangl, $</Line>
+    <Line>A,#,RAPTO,#rapto,A,A</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,CSINK,CSKDIA,#cskdia,TLANGL,#tlangl, $</Line>
+    <Line>A,#,RAPTO,#rapto,A,A,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,CSINK,CSKDIA,#cskdia,TLANGL,#tlangl,HOLDIA,#holdia, $</Line>
+    <Line>A,#,RAPTO,#rapto,RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,CSINK,CSKDIA,#cskdia,TLANGL,#tlangl,HOLDIA,#holdia, $</Line>
+    <Line>A,#,RAPTO,#rapto,RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm,A</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,RAPTO,#rapto,FEDTO,#-fedto,A,A, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,#,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,#,RAPTO,#rapto,FEDTO,#-fedto,A,A, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,#,#,RAPTO,#rapto,FEDTO,#-fedto,A,A</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,#,#,RAPTO,#rapto,FEDTO,#-fedto,A,A, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,#,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,DEEP,STEP,#step,A,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,BRKCHP,STEP,#step,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>A,A,IPM,#fedupm</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,BRKCHP,STEP,#step,A,#,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>A,A,IPM,#fedupm</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/DRILL,BRKCHP,STEP,#step,A,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto,A,#,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto,A,#,A,A,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto,A,#,RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,CCLW,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,CCLW,RAPTO,#rapto,FEDTO,#-fedto,A,#,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,CCLW,RAPTO,#rapto,FEDTO,#-fedto,A,#,A,A,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,CCLW,RAPTO,#rapto,FEDTO,#-fedto,A,#,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/TAP,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DRAG,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,A, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,DRAG,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto, $</Line>
+    <Line>IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,NODRAG,RAPTO,#rapto,FEDTO,#-fedto,A,A,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,NODRAG,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,NODRAG,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,BACK,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,MANUAL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,IPM,#fedupm</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,MANUAL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line>CYCLE/BORE,MANUAL,DWELL,#,RAPTO,#rapto,FEDTO,#-fedto,A,#, $</Line>
+    <Line>RTRCTO,#rtrcto,IPM,#fedupm,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:UG</Line>
+    <Line></Line>
+    <Line>$$ CATIA.</Line>
+    <Line></Line>
+    <Line>CYCLE/CSINK,#fedto,#rapto</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/CSINK,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/DRILL,#fedto,#rapto</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/DRILL,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/TAP,#fedto,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/TAP,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/BORE,#fedto,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/BORE,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/REAM,#fedto,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/REAM,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/DEEPHL,#fedto,#rapto,#step,#,#</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/DEEPHL,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A,#step,#,#</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/BREAKCHP,#fedto,#rapto,#step,#,#</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line>CYCLE/BREAKCHP,#fedto,#rapto,#,#,#rtrcto,#fedupm,#,A,#step,#,#</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:CATIA</Line>
+    <Line></Line>
+    <Line>$$ NCL (PostWorks and GEN4AX).</Line>
+    <Line></Line>
+    <Line>CYCLE/AUTO,ON</Line>
+    <Line>MODALS:cycle_op=off</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/AUTO,OFF</Line>
+    <Line>MODALS:cycle_op=off</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/OPTION</Line>
+    <Line>MODALS:cycle_op=off</Line>
+    <Line>USEWITH:NCL,POSTWORKS,GEN4AX</Line>
+    <Line>CYCLE/BORE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE7,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE7,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE7,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE7,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE7,FEDTO,#fedto,STEP,#step,#,A,#,#,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE8,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE8,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE8,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE8,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE8,FEDTO,#fedto,STEP,#step,#,A,#,#,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE9,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE9,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE9,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE9,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE9,FEDTO,#fedto,A,#,#,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,STEP,#step</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,STEP,#step,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step, $</Line>
+    <Line>RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DEEP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step,#, $</Line>
+    <Line>RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#cskdia,#tlangl,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/DRILL,FEDTO,#cskdia,#tlangl,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#cskdia,#tlangl,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/FACE,FEDTO,#cskdia,#tlangl,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/MILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/MILL,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/REAM,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/REAM,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/REAM,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/REAM,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,A,#,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/SHIFT,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/TAP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/TAP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/TAP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/TAP,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,STEP,#step</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step,#</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,STEP,#step</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,STEP,#step,#</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,A,#,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step, $</Line>
+    <Line>RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/THRU,FEDTO,#fedto,IPM,#fedupm,RAPTO,#rapto,STEP,#step,#, $</Line>
+    <Line>RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,POSTWORKS</Line>
+    <Line>CYCLE/BORE,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/BORE8,#fedto,#,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/BORE9,#fedto,#,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/CUTANG,#cskdia,#tlangl,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/CUTANG,#cskdia,#tlangl,#,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/DEEP,#fedto,#step,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/DEEP,#fedto,#step,#,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/DEEP,#fedto,#step,#,#,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/DRILL,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/FACE,#fedto,#,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/REAM,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/TAP,#fedto,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/THRU,#fedto,#step,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/THRU,#fedto,#step,#,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/THRU,#fedto,#step,A,#,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line>CYCLE/THRU,#fedto,#step,#,A,#,#fedupm,IPM,#rapto</Line>
+    <Line>MODALS:deep_retract=off,thru_mode=on</Line>
+    <Line>USEWITH:NCL,GEN4AX</Line>
+    <Line></Line>
+    <Line>$$ Converted APT (note that "fedto"s are negative).</Line>
+    <Line></Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DRILL,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/FACE,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/FACE,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step,A</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step,A,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step,STEPRAP,#steprap</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/DEEP,RAPTO,#rapto,FEDTO,#-fedto,STEP,#step,STEPRAP,#steprap, $</Line>
+    <Line>RTRCTO,#rtrcto</Line>
+    <Line>MODALS:deep_retract=off</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/TAP,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,ORIENT,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,ORIENT,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/BORE,DRAG,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=fedrat</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/MILL,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/MILL,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>MODALS:retract_mode=none</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/THRU,RAPTO,#rapto,FEDTO,#-fedto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line>CYCLE/THRU,RAPTO,#rapto,FEDTO,#-fedto,RTRCTO,#rtrcto</Line>
+    <Line>USEWITH:Converted</Line>
+    <Line></Line>
+  </Cycles>
+  <OffsetShowRotationFlag>0</OffsetShowRotationFlag>
+  <AutoDiff Method="solid" Type="both" Report="on" Uncut="off" Auto="none" TemporaryDesign="on" Image="off" File="" AutoSave="off" Log="">
+    <Stock Name="Stock" />
+    <Design Name="Design" Points="" Check="on" Keep="on" />
+    <Solid>
+      <Gouge Tol="0.1" Hue="0" />
+      <Excess Tol="0.1" Hue="14" />
+    </Solid>
+    <Surface>
+      <Gouge Value="20" Hue="11" />
+      <Gouge Value="1" Hue="0" />
+      <Gouge Value="0.5" Hue="54" />
+      <Gouge Value="0.4" Hue="53" />
+      <Gouge Value="0.3" Hue="52" />
+      <Gouge Value="0.2" Hue="51" />
+      <Gouge Value="0.1" Hue="50" />
+      <Gouge Value="0" Hue="6" />
+      <Excess Value="5" Hue="11" />
+      <Excess Value="1" Hue="16" />
+      <Excess Value="0.5" Hue="59" />
+      <Excess Value="0.4" Hue="58" />
+      <Excess Value="0.3" Hue="57" />
+      <Excess Value="0.2" Hue="56" />
+      <Excess Value="0.1" Hue="55" />
+      <Excess Value="0" Hue="6" />
+      <Minimum Check="off" Tol="0" Hue="0" />
+    </Surface>
+    <Point>
+      <Gouge Tol="0.1" Distance="0.5" />
+      <Excess Tol="0.1" Distance="0.5" />
+      <Normal X="0" Y="0" Z="1" Direction="out" />
+    </Point>
+    <Profile>
+      <Gouge Tol="0.1" Hue="0" />
+      <Excess Tol="0.1" Hue="4" />
+    </Profile>
+    <Region Limits="off" Entire="off" Improve="off">
+      <Minimum X="0" Y="0" Z="0" />
+      <Maximum X="25" Y="25" Z="25" />
+    </Region>
+    <Visibility Error="on" Stock="off" Fixture="off" Design="off" Tool="off" />
+    <Translucency AutoDiff="off" Stock="off" Fixture="on" Design="on" />
+  </AutoDiff>
+  <ToolUseWindow Time="-1" />
+  <GraphSettings OverrideGraphPreferences="on" ViewGraphsAtEnd="off" SaveGraphsAtEnd="off" SaveGraphsSplitByToolChange="off" SaveGraphsProjectUnits="on" SaveGraphsImperialUnits="off" RecordGraphToolPositions="off" RecordGraphForceAverages="on" />
+  <Layouts></Layouts>
+  <DeletedMaterial LowerBoundOn="0" UpperBoundOn="0" DefaultFlag="0" TabRemoval="0" LowerField="0.000000" UpperField="0.000000" />
+  <Preview Image="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" />
+  <Setup Name="1" Active="on">
+    <Property Export="off" OptiSpunModels="off" StockCheck="on">
+      <Tolerance Model="0.1" NURBS="0.1" Volume="0.02" />
+      <Cutting Base="stock" Tol="0.5" />
+      <Review DoReview="on" DoMaterial="on" Skip="0" DoCutConditions="off" />
+    </Property>
+    <Report>
+      <File></File>
+    </Report>
+    <Views ActiveViewID="1">
+      <FrontMatrix X1="1" X2="0" X3="0" Y1="0" Y2="1" Y3="0" Z1="0" Z2="0" Z3="1" />
+      <HomeMatrixMachine X1="1" X2="0" X3="0" Y1="0" Y2="1" Y3="0" Z1="0" Z2="0" Z3="1" />
+      <HomeMatrixWorkpiece X1="1" X2="0" X3="0" Y1="0" Y2="1" Y3="0" Z1="0" Z2="0" Z3="1" />
+      <ViewPrimary Name="Machine_View" ID="0" Type="machine">
+        <Options Scale="12.6186008453" UseSpinCenter="off" Back="shaded" Inherit="true" Color="0" Color2="0" Draw="shaded edges" Translucency="46" SpunToolDisp="on" SpunPartDisp="on" UseAO="on" />
+        <Position X="92.3591308594" Y="-627.354125977" Z="0" />
+        <Rotation I="-56.3099328695" J="-25.6589082493" K="-16.102114026" />
+        <SpinCenter X="0" Y="0" Z="0" />
+        <Attach>Base</Attach>
+        <Location X="0" Y="0" Width="50.0346500347" Height="100" Front="0" Order="1" WindowState="normal" />
+      </ViewPrimary>
+      <ViewPrimary Name="View 2" ID="1" Type="workpiece">
+        <Options Scale="1.94871735573" UseSpinCenter="off" Back="shaded" Inherit="true" Color="0" Color2="0" Draw="shaded edges" Translucency="46" SpunToolDisp="on" SpunPartDisp="on" UseAO="on" />
+        <Position X="-148.618164063" Y="74.5710449219" Z="0" />
+        <Rotation I="-58.2502334851" J="-52.1525791911" K="-26.7474826013" />
+        <SpinCenter X="0" Y="0" Z="0" />
+        <Attach>Stock</Attach>
+        <Location X="50.0346500347" Y="0" Width="49.9653499653" Height="100" Front="0" Order="0" WindowState="normal" />
+      </ViewPrimary>
+    </Views>
+    <Section></Section>
+    <Build Loose="keep">
+      <Component Name="Fixture" Subsystem="1" Cut="no" Check="no" MaxDist="0" Type="fixture" Visible="all" Enabled="on" Draw="shaded" Select="off" Source="project">
+        <Appearance Name="Stock" Ambient="0.2" Diffuse="0.7" Reflect="0.2" Specular="1" Shininess="6" Translucency="1" XRGB="0x00696969" />
+        <Attach>Attach</Attach>
+        <Position X="0" Y="0" Z="0" />
+        <Rotation I="0" J="0" K="0" />
+        <STL Unit="millimeter" Normal="outward" Visible="on" Mirror="off" Hue="-1">
+          <File>W5270NS01001_fixture.stl</File>
+          <Position X="62" Y="87" Z="190" />
+          <Rotation I="0" J="0" K="180" />
+        </STL>
+      </Component>
+      <Component Name="Stock" Subsystem="1" Type="stock" Visible="all" Enabled="on" Draw="shaded" Select="off" Source="project">
+        <Appearance Name="Stock" Ambient="0.2" Diffuse="0.7" Reflect="0.2" Specular="1" Shininess="6" Translucency="1" XRGB="0x00FFD700" />
+        <Attach>Fixture</Attach>
+        <Position X="0" Y="0" Z="0" />
+        <Rotation I="0" J="0" K="0" />
+        <STL Unit="millimeter" Normal="outward" Visible="on" Mirror="off" Hue="-1">
+          <File>W5270NS01001_stock.stl</File>
+          <Position X="62" Y="87" Z="190" />
+          <Rotation I="0" J="0" K="180" />
+        </STL>
+      </Component>
+      <Component Name="Design" Subsystem="1" IgnoreCollision="no" IgnoreProbing="yes" Type="design" Visible="all" Enabled="on" Draw="shaded" Select="off" Source="project">
+        <Appearance Name="Stock" Ambient="0.2" Diffuse="0.7" Reflect="0.2" Specular="1" Shininess="6" Translucency="1" XRGB="0x00EE82EE" />
+        <Attach>Stock</Attach>
+        <Position X="0" Y="0" Z="0" />
+        <Rotation I="0" J="0" K="0" />
+        <STL Unit="millimeter" Normal="outward" Visible="on" Mirror="off" Hue="-1">
+          <File>W5270NS01001_design.stl</File>
+          <Position X="62" Y="87" Z="190" />
+          <Rotation I="0" J="0" K="180" />
+        </STL>
+      </Component>
+      <MachineAttributes>
+        <Component Name="Tool_Change_Door" Visible="machine" Enabled="on" Count="1">
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Enclosure" Visible="machine" Enabled="on" Count="8">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="BLUM_Laser" Visible="machine" Enabled="on" Count="1">
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="C" Visible="machine" Enabled="on" Count="2">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Y" Visible="machine" Enabled="on" Count="2">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Light" Visible="machine" Enabled="on" Count="1">
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Tool" Visible="all" Enabled="on" Count="0"></Component>
+        <Component Name="Spindle" Visible="machine" Enabled="on" Count="1">
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="B" Visible="machine" Enabled="on" Count="5">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Z" Visible="machine" Enabled="on" Count="2">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="X" Visible="machine" Enabled="on" Count="1">
+          <Model Visible="on" Enabled="on" />
+        </Component>
+        <Component Name="Base" Visible="machine" Enabled="on" Count="4">
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+          <Model Visible="on" Enabled="on" />
+        </Component>
+      </MachineAttributes>
+    </Build>
+    <NCPrograms Type="gcode">
+      <Init Flag="off"></Init>
+      <Over Flag="off"></Over>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C1.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C2.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C3.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C4.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C5.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C6.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C7.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+      <NCProgram Use="on" Filter="off">
+        <File>C:/Users/Public/Documents/OPEN MIND/TMP/omHbNcs/W5270NS01001/W5270NS01001C/DMU 100P duoblock Minus/W5270NS01001C8.h</File>
+        <Orient>Keine</Orient>
+        <Ident></Ident>
+      </NCProgram>
+    </NCPrograms>
+    <Filter Type="arc" Accel="off" Remove="off">
+      <File></File>
+      <Arc XY="on" YZ="on" XZ="on" Fit="0.01" Flat="0.0001" Points="5" Small="0.1" Large="9999" />
+      <NURBS Tol="0.01" Points="5" Order="4" />
+    </Filter>
+    <ToolChange List="cutter_desc"></ToolChange>
+    <Motion Fast="20000" Fast_FPR="0" Animation="on" Skip="1024" SpinCheck="off" SpindleOn="off" Cycle="full" MaxDist="100" MinMotionDist="1" MaxMotionDist="200" Removal="standard" LimitsCheck="off" CheckCoolant="off" Angle="45" MinLimit="0.025" MaxLimit="0.025" Tol="0" AutoLoadRew="off" AutoLoad="off" />
+    <Tool Change="tool_num" CutterVisible="all" HolderVisible="all" ShankVisible="all" Draw="translucent" Control="tip" HolderStockCollisionOnOff="on" HolderFixtureCollisionOnOff="on" CutterFixtureCollision="on" ShankFixtureCollision="on" ShankStockCollision="on" ShankPlungeError="on" HolderStockNearMiss="0.5" HolderFixtureNearMiss="0.5" CutterFixtureNearMiss="0.5" ShankFixtureNearMiss="0.5" ShankStockDist="0.0500000007451" ShankPlungeTolerance="0.0500000007451" Gouge="off" Tol="0.10000000149" Excess="off" Minimum="1" MinHeight="0" Clear="0" MinCalcKeep="off" />
+    <GCode Prog="length_comp" Init="off" Comp="full" Type="scan_convert" Syntax="off" CheckTools="off" Column="0" Accel="on" Feed="0.5" ScanSubs="on">
+      <Table Name="Work Offsets">
+        <Row Index="0" Register="0:0" SubIndex="0" Auto="auto">
+          <System>1</System>
+          <From CSystem="off" X="0" Y="0" Z="0">B</From>
+          <To CompCSYS="csys" X="0" Y="0" Z="0">NCS</To>
+          <AddOffset X="0" Y="0" Z="0" A="0" B="0" C="0" U="0" V="0" W="0" A2="0" B2="0" C2="0" />
+          <RotationPlane X="0" Y="0" Z="0" />
+          <RelPosition X="0" Y="0" Z="0" A="0" B="0" C="0" U="0" V="0" W="0" A2="0" B2="0" C2="0" />
+          <Value>500</Value>
+          <Value>-980.7779</Value>
+          <Value>-1331.594</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+          <Value>0</Value>
+        </Row>
+      </Table>
+      <Block Skip="/" Apply="immediate">
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+        <Switch>on</Switch>
+      </Block>
+      <Wire XY="0" UV="25" Diameter="0.25" />
+      <Recent Count="5" />
+      <Output APT="off" />
+      <Modal Macro="mmDEBUG_OFFSETS" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_DELTA_INFO" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_RATE_CALCULATIONS" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_LOOP_LOGIC" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_MACRO_ARGS" Value="mmYES_TEXT" />
+      <Modal Macro="mmDEBUG_INTERSECT_POINTS" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_CUTCOM_LOOK_AHEAD" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_CYCLE_VALUES" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_SUBSTITUTION" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_VARIABLES" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_TURNING" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_WIREDM" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_OPTIPATH" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_CONTROL_API" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_TIMING" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_ACTIVE_COMPONENTS" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_COMPOSITE" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_TOOLCHAIN" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_CONTROL_SUBS" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_TILTED_PLANE" Value="mmNO_TEXT" />
+      <Modal Macro="mmDEBUG_PROCESS_CUTCOM" Value="mmNO_TEXT" />
+      <Modal Macro="mmSEND_ERROR" Value="mmTO_LOG_N_SCREEN" />
+      <Modal Macro="mmSEND_WARN" Value="mmTO_LOG" />
+      <Modal Macro="mmSEND_INFO" Value="mmTO_LOG" />
+      <Modal Macro="mmSEND_DEBUG" Value="mmTO_LOG" />
+      <Modal Macro="mmSEND_MACRO_MODAL" Value="mmTO_LOG" />
+      <Modal Macro="mmSEND_INPUT" Value="mmTO_LOG" />
+      <Modal Macro="mmSEND_OUTPUT" Value="mmTO_OUTPUT" />
+      <Modal Macro="mmOUTPUT_FILENAME_FORMAT" Value="mmLOCAL_FILENAME" />
+      <Modal Macro="mmOUTPUT_SEQUENCE_NUMBERS" Value="mmYES_TEXT" />
+      <Modal Macro="mmDISPLAY_ERRORS_DURING_SCAN" Value="mmNO_TEXT" />
+      <Modal Macro="mmDISPLAY_DUPLICATE_VAR_DEF_ERRORS" Value="mmNO_TEXT" />
+    </GCode>
+    <APT Machine="mill" Unit="millimeter" Multax="on" Clear="100" Rapid="linear" Major="warn">
+      <Angle Maximum="45" Reset="90" />
+      <Circle Process="on" Reverse="off" Chords="off" FourAxis="off" Tolerance="0" />
+      <Tool Reset="off" />
+      <Matrix Process="off" />
+      <Home Motion="from" Distance="25" />
+      <Rotation Philosophy="table" Angle="relative" Direction="shortest" Rotate="ignore" Rotabl="ignore" Rothed="ignore">
+        <Center X="0" Y="0" Z="0" />
+      </Rotation>
+      <Turn>#zval, #xval</Turn>
+      <CycleSet>VERICUT</CycleSet>
+    </APT>
+    <CSystems Simulation="off">
+      <Machine></Machine>
+      <CSystem Name="NCS" Type="component" Visible="all" XRGB="0x0000FFFF" Transition="off" NormalType="0" Select="off" UseColor="off">
+        <Attach>Stock</Attach>
+        <Position X="62.0000000000001" Y="86.9999999999998" Z="246" />
+        <Rotation I="0" J="0" K="0" />
+      </CSystem>
+    </CSystems>
+    <IP_SvFiles Count="0" IP_Project=""></IP_SvFiles>
+    <ToolMan>
+      <Library>W5270NS01001C.tls</Library>
+      <ActiveStockMatRecords></ActiveStockMatRecords>
+      <InactiveDefaultStockMatRecords></InactiveDefaultStockMatRecords>
+    </ToolMan>
+    <Control>
+      <File>Y:\VERICUT\templates\DMU100\DMG_DMU100p_hei530.ctl</File>
+      <VNCext VNCexternal="off" />
+      <TNCkinematics Index="0" />
+      <TNCtoolnum Flag="off" />
+      <TNCskipTransfer Flag="off" />
+      <TNCBlk Flag="on" />
+    </Control>
+    <Machine Up="Z+">
+      <File>Y:\VERICUT\templates\DMU100\DMG_DMU100P.mch</File>
+      <MachineLaminateCollisionDetection Detect="off" />
+      <Collision Detect="on" Ignore="active">
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>Spindle</Component>
+          <Component>Fixture</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>Spindle</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>B</Component>
+          <Component>Fixture</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>B</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>Z</Component>
+          <Component>Fixture</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="2">
+          <Component>Z</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Base</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Base</Component>
+          <Component>Design</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Enclosure</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Enclosure</Component>
+          <Component>Design</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Tool_Change_Door</Component>
+          <Component>Stock</Component>
+        </Between>
+        <Between Sub1="off" Sub2="off" Tol="1">
+          <Component>Tool_Change_Door</Component>
+          <Component>Design</Component>
+        </Between>
+      </Collision>
+      <Travel Beyond="on" LogError="on" Hue="0" RobotSumA4A6="off" OverTravelLogWarning="off" OverTravelHueWarning="1" />
+    </Machine>
+    <Inspect></Inspect>
+    <DieSink Animation="off" Speed="100">
+      <Stock></Stock>
+      <Burned Display="off" />
+    </DieSink>
+    <Optimization>
+      <Material>Default</Material>
+      <MachineAlias>Default</MachineAlias>
+      <MachineAliasExists>1</MachineAliasExists>
+      <CreateDefaultToolData>0</CreateDefaultToolData>
+      <Settings Over="100" AptDecimals="10" Air="2500" DefaultValueCheck="on" Breakup="off" Resolution="auto" Distance="0" Entry="0" Exit="0" />
+      <OutputFile>*.opti</OutputFile>
+      <Learn Append="off" Update="off" Reset="off" OptiMethod="None">
+        <ForceLearn FLPercentileOpts="1" FLPercentileValue="95" />
+        <Library></Library>
+      </Learn>
+      <ForceMaterialDir>(null)</ForceMaterialDir>
+      <ToolFeedrateSettings>
+        <Mill>
+          <MinFRChange Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <MinCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <MaxCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <AirCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <CleanupFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+        </Mill>
+        <Holemaking>
+          <MinFRChange Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <MinCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <MaxCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <AirCutFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+          <CleanupFR Value="-1" DefaultValueCheck="on" FeedrateMode="2" />
+        </Holemaking>
+        <Turn>
+          <MinFRChange Value="25" DefaultValueCheck="on" FeedrateMode="2" />
+          <MinCutFR Value="25" DefaultValueCheck="on" FeedrateMode="2" />
+          <MaxCutFR Value="1125" DefaultValueCheck="on" FeedrateMode="2" />
+          <AirCutFR Value="2500" DefaultValueCheck="on" FeedrateMode="1" />
+          <CleanupFR Value="100" DefaultValueCheck="on" FeedrateMode="3" />
+        </Turn>
+      </ToolFeedrateSettings>
+    </Optimization>
+    <SetupPlans></SetupPlans>
+    <StatusBoxData>
+      <StatusSubSystem Name="1" UId="7110837261521861040">
+        <StatusGroups>
+          <ReservedStatusGroup Type="PROGRAM" UId="7040593149780521933" Visible="true">
+            <StatusField Type="SUBSYSTEM" UId="6696143852008482777" Visible="false" />
+            <StatusField Type="TOOLPATH_FILENAME" UId="8914779443367488596" Visible="true" />
+            <StatusField Type="TOOLPATH_LINENUMBER" UId="7438804499268057034" Visible="false" />
+            <StatusField Type="TOOLPATH_RECORD" UId="1733947145541081376" Visible="false" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="BASIC" UId="3040270670671198675" Visible="true">
+            <StatusField Type="ERRORS" UId="3434932412319045661" Visible="true" />
+            <StatusField Type="WARNINGS" UId="2404554007852334264" Visible="true" />
+            <StatusField Type="SPINDLESPEED_0" UId="1961212063097270257" Visible="true" />
+            <StatusField Type="FEEDRATE" UId="5257220457113871999" Visible="true" />
+            <StatusField Type="COOLANT" UId="1975321466763230178" Visible="false" />
+            <StatusField Type="MOTIONTYPE" UId="2086246257897873684" Visible="true" />
+            <StatusField Type="ABSINC" UId="3292188734570396352" Visible="true" />
+            <StatusField Type="MOTIONPLANE" UId="5366110723552434690" Visible="true" />
+            <StatusField Type="UNITS" UId="3450820827412760790" Visible="true" />
+            <StatusField Type="SPINDLEMODE" UId="2362418882915486049" Visible="true" />
+            <StatusField Type="TOOLSPINDLESPEED" UId="8428444976158209896" Visible="false" />
+            <StatusField Type="WORK_OFFSET" UId="798891361751230707" Visible="true" />
+            <StatusField Type="TOOL_OFFSET" UId="7594106626632649385" Visible="true" />
+            <StatusField Type="WORK_OFFSET_VALUE" UId="7747267859288085074" Visible="true" />
+            <StatusField Type="TOOL_OFFSET_VALUE" UId="1541851123060208040" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="CONNECTIVITY" UId="2652666783087426606" Visible="true">
+            <StatusField Type="CONN_SUBSYSTEM" UId="6391626468900711249" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_FILENAME" UId="6770100865693898080" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_LINENUMBER" UId="3502269492325512356" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_RECORD" UId="7463008176517973816" Visible="true" />
+            <StatusField Type="CONN_ACTIVE_ALARM" UId="4249518854695480524" Visible="true" />
+            <StatusField Type="CONN_ESTOP_STATE" UId="1689219281214094520" Visible="true" />
+            <StatusField Type="CONN_WORK_OFFSET" UId="2763184627645507874" Visible="true" />
+            <StatusField Type="CONN_CYCLE_STATUS" UId="6209551308063924824" Visible="true" />
+            <StatusField Type="CONN_TOOL_OFFSET" UId="8604131757620228336" Visible="true" />
+            <StatusField Type="CONN_RUNNING_STATE" UId="6801386699822814612" Visible="true" />
+            <StatusField Type="CONN_FEEDRATE_OVERRIDE" UId="6415808608521093356" Visible="true" />
+            <StatusField Type="CONN_CONTROLLER_MODE" UId="644448862115121057" Visible="true" />
+            <StatusField Type="CONN_RAPID_OVERRIDE" UId="2382871874371270345" Visible="true" />
+            <StatusField Type="CONN_SPINDLE_LOAD_0" UId="3249574547702061480" Visible="true" />
+            <StatusField Type="CONN_SPINDLE_OVERRIDE_0" UId="8245860958893210498" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="LOCATIONS" UId="601994191378086440" Visible="true">
+            <ReservedTableColumnIsToggled ColumnToggled1="true" ColumnToggled2="true" ColumnToggled3="true" />
+            <StatusField Type="MACHINE_X" UId="5011815921835228230" Visible="true" />
+            <StatusField Type="LOCAL_X" UId="5165951457874719725" Visible="true" />
+            <StatusField Type="MACHINE_Y" UId="8163502986923623544" Visible="true" />
+            <StatusField Type="LOCAL_Y" UId="4005755578552040210" Visible="true" />
+            <StatusField Type="MACHINE_Z" UId="4447934032491710038" Visible="true" />
+            <StatusField Type="LOCAL_Z" UId="6572899446112097840" Visible="true" />
+            <StatusField Type="MACHINE_B" UId="1659503131523750326" Visible="true" />
+            <StatusField Type="LOCAL_B" UId="2467343814206387274" Visible="true" />
+            <StatusField Type="MACHINE_C" UId="8423574579049021049" Visible="true" />
+            <StatusField Type="LOCAL_C" UId="4729449120954901447" Visible="true" />
+            <StatusField Type="TOOLTIP_X" UId="5118391452183488606" Visible="false" />
+            <StatusField Type="TOOLTIP_Y" UId="8341717421431320316" Visible="false" />
+            <StatusField Type="TOOLTIP_Z" UId="6066029653946943066" Visible="false" />
+            <StatusField Type="TOOLTIP_I" UId="5640818717514443326" Visible="false" />
+            <StatusField Type="TOOLTIP_J" UId="6819507813807577210" Visible="false" />
+            <StatusField Type="TOOLTIP_K" UId="5642026063683873320" Visible="false" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="TIME_AND_DISTANCE" UId="3049495423740215159" Visible="true">
+            <StatusField Type="TIME" UId="1768210721637908415" Visible="true" />
+            <StatusField Type="DISTANCE" UId="6233185680755634426" Visible="false" />
+            <StatusField Type="TIME_PERCENT" UId="4585156455284954998" Visible="false" />
+            <StatusField Type="AIRTIME_PERCENT" UId="434545950122461655" Visible="false" />
+            <StatusField Type="DISTANCE_PERCENT" UId="4651168731190009385" Visible="false" />
+            <StatusField Type="AIRTIME" UId="332992389772897830" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="TOOL" UId="5217665839223950013" Visible="true">
+            <StatusField Type="TOOL_SEQUENCE" UId="2465271041972996508" Visible="false" />
+            <StatusField Type="TOOL_NUMBER" UId="8709333766855044646" Visible="true" />
+            <StatusField Type="TOOL_GEOMETRY" UId="8912865907979379875" Visible="false" />
+            <StatusField Type="TOOL_ID" UId="5594067245225521829" Visible="false" />
+            <StatusField Type="TOOL_DESCRIPTION" UId="2075528294611725940" Visible="false" />
+            <StatusField Type="TOOL_CHANGERECORD" UId="8510774570618979807" Visible="true" />
+            <StatusField Type="TOOL_DIAMETER" UId="4822294619077195808" Visible="true" />
+            <StatusField Type="TOOL_FLUTES_OR_TEETH" UId="8201749016861213017" Visible="true" />
+            <StatusField Type="TOOL_CHANGERECORDNUMBER" UId="5378864050317651480" Visible="false" />
+            <StatusField Type="TOOL_CUT_TIME" UId="2552439908157868254" Visible="true" />
+            <StatusField Type="TOOL_CUT_DISTANCE" UId="8513399126766037797" Visible="true" />
+            <StatusField Type="TOOL_CUT_VOLUME" UId="822271915714084165" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="OPTIMIZATION" UId="431063998371291575" Visible="true">
+            <StatusField Type="OPTIMIZED_SPINDLESPEED_0" UId="4564171863870295110" Visible="true" />
+            <StatusField Type="OPTIMIZED_FEEDRATE" UId="927299692632374408" Visible="false" />
+            <StatusField Type="OPTIMIZED_TIME" UId="3309178869960537027" Visible="false" />
+            <StatusField Type="OPTIMIZED_VOLUMEREMOVALRATE" UId="6091641481154346199" Visible="true" />
+            <StatusField Type="OPTIMIZED_CHIPTHICKNESS" UId="2888608347786281169" Visible="true" />
+            <StatusField Type="OPTIMIZED_CUT_TIME" UId="4208992197526486193" Visible="false" />
+            <StatusField Type="OPTIMIZED_CUT_DISTANCE" UId="5651519498221990917" Visible="false" />
+            <StatusField Type="OPTIMIZED_CUT_VOLUME" UId="672640837310124500" Visible="false" />
+            <StatusField Type="ACTIVE_STOCK_MATERIAL" UId="5569814578148632140" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="CUTTING CONDITIONS" UId="6261197479605510753" Visible="true">
+            <StatusField Type="CUT_AXIALDEPTH" UId="7406891318784560680" Visible="false" />
+            <StatusField Type="CUT_RADIALWIDTH" UId="2418717213852294084" Visible="false" />
+            <StatusField Type="CUT_CONTACTAREA" UId="5745139121273853524" Visible="false" />
+            <StatusField Type="CUT_SURFACESPEED" UId="984243079547004615" Visible="false" />
+            <StatusField Type="CUT_VOLUMEREMOVALRATE" UId="3806745889303402517" Visible="false" />
+            <StatusField Type="CUT_CHIPTHICKNESS" UId="6345773761594121687" Visible="false" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="ADDITIVE_FUNCTIONS" UId="6342405028132719337" Visible="true">
+            <StatusField Type="ADDITIVE_MATERIALFEEDRATE" UId="1218223669819371444" Visible="true" />
+            <StatusField Type="ADDITIVE_LASER" UId="1872339527208608121" Visible="true" />
+            <StatusField Type="ADDITIVE_MATERIALGAS" UId="7178038152688342335" Visible="true" />
+            <StatusField Type="ADDITIVE_SHIELDGAS" UId="8471109812084539859" Visible="true" />
+            <StatusField Type="ADDITIVE_MATERIALVOLUME" UId="2596673491308660090" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="OTHERS" UId="6183690146298464322" Visible="true">
+            <StatusField Type="CUTTERCOMP_STATE" UId="7420204533234885331" Visible="true" />
+            <StatusField Type="CYCLE" UId="5964588524532329335" Visible="true" />
+            <StatusField Type="INTERPOLATION" UId="3299508800135249031" Visible="true" />
+            <StatusField Type="CUTTERCOMP_ID" UId="2579244089734561558" Visible="true" />
+            <StatusField Type="CUTTERCOMP_VALUE" UId="6062297237739812337" Visible="true" />
+            <StatusField Type="POLARCOORDINATEMODE" UId="2252719942356611414" Visible="false" />
+          </ReservedStatusGroup>
+        </StatusGroups>
+      </StatusSubSystem>
+      <StatusSubSystem Name="TC" UId="2892228253348591592">
+        <StatusGroups>
+          <ReservedStatusGroup Type="PROGRAM" UId="5703151628813291156" Visible="true">
+            <StatusField Type="SUBSYSTEM" UId="7464630765005822309" Visible="false" />
+            <StatusField Type="TOOLPATH_FILENAME" UId="2694002663449870353" Visible="true" />
+            <StatusField Type="TOOLPATH_LINENUMBER" UId="2352417877933620432" Visible="true" />
+            <StatusField Type="TOOLPATH_RECORD" UId="5473937614273368254" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="BASIC" UId="8820811111869871936" Visible="true">
+            <StatusField Type="ERRORS" UId="3395859813314883012" Visible="true" />
+            <StatusField Type="WARNINGS" UId="2598529782607036864" Visible="true" />
+            <StatusField Type="SPINDLESPEED_0" UId="2865432730710690179" Visible="true" />
+            <StatusField Type="FEEDRATE" UId="5593189560172915648" Visible="true" />
+            <StatusField Type="COOLANT" UId="3759623423302204287" Visible="true" />
+            <StatusField Type="MOTIONTYPE" UId="8989706201409994174" Visible="true" />
+            <StatusField Type="ABSINC" UId="4561670885811343969" Visible="true" />
+            <StatusField Type="MOTIONPLANE" UId="316457189821768625" Visible="true" />
+            <StatusField Type="UNITS" UId="8594184010901201231" Visible="true" />
+            <StatusField Type="SPINDLEMODE" UId="4516945765171194476" Visible="true" />
+            <StatusField Type="TOOLSPINDLESPEED" UId="8404543248092220783" Visible="false" />
+            <StatusField Type="WORK_OFFSET" UId="1826129533797915338" Visible="true" />
+            <StatusField Type="TOOL_OFFSET" UId="141089479620871999" Visible="true" />
+            <StatusField Type="WORK_OFFSET_VALUE" UId="8177044997626165317" Visible="true" />
+            <StatusField Type="TOOL_OFFSET_VALUE" UId="8203178227116144053" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="CONNECTIVITY" UId="1500366596755982179" Visible="true">
+            <StatusField Type="CONN_SUBSYSTEM" UId="2553073461778292008" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_FILENAME" UId="9157156611777892668" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_LINENUMBER" UId="7708591810638947285" Visible="true" />
+            <StatusField Type="CONN_TOOLPATH_RECORD" UId="8998520627207932489" Visible="true" />
+            <StatusField Type="CONN_ACTIVE_ALARM" UId="7525709455248984921" Visible="true" />
+            <StatusField Type="CONN_ESTOP_STATE" UId="5026426850671637832" Visible="true" />
+            <StatusField Type="CONN_WORK_OFFSET" UId="8051094595207303499" Visible="true" />
+            <StatusField Type="CONN_CYCLE_STATUS" UId="2000940338859076830" Visible="true" />
+            <StatusField Type="CONN_TOOL_OFFSET" UId="6198705284532856084" Visible="true" />
+            <StatusField Type="CONN_RUNNING_STATE" UId="2696059350358123628" Visible="true" />
+            <StatusField Type="CONN_FEEDRATE_OVERRIDE" UId="2305123092121144552" Visible="true" />
+            <StatusField Type="CONN_CONTROLLER_MODE" UId="1444594377418221690" Visible="true" />
+            <StatusField Type="CONN_RAPID_OVERRIDE" UId="3921806893832479030" Visible="true" />
+            <StatusField Type="CONN_SPINDLE_LOAD_0" UId="7682574694500308587" Visible="true" />
+            <StatusField Type="CONN_SPINDLE_OVERRIDE_0" UId="7107570737532718936" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="LOCATIONS" UId="5173519472086115259" Visible="true">
+            <ReservedTableColumnIsToggled ColumnToggled1="true" ColumnToggled2="true" ColumnToggled3="true" />
+            <StatusField Type="MACHINE_W" UId="3585544003812595384" Visible="true" />
+            <StatusField Type="LOCAL_W" UId="4477418959225337057" Visible="true" />
+            <StatusField Type="TOOLTIP_X" UId="6373909092545638578" Visible="true" />
+            <StatusField Type="TOOLTIP_Y" UId="3254653600856878981" Visible="true" />
+            <StatusField Type="TOOLTIP_Z" UId="1011439294376393696" Visible="true" />
+            <StatusField Type="TOOLTIP_I" UId="1976267430432210393" Visible="true" />
+            <StatusField Type="TOOLTIP_J" UId="5143742924806886990" Visible="true" />
+            <StatusField Type="TOOLTIP_K" UId="2895245341589179902" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="TIME_AND_DISTANCE" UId="1729790815566914846" Visible="true">
+            <StatusField Type="TIME" UId="5637564688829428787" Visible="true" />
+            <StatusField Type="DISTANCE" UId="5647780924627464671" Visible="true" />
+            <StatusField Type="TIME_PERCENT" UId="2662779447355259822" Visible="true" />
+            <StatusField Type="AIRTIME_PERCENT" UId="4936187702312290232" Visible="true" />
+            <StatusField Type="DISTANCE_PERCENT" UId="6620952014660470119" Visible="true" />
+            <StatusField Type="AIRTIME" UId="7867689537917755800" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="TOOL" UId="3852796375128367231" Visible="true">
+            <StatusField Type="TOOL_SEQUENCE" UId="8153748975041611223" Visible="true" />
+            <StatusField Type="TOOL_NUMBER" UId="6553540154467310497" Visible="true" />
+            <StatusField Type="TOOL_GEOMETRY" UId="3246011763677462832" Visible="true" />
+            <StatusField Type="TOOL_ID" UId="1065165255310514426" Visible="true" />
+            <StatusField Type="TOOL_DESCRIPTION" UId="2016309774361186247" Visible="true" />
+            <StatusField Type="TOOL_CHANGERECORD" UId="8236493921607543042" Visible="true" />
+            <StatusField Type="TOOL_DIAMETER" UId="1482357331152000546" Visible="true" />
+            <StatusField Type="TOOL_FLUTES_OR_TEETH" UId="812396684255298923" Visible="true" />
+            <StatusField Type="TOOL_CHANGERECORDNUMBER" UId="6497302005678314027" Visible="true" />
+            <StatusField Type="TOOL_CUT_TIME" UId="7276136577444658423" Visible="true" />
+            <StatusField Type="TOOL_CUT_DISTANCE" UId="5957477052197845526" Visible="true" />
+            <StatusField Type="TOOL_CUT_VOLUME" UId="8454184469855287957" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="OPTIMIZATION" UId="4016282685489256194" Visible="true">
+            <StatusField Type="OPTIMIZED_SPINDLESPEED_0" UId="1900895002823792963" Visible="true" />
+            <StatusField Type="OPTIMIZED_FEEDRATE" UId="3267981462910255801" Visible="true" />
+            <StatusField Type="OPTIMIZED_TIME" UId="1184093474531203297" Visible="true" />
+            <StatusField Type="OPTIMIZED_VOLUMEREMOVALRATE" UId="2455764979565721458" Visible="true" />
+            <StatusField Type="OPTIMIZED_CHIPTHICKNESS" UId="2914260434609559158" Visible="true" />
+            <StatusField Type="OPTIMIZED_CUT_TIME" UId="5036454797672793055" Visible="true" />
+            <StatusField Type="OPTIMIZED_CUT_DISTANCE" UId="6126747525231951403" Visible="true" />
+            <StatusField Type="OPTIMIZED_CUT_VOLUME" UId="6913534655462506577" Visible="true" />
+            <StatusField Type="ACTIVE_STOCK_MATERIAL" UId="5401493447104303088" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="CUTTING CONDITIONS" UId="2165116500001298988" Visible="true">
+            <StatusField Type="CUT_AXIALDEPTH" UId="1544672221176464747" Visible="true" />
+            <StatusField Type="CUT_RADIALWIDTH" UId="669436628792377007" Visible="true" />
+            <StatusField Type="CUT_CONTACTAREA" UId="490918377450437280" Visible="true" />
+            <StatusField Type="CUT_SURFACESPEED" UId="1595890294176370591" Visible="true" />
+            <StatusField Type="CUT_VOLUMEREMOVALRATE" UId="267529361598589211" Visible="true" />
+            <StatusField Type="CUT_CHIPTHICKNESS" UId="5046102370964844689" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="ADDITIVE_FUNCTIONS" UId="8483007874208070129" Visible="true">
+            <StatusField Type="ADDITIVE_MATERIALFEEDRATE" UId="8642506384753942873" Visible="true" />
+            <StatusField Type="ADDITIVE_LASER" UId="2319938490031429106" Visible="true" />
+            <StatusField Type="ADDITIVE_MATERIALGAS" UId="5218204022982639291" Visible="true" />
+            <StatusField Type="ADDITIVE_SHIELDGAS" UId="4262783765625676395" Visible="true" />
+            <StatusField Type="ADDITIVE_MATERIALVOLUME" UId="2811138609759299121" Visible="true" />
+          </ReservedStatusGroup>
+          <ReservedStatusGroup Type="OTHERS" UId="3268981205450824988" Visible="true">
+            <StatusField Type="CUTTERCOMP_STATE" UId="1350456959484653391" Visible="true" />
+            <StatusField Type="CYCLE" UId="1379956978211293433" Visible="true" />
+            <StatusField Type="INTERPOLATION" UId="2795634422048700250" Visible="true" />
+            <StatusField Type="CUTTERCOMP_ID" UId="2069601007233617822" Visible="true" />
+            <StatusField Type="CUTTERCOMP_VALUE" UId="932939420850698984" Visible="true" />
+            <StatusField Type="POLARCOORDINATEMODE" UId="4478299365322735606" Visible="true" />
+          </ReservedStatusGroup>
+        </StatusGroups>
+      </StatusSubSystem>
+    </StatusBoxData>
+    <WordDisplay Variables="on" />
+    <HUD Translucency="1" Current="-16776961" Text="-16777216" File="-16777216" Program="13" Label="-16777216" Value="-16776961" Status="12">
+      <Program></Program>
+      <Status>
+        <Box Name="Box" View="" Count="6" HudBoxData="0,1,10,30,400,400" HudStatusFields="5165951457874719725,4005755578552040210,6572899446112097840,2467343814206387274,4729449120954901447,1768210721637908415,8709333766855044646" HudStatusFieldSubsystems="0,0,0,0,0,0,0" HudStatusFieldTypes="LOCAL_X,LOCAL_Y,LOCAL_Z,LOCAL_B,LOCAL_C,TIME,TOOL_NUMBER"></Box>
+      </Status>
+    </HUD>
+  </Setup>
+</VcProject>

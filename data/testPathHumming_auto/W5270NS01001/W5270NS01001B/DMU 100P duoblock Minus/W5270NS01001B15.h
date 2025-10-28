@@ -1,0 +1,108 @@
+0 BEGIN PGM W5270NS01001B15 MM
+1 ; ----------------------------------
+2 ; PROJECT	  : 
+3 ; DRAWING NUMBER: 
+4 ; INDEX   	  : 
+5 ; MACHINE	  : DMG DMU 100P duoBLOCK
+6 ; DATE   	  : 28.10.2025
+7 ; TIME  	  : 08:37
+8 ; PROGRAM RAN	  :
+9 ; ----------------------------------
+10 ;
+11 ;created by hyperMILL 2025 OPEN MIND Technologies AG
+12 ;
+13 ; --- TOOLLIST BEGIN ---------------
+14 ; T2062940801 | GUH-5512-BHF4.3_H63Z6L80 / DM=4.3 CR=0 TL=131  
+15 ; ---- TOOLLIST END ----------------
+16 ;
+17 ; --- BLOCK FORM -------------------
+18 BLK FORM 0.1 Z X-248 Y-223 Z-56
+19 BLK FORM 0.2 X248 Y223 Z0
+20 ; ----------------------------------
+21 CYCL DEF 392 ATC~
+  Q240=0 ;TUNING MODE~
+  Q241=1 ;WEIGHT MODE
+22 ; ----------------------------------
+23 M55
+24 CALL LBL 1 ; RESET WORKING PLANE
+25 M127 ; SHORTER PATH TRAVERSE OFF
+26 M129 ; TCPM OFF
+27 ; --- SAFEPOSITION TOOL CALL -------
+28 L Z+0.0 R0 FMAX M92
+29 L X+0.0 Y+0.0 R0 FMAX M92
+30 L B+0.0 C+0.0 R0 FMAX
+31 ; ----------------------------------
+32 * - TOOL: T2062940801 | GUH-5512-BHF4.3_H63Z6L80 / DM=4.3 CR=0 TL=131
+33 TOOL CALL "BH04300000510172" Z S5922 DL+0 DR+0
+34 CALL LBL 1 ; RESET WORKING PLANE
+35 ; --- SAFEPOSITION -----------------
+36 L Z+0.0 R0 FMAX M92
+37 L X+0.0 Y+0.0 R0 FMAX M92
+38 TOOL DEF 0
+39 ; ----------------------------------
+40 *   - JOB: 34: D4.3-tisztito-CYCL200
+41 ; ----------------------------------
+42 FN 0:Q2=474 ;Z FEEDRATE
+43 CALL LBL 1 ; RESET WORKING PLANE
+44 ; ----------------------------------
+45 ; B0 C0
+46 ; ----------------------------------
+47 CYCL DEF 7.0 DATUM SHIFT
+48 CYCL DEF 7.1 X0
+49 CYCL DEF 7.2 Y0
+50 CYCL DEF 7.3 Z0
+51 PLANE SPATIAL SPA0 SPB0 SPC0 STAY SEQ+ TABLE ROT
+52 L B+Q121 C+Q122 R0 F MAX M126 ; SHORTER PATH TRAVERSE ON
+53 L X0 Y52 R0 F MAX M3 
+54 L Z50 R0 F MAX
+55 ; --- coolant.txt ----
+56 M7
+57 CYCL DEF9.0 VARAKOZASI IDO
+58 CYCL DEF9.1 V.IDO2
+59 ; -------
+60 CYCL DEF 200 DRILLING~
+   Q200=5 ;SET-UP CLEARANCE~
+   Q201=-16 ;DEPTH~
+   Q206=Q2 ;FEED RATE FOR PLUNGING~
+   Q202=16 ;PLUNGING DEPTH~
+   Q210=0 ;DWELL TIME AT TOP~
+   Q203=0 ;SURFACE COORDINATE~
+   Q204=50 ;2ND SET-UP CLEARANCE~
+   Q211=0 ;DWELL TIME AT BOTTOM
+61 L X0 Y52 R0 F MAX M99
+62 L X0 Y-52 R0 F MAX M99
+63 M9
+64 M5
+65 CALL LBL 1 ; RESET WORKING PLANE
+66 ; --- SAFEPOSITION END -------------
+67 L Z+0.0 R0 FMAX M92
+68 L X+0.0 Y+0.0 R0 FMAX M92
+69 ; ----------------------------------
+70 PLANE SPATIAL SPA0 SPB0 SPC0 STAY SEQ+ TABLE ROT
+71 L B+Q121 C+Q122 R0 F MAX M126 ; SHORTER PATH TRAVERSE ON
+72 CALL LBL 1 ; RESET WORKING PLANE
+/73 M30
+74 * --- LBL BEGIN --------------------
+75 * -  LBL 1, RESET WORKING PLANE 
+76 LBL 1 ; RESET WORKING PLANE
+77 CYCL DEF 7.0 DATUM SHIFT
+78 CYCL DEF 7.1 X+0
+79 CYCL DEF 7.2 Y+0
+80 CYCL DEF 7.3 Z+0
+81 PLANE RESET STAY
+82 LBL 0
+83 ; ----------------------------------
+84 LBL "CuttingEdgesCheck"
+85 FN 9: IF +Q1900 EQU +1 GOTO LBL "CuttingEdges1"
+86 FN 9: IF +Q1900 EQU +2 GOTO LBL "CuttingEdges2"
+87 LBL 0
+88 ; ----------------------------------
+89 LBL "CuttingEdges1"
+90 FN 0: Q1901=4
+91 LBL 0
+92 ; ----------------------------------
+93 LBL "CuttingEdges2"
+94 FN 0: Q1901=3
+95 LBL 0
+96 ; ----------------------------------
+97 END PGM W5270NS01001B15 MM
