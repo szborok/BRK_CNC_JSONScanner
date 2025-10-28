@@ -24,7 +24,7 @@ npm install
 
 # Create required directories
 mkdir logs
-mkdir data
+mkdir test_data
 ```
 
 ### 2. Configuration
@@ -44,17 +44,17 @@ notepad config\Settings.js
 ```javascript
 module.exports = {
   app: {
-    autorun: true,                     // Enable automatic scanning
-    scanIntervalMs: 60000,             // Scan every 60 seconds
-    testMode: false,                   // Set to false for production
-    logLevel: "info"                   // Logging detail level
+    autorun: true, // Enable automatic scanning
+    scanIntervalMs: 60000, // Scan every 60 seconds
+    testMode: false, // Set to false for production
+    logLevel: "info", // Logging detail level
   },
-  
+
   paths: {
     // Update this path to your actual data location
     productionDataPath: "\\\\server\\projects",
-    testDataPath: "./data/testPathHumming_auto"
-  }
+    testDataPath: "./test_data/testPathHumming_auto",
+  },
 };
 ```
 
@@ -71,6 +71,7 @@ npm start
 ```
 
 You should see output like:
+
 ```
 [2025-01-28 14:30:00] INFO: JSON Scanner starting...
 [2025-01-28 14:30:01] INFO: Configuration loaded successfully
@@ -145,7 +146,7 @@ Open a `result.json` file to see the analysis:
 ```javascript
 // In config/Settings.js, make sure the path exists and is accessible
 paths: {
-  productionDataPath: "C:\\Your\\Actual\\Path\\To\\Projects"
+  productionDataPath: "C:\\Your\\Actual\\Path\\To\\Projects";
 }
 ```
 
@@ -176,6 +177,7 @@ healthCheck: {
 ### 1. Configure for Your Environment
 
 Update `config/Settings.js` with your specific:
+
 - Data paths
 - Scan intervals
 - Logging preferences
@@ -214,24 +216,25 @@ Add your own quality control rules:
 3. Restart the application to load new rules
 
 **Example Rule Template:**
+
 ```javascript
 // rules/MyCustomRule.js
 module.exports = {
-  name: 'MyCustomRule',
-  description: 'Custom quality control check',
-  
-  shouldRun: function(project) {
+  name: "MyCustomRule",
+  description: "Custom quality control check",
+
+  shouldRun: function (project) {
     // Return true if this rule should run for this project
-    return project.machine.includes('DMU');
+    return project.machine.includes("DMU");
   },
-  
-  execute: function(project, compoundJobs, tools) {
+
+  execute: function (project, compoundJobs, tools) {
     // Your rule logic here
     return {
       passed: true,
-      violations: []
+      violations: [],
     };
-  }
+  },
 };
 ```
 
@@ -243,10 +246,10 @@ For development and testing, use the included test data:
 // config/Settings.js
 module.exports = {
   app: {
-    testMode: true,  // Uses ./data/testPathHumming_auto
+    testMode: true, // Uses ./test_data/testPathHumming_auto
     autorun: true,
-    scanIntervalMs: 10000  // Faster scanning for testing
-  }
+    scanIntervalMs: 10000, // Faster scanning for testing
+  },
 };
 ```
 
@@ -263,7 +266,7 @@ You should now have:
 ✅ JSON Scanner installed and running  
 ✅ Automatic scanning every 60 seconds  
 ✅ Results being generated in `result.json` files  
-✅ Logs showing system operation  
+✅ Logs showing system operation
 
 The system will continuously monitor your specified directories and analyze projects according to the configured quality control rules.
 

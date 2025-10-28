@@ -41,7 +41,7 @@ json_scanner/
 │   ├── Logger.js           # Logging infrastructure
 │   ├── ModeManager.js      # Mode management utilities
 │   └── PathUtils.js        # Path processing utilities
-├── data/                   # Data directories
+├── test_data/               # Test data directories
 │   ├── testPathHumming_auto/   # Test data for auto mode
 │   └── testPathOne_manual/     # Test data for manual mode
 └── logs/                   # Application logs
@@ -61,12 +61,14 @@ json_scanner/
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd json_scanner
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -107,12 +109,12 @@ node main.js --manual --operator "jane.smith"
 
 ### Command Line Options
 
-| Option | Description | Example |
-|--------|-------------|---------|
-| `--force` | Reprocess even if result files exist | `node main.js --force` |
-| `--manual` | Enable manual processing mode | `node main.js --manual` |
-| `--operator <name>` | Filter projects by operator | `node main.js --operator "user123"` |
-| `--path <directory>` | Specify custom scan path | `node main.js --path "/data/projects"` |
+| Option               | Description                          | Example                                |
+| -------------------- | ------------------------------------ | -------------------------------------- |
+| `--force`            | Reprocess even if result files exist | `node main.js --force`                 |
+| `--manual`           | Enable manual processing mode        | `node main.js --manual`                |
+| `--operator <name>`  | Filter projects by operator          | `node main.js --operator "user123"`    |
+| `--path <directory>` | Specify custom scan path             | `node main.js --path "/data/projects"` |
 
 ## 📊 Output & Results
 
@@ -123,7 +125,7 @@ The system generates clean, structured JSON result files for each processed proj
 ```json
 {
   "project": "W5270NS01001A",
-  "operator": "szborok", 
+  "operator": "szborok",
   "machine": "DMC 105 V Linear",
   "position": "A",
   "summary": {
@@ -144,6 +146,7 @@ The system generates clean, structured JSON result files for each processed proj
 ### Log Files
 
 Detailed operation logs are saved in `logs/app-YYYY-MM-DD.log` with:
+
 - Scan cycle timings
 - Project processing status
 - Rule execution results
@@ -156,17 +159,17 @@ Detailed operation logs are saved in `logs/app-YYYY-MM-DD.log` with:
 ```javascript
 module.exports = {
   app: {
-    testMode: true,                    // Use test data paths
-    autorun: true,                     // Enable auto scanning
-    scanIntervalMs: 60000,             // Scan every 60 seconds
-    logLevel: "info",                  // Logging verbosity
-    forceReprocess: false              // Skip already processed files
+    testMode: true, // Use test data paths
+    autorun: true, // Enable auto scanning
+    scanIntervalMs: 60000, // Scan every 60 seconds
+    logLevel: "info", // Logging verbosity
+    forceReprocess: false, // Skip already processed files
   },
-  
+
   paths: {
-    testDataPath: "./data/testPathHumming_auto",
-    productionDataPath: "/production/data/path"
-  }
+    testDataPath: "./test_data/testPathHumming_auto",
+    productionDataPath: "/production/test_data/path",
+  },
 };
 ```
 
@@ -176,13 +179,13 @@ Rules are automatically discovered and can be configured individually. Each rule
 
 ```javascript
 module.exports = {
-  name: 'RuleName',
-  description: 'Rule description',
-  shouldRun: (project) => true,    // Condition logic
+  name: "RuleName",
+  description: "Rule description",
+  shouldRun: (project) => true, // Condition logic
   execute: (project, compoundJobs, tools) => {
     // Rule implementation
     return { passed: true, violations: [] };
-  }
+  },
 };
 ```
 
@@ -207,6 +210,7 @@ module.exports = {
 ### Log Monitoring
 
 Monitor the application through log files:
+
 - Scan cycle performance
 - Project processing statistics
 - Rule execution results
@@ -238,7 +242,7 @@ Comprehensive documentation is available in the `/docs` directory:
 - **[Quick Start Guide](docs/QUICKSTART.md)** - Get running in 5 minutes
 - **[FAQ](docs/FAQ.md)** - Frequently asked questions and troubleshooting
 - **[API Documentation](docs/API.md)** - Data structures and future REST API design
-- **[Architecture](docs/ARCHITECTURE.md)** - System design and component relationships  
+- **[Architecture](docs/ARCHITECTURE.md)** - System design and component relationships
 - **[Development Guide](docs/DEVELOPMENT.md)** - Code standards, testing, and workflow
 - **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment and maintenance
 

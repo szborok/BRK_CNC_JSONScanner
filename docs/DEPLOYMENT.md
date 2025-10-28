@@ -20,6 +20,7 @@ This guide covers deployment strategies for the JSON Scanner system across diffe
 ### System Requirements
 
 **Minimum Requirements:**
+
 - Node.js 14.x or higher
 - Windows 10/Server 2016 or higher
 - 2GB RAM
@@ -27,6 +28,7 @@ This guide covers deployment strategies for the JSON Scanner system across diffe
 - Network access to CAD file locations
 
 **Recommended Requirements:**
+
 - Node.js 18.x LTS
 - Windows 11/Server 2022
 - 4GB RAM
@@ -92,15 +94,17 @@ API_RATE_LIMIT=1000
 ### Configuration by Environment
 
 #### Development
+
 ```bash
 NODE_ENV=development
 LOG_LEVEL=debug
 SCAN_INTERVAL_MS=10000
-SCAN_PATH=./data/testPathHumming_auto
+SCAN_PATH=./test_data/testPathHumming_auto
 AUTO_SCAN_ENABLED=true
 ```
 
 #### Staging
+
 ```bash
 NODE_ENV=staging
 LOG_LEVEL=info
@@ -111,6 +115,7 @@ HEALTH_CHECK_PORT=3001
 ```
 
 #### Production
+
 ```bash
 NODE_ENV=production
 LOG_LEVEL=warn
@@ -155,10 +160,10 @@ npm run test:config
 param(
     [Parameter(Mandatory=$true)]
     [string]$InstallPath,
-    
+
     [Parameter(Mandatory=$true)]
     [string]$ScanPath,
-    
+
     [string]$Environment = "production"
 )
 
@@ -202,32 +207,35 @@ npm install -g pm2
 ```
 
 **ecosystem.config.js:**
+
 ```javascript
 module.exports = {
-  apps: [{
-    name: 'json-scanner',
-    script: './main.js',
-    instances: 1,
-    exec_mode: 'fork',
-    watch: false,
-    max_memory_restart: '500M',
-    env: {
-      NODE_ENV: 'production',
-      PORT: 3000
+  apps: [
+    {
+      name: "json-scanner",
+      script: "./main.js",
+      instances: 1,
+      exec_mode: "fork",
+      watch: false,
+      max_memory_restart: "500M",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000,
+      },
+      env_production: {
+        NODE_ENV: "production",
+        SCAN_INTERVAL_MS: 60000,
+        LOG_LEVEL: "info",
+      },
+      log_file: "./logs/combined.log",
+      out_file: "./logs/out.log",
+      error_file: "./logs/error.log",
+      log_date_format: "YYYY-MM-DD HH:mm:ss Z",
+      restart_delay: 4000,
+      max_restarts: 10,
+      min_uptime: "10s",
     },
-    env_production: {
-      NODE_ENV: 'production',
-      SCAN_INTERVAL_MS: 60000,
-      LOG_LEVEL: 'info'
-    },
-    log_file: './logs/combined.log',
-    out_file: './logs/out.log',
-    error_file: './logs/error.log',
-    log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
-    restart_delay: 4000,
-    max_restarts: 10,
-    min_uptime: '10s'
-  }]
+  ],
 };
 ```
 
@@ -257,26 +265,24 @@ pm2 stop json-scanner
 ### Option 2: Node.js Service Wrapper
 
 **service.js:**
+
 ```javascript
-const Service = require('node-windows').Service;
+const Service = require("node-windows").Service;
 
 // Create a new service object
 const svc = new Service({
-  name: 'JSON Scanner Service',
-  description: 'Manufacturing Quality Control JSON Scanner',
-  script: require('path').join(__dirname, 'main.js'),
-  nodeOptions: [
-    '--harmony',
-    '--max_old_space_size=4096'
-  ],
+  name: "JSON Scanner Service",
+  description: "Manufacturing Quality Control JSON Scanner",
+  script: require("path").join(__dirname, "main.js"),
+  nodeOptions: ["--harmony", "--max_old_space_size=4096"],
   env: {
     name: "NODE_ENV",
-    value: "production"
-  }
+    value: "production",
+  },
 });
 
 // Listen for the "install" event
-svc.on('install', function() {
+svc.on("install", function () {
   svc.start();
 });
 
@@ -337,8 +343,9 @@ CMD ["npm", "start"]
 ### Docker Compose
 
 **docker-compose.yml:**
+
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   json-scanner:
@@ -439,7 +446,7 @@ nssm remove "JSON Scanner"
 param(
     [Parameter(Mandatory=$true)]
     [string]$ServicePath,
-    
+
     [string]$ServiceName = "JSON Scanner",
     [string]$ServiceDescription = "Manufacturing Quality Control JSON Scanner"
 )
@@ -489,9 +496,10 @@ Write-Host "Service '$ServiceName' installed and started successfully!"
 ### Health Monitoring
 
 **health.js:**
+
 ```javascript
-const http = require('http');
-const fs = require('fs');
+const http = require("http");
+const fs = require("fs");
 
 class HealthMonitor {
   constructor(port = 3001) {
@@ -501,13 +509,13 @@ class HealthMonitor {
 
   start() {
     this.server = http.createServer((req, res) => {
-      if (req.url === '/health') {
+      if (req.url === "/health") {
         this.handleHealthCheck(req, res);
-      } else if (req.url === '/metrics') {
+      } else if (req.url === "/metrics") {
         this.handleMetrics(req, res);
       } else {
         res.writeHead(404);
-        res.end('Not Found');
+        res.end("Not Found");
       }
     });
 
@@ -518,24 +526,24 @@ class HealthMonitor {
 
   handleHealthCheck(req, res) {
     const health = {
-      status: 'healthy',
+      status: "healthy",
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
       memory: process.memoryUsage(),
-      version: require('./package.json').version
+      version: require("./package.json").version,
     };
 
     // Check disk space
     try {
-      const stats = fs.statSync('./logs');
-      health.diskAccess = 'ok';
+      const stats = fs.statSync("./logs");
+      health.diskAccess = "ok";
     } catch (error) {
-      health.status = 'unhealthy';
-      health.diskAccess = 'error';
+      health.status = "unhealthy";
+      health.diskAccess = "error";
     }
 
-    const statusCode = health.status === 'healthy' ? 200 : 503;
-    res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    const statusCode = health.status === "healthy" ? 200 : 503;
+    res.writeHead(statusCode, { "Content-Type": "application/json" });
     res.end(JSON.stringify(health, null, 2));
   }
 
@@ -544,10 +552,10 @@ class HealthMonitor {
       // Application metrics would go here
       projectsProcessed: this.getProjectCount(),
       lastScanTime: this.getLastScanTime(),
-      errorCount: this.getErrorCount()
+      errorCount: this.getErrorCount(),
     };
 
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(metrics, null, 2));
   }
 }
@@ -558,6 +566,7 @@ module.exports = HealthMonitor;
 ### Log Rotation
 
 **logrotate.conf:**
+
 ```bash
 # Windows equivalent using PowerShell scheduled task
 # Create-ScheduledTask for log rotation
@@ -573,7 +582,7 @@ Get-ChildItem $LogPath -Filter "*.log" | ForEach-Object {
         $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
         $archiveName = "$($_.BaseName)_$timestamp$($_.Extension)"
         Move-Item $_.FullName "$LogPath\archive\$archiveName"
-        
+
         # Create new log file
         New-Item -Path $_.FullName -ItemType File
     }
@@ -614,6 +623,7 @@ Get-ChildItem $BackupPath -Filter "backup-*.zip" | Where-Object { $_.CreationTim
 ### Common Issues
 
 #### Issue: Service Won't Start
+
 ```powershell
 # Check Node.js version
 node --version
@@ -629,18 +639,21 @@ Get-EventLog -LogName Application -Source "JSON Scanner" -Newest 50
 ```
 
 #### Issue: High Memory Usage
+
 ```javascript
 // Add memory monitoring to main.js
 setInterval(() => {
   const usage = process.memoryUsage();
-  if (usage.heapUsed > 500 * 1024 * 1024) { // 500MB
-    console.warn('High memory usage detected:', usage);
+  if (usage.heapUsed > 500 * 1024 * 1024) {
+    // 500MB
+    console.warn("High memory usage detected:", usage);
     // Consider garbage collection or restart
   }
 }, 60000);
 ```
 
 #### Issue: Scanning Not Working
+
 ```powershell
 # Check file permissions
 Get-Acl "\\network\path\to\projects"
@@ -667,7 +680,7 @@ const config = {
   maxConcurrentProjects: 4,
 
   // Adjust scan frequency based on load
-  adaptiveScanInterval: true
+  adaptiveScanInterval: true,
 };
 ```
 
@@ -694,6 +707,7 @@ Select-String -Path ".\logs\*.log" -Pattern "memory" | Select-Object -Last 20
 ### Emergency Procedures
 
 #### Service Recovery
+
 ```powershell
 # emergency-restart.ps1
 $serviceName = "JSON Scanner"

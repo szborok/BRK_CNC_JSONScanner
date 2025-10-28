@@ -5,6 +5,7 @@
 ### 1. JavaScript Style Guide
 
 #### Naming Conventions
+
 ```javascript
 // Classes: PascalCase
 class ProjectAnalyzer {}
@@ -29,6 +30,7 @@ class Scanner {
 ```
 
 #### Code Structure
+
 ```javascript
 // File header with purpose
 /**
@@ -38,11 +40,11 @@ class Scanner {
  */
 
 // Imports grouped by type
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const Logger = require('../utils/Logger');
-const Settings = require('../config/Settings');
+const Logger = require("../utils/Logger");
+const Settings = require("../config/Settings");
 
 // Class definition with JSDoc
 /**
@@ -56,7 +58,7 @@ class Analyzer {
    */
   constructor(config) {
     this.config = config;
-    this.logger = new Logger('Analyzer');
+    this.logger = new Logger("Analyzer");
   }
 
   /**
@@ -75,10 +77,11 @@ module.exports = Analyzer;
 ### 2. Error Handling
 
 #### Error Types
+
 ```javascript
 // Base application error
 class ApplicationError extends Error {
-  constructor(message, code = 'GENERIC_ERROR', details = {}) {
+  constructor(message, code = "GENERIC_ERROR", details = {}) {
     super(message);
     this.name = this.constructor.name;
     this.code = code;
@@ -90,24 +93,25 @@ class ApplicationError extends Error {
 // Specific error types
 class ValidationError extends ApplicationError {
   constructor(message, field, value) {
-    super(message, 'VALIDATION_ERROR', { field, value });
+    super(message, "VALIDATION_ERROR", { field, value });
   }
 }
 
 class ProcessingError extends ApplicationError {
   constructor(message, projectId, stage) {
-    super(message, 'PROCESSING_ERROR', { projectId, stage });
+    super(message, "PROCESSING_ERROR", { projectId, stage });
   }
 }
 
 class FileSystemError extends ApplicationError {
   constructor(message, filePath, operation) {
-    super(message, 'FILESYSTEM_ERROR', { filePath, operation });
+    super(message, "FILESYSTEM_ERROR", { filePath, operation });
   }
 }
 ```
 
 #### Error Handling Patterns
+
 ```javascript
 // Function-level error handling
 async function processProject(project) {
@@ -118,18 +122,18 @@ async function processProject(project) {
     logger.error(`Project processing failed: ${project.name}`, {
       error: error.message,
       stack: error.stack,
-      projectId: project.name
+      projectId: project.name,
     });
-    
+
     // Transform to application error if needed
     if (!(error instanceof ApplicationError)) {
       throw new ProcessingError(
         `Unexpected error processing ${project.name}`,
         project.name,
-        'analysis'
+        "analysis"
       );
     }
-    
+
     throw error;
   }
 }
@@ -140,15 +144,17 @@ function executeRule(rule, project) {
     return rule.execute(project);
   } catch (error) {
     logger.warn(`Rule ${rule.name} failed for ${project.name}`, error);
-    
+
     return {
       passed: false,
-      violations: [{
-        type: 'execution_error',
-        severity: 'error',
-        message: `Rule execution failed: ${error.message}`,
-        context: { ruleName: rule.name }
-      }]
+      violations: [
+        {
+          type: "execution_error",
+          severity: "error",
+          message: `Rule execution failed: ${error.message}`,
+          context: { ruleName: rule.name },
+        },
+      ],
     };
   }
 }
@@ -157,55 +163,57 @@ function executeRule(rule, project) {
 ### 3. Logging Standards
 
 #### Log Levels and Usage
+
 ```javascript
 // ERROR: System errors, processing failures
-logger.error('Failed to process project', {
-  projectId: 'W5270NS01001A',
+logger.error("Failed to process project", {
+  projectId: "W5270NS01001A",
   error: error.message,
-  stack: error.stack
+  stack: error.stack,
 });
 
 // WARN: Recoverable issues, missing optional data
-logger.warn('Optional file not found', {
-  filePath: '/path/to/optional.json',
-  projectId: 'W5270NS01001A'
+logger.warn("Optional file not found", {
+  filePath: "/path/to/optional.json",
+  projectId: "W5270NS01001A",
 });
 
 // INFO: Normal system operations, significant events
-logger.info('Scan cycle completed', {
+logger.info("Scan cycle completed", {
   projectsProcessed: 9,
   duration: 1250,
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 });
 
 // DEBUG: Detailed execution flow (development only)
-logger.debug('Rule evaluation', {
-  ruleName: 'M110Contour',
-  projectId: 'W5270NS01001A',
-  shouldRun: true
+logger.debug("Rule evaluation", {
+  ruleName: "M110Contour",
+  projectId: "W5270NS01001A",
+  shouldRun: true,
 });
 ```
 
 #### Structured Logging
+
 ```javascript
 // Use structured logging with consistent fields
 const logContext = {
-  module: 'Executor',
-  operation: 'scanCycle',
+  module: "Executor",
+  operation: "scanCycle",
   sessionId: generateSessionId(),
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 };
 
-logger.info('Starting scan cycle', logContext);
+logger.info("Starting scan cycle", logContext);
 
 // Add operation-specific context
-logger.info('Project processed', {
+logger.info("Project processed", {
   ...logContext,
   projectId: project.name,
   operator: project.operator,
-  status: 'completed',
+  status: "completed",
   rulePassed: 4,
-  rulesFailed: 1
+  rulesFailed: 1,
 });
 ```
 
@@ -214,69 +222,70 @@ logger.info('Project processed', {
 ### 1. Unit Testing
 
 #### Test Structure
+
 ```javascript
 // tests/unit/rules/M110.test.js
-const M110Rule = require('../../../rules/M110');
-const { createTestProject } = require('../../helpers/projectFactory');
+const M110Rule = require("../../../rules/M110");
+const { createTestProject } = require("../../helpers/projectFactory");
 
-describe('M110Rule', () => {
+describe("M110Rule", () => {
   let rule;
-  
+
   beforeEach(() => {
     rule = new M110Rule();
   });
 
-  describe('shouldRun', () => {
-    test('should return true for projects with M110 operations', () => {
+  describe("shouldRun", () => {
+    test("should return true for projects with M110 operations", () => {
       const project = createTestProject({
-        compoundJobs: new Map([
-          ['job1', { operations: [{ code: 'M110' }] }]
-        ])
+        compoundJobs: new Map([["job1", { operations: [{ code: "M110" }] }]]),
       });
 
       expect(rule.shouldRun(project)).toBe(true);
     });
 
-    test('should return false for projects without M110 operations', () => {
+    test("should return false for projects without M110 operations", () => {
       const project = createTestProject({
-        compoundJobs: new Map([
-          ['job1', { operations: [{ code: 'G01' }] }]
-        ])
+        compoundJobs: new Map([["job1", { operations: [{ code: "G01" }] }]]),
       });
 
       expect(rule.shouldRun(project)).toBe(false);
     });
   });
 
-  describe('execute', () => {
-    test('should detect contour operations exceeding limits', () => {
+  describe("execute", () => {
+    test("should detect contour operations exceeding limits", () => {
       const project = createTestProject({
         compoundJobs: new Map([
-          ['job1', {
-            operations: [
-              { code: 'M110', type: 'contour', depth: 15 } // Exceeds 10mm limit
-            ]
-          }]
-        ])
+          [
+            "job1",
+            {
+              operations: [
+                { code: "M110", type: "contour", depth: 15 }, // Exceeds 10mm limit
+              ],
+            },
+          ],
+        ]),
       });
 
       const result = rule.execute(project);
 
       expect(result.passed).toBe(false);
       expect(result.violations).toHaveLength(1);
-      expect(result.violations[0].type).toBe('depth_exceeded');
-      expect(result.violations[0].severity).toBe('error');
+      expect(result.violations[0].type).toBe("depth_exceeded");
+      expect(result.violations[0].severity).toBe("error");
     });
 
-    test('should pass for contour operations within limits', () => {
+    test("should pass for contour operations within limits", () => {
       const project = createTestProject({
         compoundJobs: new Map([
-          ['job1', {
-            operations: [
-              { code: 'M110', type: 'contour', depth: 8 }
-            ]
-          }]
-        ])
+          [
+            "job1",
+            {
+              operations: [{ code: "M110", type: "contour", depth: 8 }],
+            },
+          ],
+        ]),
       });
 
       const result = rule.execute(project);
@@ -289,17 +298,18 @@ describe('M110Rule', () => {
 ```
 
 #### Test Helpers
+
 ```javascript
 // tests/helpers/projectFactory.js
 function createTestProject(overrides = {}) {
   const defaultProject = {
-    name: 'TEST_PROJECT',
-    operator: 'test.operator',
-    machine: 'TEST_MACHINE',
-    position: 'A',
+    name: "TEST_PROJECT",
+    operator: "test.operator",
+    machine: "TEST_MACHINE",
+    position: "A",
     compoundJobs: new Map(),
     tools: new Map(),
-    ...overrides
+    ...overrides,
   };
 
   return new Project(defaultProject.name, defaultProject);
@@ -307,28 +317,32 @@ function createTestProject(overrides = {}) {
 
 function createTestCompoundJob(operations = []) {
   return {
-    name: 'TEST_JOB',
+    name: "TEST_JOB",
     operations,
     duration: 1000,
-    tools: []
+    tools: [],
   };
 }
 
 module.exports = {
   createTestProject,
-  createTestCompoundJob
+  createTestCompoundJob,
 };
 ```
 
 ### 2. Integration Testing
 
 #### End-to-End Workflow Tests
+
 ```javascript
 // tests/integration/scanning.test.js
-const Executor = require('../../core/executor/Executor');
-const { setupTestEnvironment, cleanupTestEnvironment } = require('../helpers/testEnv');
+const Executor = require("../../core/executor/Executor");
+const {
+  setupTestEnvironment,
+  cleanupTestEnvironment,
+} = require("../helpers/testEnv");
 
-describe('Scanning Integration', () => {
+describe("Scanning Integration", () => {
   let executor;
   let testDataPath;
 
@@ -336,7 +350,7 @@ describe('Scanning Integration', () => {
     testDataPath = await setupTestEnvironment();
     executor = new Executor({
       basePath: testDataPath,
-      scanIntervalMs: 1000 // Faster for testing
+      scanIntervalMs: 1000, // Faster for testing
     });
   });
 
@@ -344,7 +358,7 @@ describe('Scanning Integration', () => {
     await cleanupTestEnvironment(testDataPath);
   });
 
-  test('should discover and process all test projects', async () => {
+  test("should discover and process all test projects", async () => {
     const results = await executor.runScanCycle();
 
     expect(results.projectsFound).toBeGreaterThan(0);
@@ -352,7 +366,7 @@ describe('Scanning Integration', () => {
     expect(results.errors).toHaveLength(0);
   });
 
-  test('should generate result files for processed projects', async () => {
+  test("should generate result files for processed projects", async () => {
     await executor.runScanCycle();
 
     const resultFiles = await Results.findResultFiles(testDataPath);
@@ -360,9 +374,9 @@ describe('Scanning Integration', () => {
 
     // Verify result file structure
     const sampleResult = JSON.parse(fs.readFileSync(resultFiles[0]));
-    expect(sampleResult).toHaveProperty('project');
-    expect(sampleResult).toHaveProperty('summary');
-    expect(sampleResult).toHaveProperty('rules');
+    expect(sampleResult).toHaveProperty("project");
+    expect(sampleResult).toHaveProperty("summary");
+    expect(sampleResult).toHaveProperty("rules");
   });
 });
 ```
@@ -370,29 +384,30 @@ describe('Scanning Integration', () => {
 ### 3. Performance Testing
 
 #### Benchmark Tests
+
 ```javascript
 // tests/performance/scanning.perf.js
-const { performance } = require('perf_hooks');
+const { performance } = require("perf_hooks");
 
-describe('Performance Tests', () => {
-  test('should complete scan cycle within acceptable time', async () => {
+describe("Performance Tests", () => {
+  test("should complete scan cycle within acceptable time", async () => {
     const start = performance.now();
-    
+
     await executor.runScanCycle();
-    
+
     const duration = performance.now() - start;
-    
+
     // Should complete within 30 seconds for test dataset
     expect(duration).toBeLessThan(30000);
   });
 
-  test('should handle large project sets efficiently', async () => {
+  test("should handle large project sets efficiently", async () => {
     const largeDataset = generateLargeTestDataset(100); // 100 projects
-    
+
     const start = performance.now();
     await executor.processProjects(largeDataset);
     const duration = performance.now() - start;
-    
+
     // Should process 100 projects in under 2 minutes
     expect(duration).toBeLessThan(120000);
   });
@@ -404,12 +419,14 @@ describe('Performance Tests', () => {
 ### 1. Review Checklist
 
 #### Functionality
+
 - [ ] Code fulfills requirements as specified
 - [ ] Edge cases are handled appropriately
 - [ ] Error conditions are properly managed
 - [ ] Performance implications are considered
 
 #### Code Quality
+
 - [ ] Code follows established style guidelines
 - [ ] Functions have single responsibility
 - [ ] Variable and function names are descriptive
@@ -417,12 +434,14 @@ describe('Performance Tests', () => {
 - [ ] No code duplication without justification
 
 #### Testing
+
 - [ ] Unit tests cover main functionality
 - [ ] Edge cases are tested
 - [ ] Error conditions are tested
 - [ ] Integration points are tested
 
 #### Security
+
 - [ ] Input validation is implemented
 - [ ] File path traversal is prevented
 - [ ] Sensitive data is not logged
@@ -431,22 +450,27 @@ describe('Performance Tests', () => {
 ### 2. Review Process
 
 #### Pull Request Template
+
 ```markdown
 ## Description
+
 Brief description of changes made
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests pass
 - [ ] Manual testing completed
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Code is documented
@@ -454,6 +478,7 @@ Brief description of changes made
 ```
 
 #### Review Comments Format
+
 ```javascript
 // Good: Specific, actionable feedback
 // Consider extracting this logic into a separate function for reusability
@@ -462,7 +487,7 @@ function processProject(project) {
 }
 
 // Good: Suggest alternative approach
-// This could cause memory issues with large datasets. 
+// This could cause memory issues with large datasets.
 // Consider using streaming or pagination.
 const allProjects = loadAllProjects();
 
@@ -477,6 +502,7 @@ const filePath = path.join(basePath, userInput);
 ### 1. Git Workflow
 
 #### Branch Naming
+
 ```bash
 # Feature branches
 feature/rule-engine-optimization
@@ -497,6 +523,7 @@ release/v1.2.0
 ```
 
 #### Commit Messages
+
 ```bash
 # Format: type(scope): description
 
@@ -524,6 +551,7 @@ test(integration): add end-to-end scanning tests
 ### 2. Development Environment
 
 #### Setup Script
+
 ```bash
 # setup.sh
 #!/bin/bash
@@ -535,7 +563,7 @@ npm install
 
 # Create required directories
 mkdir -p logs
-mkdir -p data/test
+mkdir -p test_data/test
 mkdir -p docs
 
 # Set up git hooks
@@ -549,6 +577,7 @@ echo "Development environment ready!"
 ```
 
 #### Pre-commit Hook
+
 ```bash
 #!/bin/sh
 # .git/hooks/pre-commit
@@ -587,7 +616,7 @@ echo "Pre-commit checks passed!"
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "docs:generate": "jsdoc -r -d docs/api src/",
-    "clean": "rm -rf logs/* data/test/*",
+    "clean": "rm -rf logs/* test_data/test/*",
     "validate": "npm run lint && npm run test"
   }
 }
@@ -598,10 +627,11 @@ echo "Pre-commit checks passed!"
 ### 1. Code Documentation
 
 #### JSDoc Standards
+
 ```javascript
 /**
  * Analyzes project against all applicable rules
- * 
+ *
  * @async
  * @param {Project} project - Project instance to analyze
  * @param {Object} [options={}] - Analysis options
@@ -610,11 +640,11 @@ echo "Pre-commit checks passed!"
  * @returns {Promise<AnalysisResult>} Complete analysis results
  * @throws {ValidationError} When project data is invalid
  * @throws {ProcessingError} When analysis fails
- * 
+ *
  * @example
  * const analyzer = new Analyzer();
  * const project = new Project(projectData);
- * 
+ *
  * try {
  *   const results = await analyzer.analyzeProject(project, {
  *     rules: ['M110', 'TimeLimits'],
@@ -633,7 +663,8 @@ async analyzeProject(project, options = {}) {
 ### 2. README Standards
 
 #### Module README Template
-```markdown
+
+````markdown
 # Module Name
 
 Brief description of module purpose and functionality.
@@ -643,11 +674,12 @@ Brief description of module purpose and functionality.
 ```bash
 npm install
 ```
+````
 
 ## Usage
 
 ```javascript
-const ModuleName = require('./ModuleName');
+const ModuleName = require("./ModuleName");
 
 const instance = new ModuleName(config);
 const result = instance.method(parameters);
@@ -668,7 +700,8 @@ const result = instance.method(parameters);
 ## Contributing
 
 ## License
-```
+
+````
 
 ## Performance Guidelines
 
@@ -693,7 +726,7 @@ function processLargeFile(filePath) {
     // Process chunk
   });
 }
-```
+````
 
 ### 2. I/O Optimization
 
@@ -702,7 +735,7 @@ function processLargeFile(filePath) {
 const results = await Promise.allSettled([
   fs.promises.readFile(file1),
   fs.promises.readFile(file2),
-  fs.promises.readFile(file3)
+  fs.promises.readFile(file3),
 ]);
 
 // Good: Cache frequently accessed data
@@ -710,7 +743,7 @@ class ProjectCache {
   constructor() {
     this.cache = new Map();
   }
-  
+
   getProject(projectId) {
     if (!this.cache.has(projectId)) {
       this.cache.set(projectId, this.loadProject(projectId));

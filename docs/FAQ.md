@@ -9,8 +9,9 @@
 ### Q: Who should use this system?
 
 **A:** The system is designed for:
+
 - Manufacturing engineers
-- Quality control supervisors  
+- Quality control supervisors
 - CAD/CAM operators
 - Production managers
 - CNC programming teams
@@ -18,6 +19,7 @@
 ### Q: What types of quality checks does it perform?
 
 **A:** The system includes several built-in rules:
+
 - **Time Limits**: Ensure operations don't exceed safe time thresholds
 - **Tool Validation**: Check for proper tool usage and reconditioning
 - **M110 Operations**: Validate contour and helical drilling parameters
@@ -29,6 +31,7 @@
 ### Q: What are the system requirements?
 
 **A:** Minimum requirements:
+
 - Windows 10 or higher
 - Node.js 14.x or higher
 - 2GB RAM
@@ -36,6 +39,7 @@
 - Network access to CAD file locations
 
 Recommended for production:
+
 - Windows Server 2019+
 - Node.js 18 LTS
 - 4GB RAM
@@ -45,6 +49,7 @@ Recommended for production:
 ### Q: How do I install the system?
 
 **A:** Follow these steps:
+
 1. Install Node.js from [nodejs.org](https://nodejs.org/)
 2. Clone the repository: `git clone [repository-url]`
 3. Run `npm install` to install dependencies
@@ -64,7 +69,7 @@ See our [Quick Start Guide](QUICKSTART.md) for detailed instructions.
 ```javascript
 paths: {
   productionDataPath: "\\\\server\\manufacturing\\projects",
-  testDataPath: "./data/test"
+  testDataPath: "./test_data/test"
 }
 ```
 
@@ -78,7 +83,7 @@ Use UNC paths (`\\server\share`) for network drives or local paths (`C:\local\pa
 
 ```javascript
 app: {
-  scanIntervalMs: 60000  // 60 seconds
+  scanIntervalMs: 60000; // 60 seconds
 }
 ```
 
@@ -87,6 +92,7 @@ For high-volume environments, you might increase this to 120000 (2 minutes) or m
 ### Q: What happens when a new project is found?
 
 **A:** When the scanner finds a new JSON project file:
+
 1. Loads and validates the project data
 2. Determines which quality rules apply
 3. Executes all applicable rules
@@ -108,6 +114,7 @@ Projects/
 ### Q: How do I know if the system is working?
 
 **A:** Check these indicators:
+
 - **Logs**: Active logging in `logs/app-YYYY-MM-DD.log`
 - **Console Output**: Real-time status if running in terminal
 - **Result Files**: New `result.json` files being created
@@ -115,7 +122,8 @@ Projects/
 
 ### Q: What does a "passed" vs "failed" result mean?
 
-**A:** 
+**A:**
+
 - **Passed**: All applicable quality rules passed without violations
 - **Failed**: One or more quality rules found violations that need attention
 - **Warning**: Non-critical issues detected that should be reviewed
@@ -131,21 +139,21 @@ Each rule can also report "not applicable" if it doesn't apply to the specific p
 ```javascript
 // rules/MyCustomRule.js
 module.exports = {
-  name: 'MyCustomRule',
-  description: 'Custom quality check description',
-  
-  shouldRun: function(project) {
+  name: "MyCustomRule",
+  description: "Custom quality check description",
+
+  shouldRun: function (project) {
     // Return true if rule applies to this project
-    return project.machine.includes('DMU');
+    return project.machine.includes("DMU");
   },
-  
-  execute: function(project, compoundJobs, tools) {
+
+  execute: function (project, compoundJobs, tools) {
     // Your validation logic here
     return {
       passed: true,
-      violations: []
+      violations: [],
     };
-  }
+  },
 };
 ```
 
@@ -176,6 +184,7 @@ Future versions will support external rule configuration files.
 ### Q: What information is available to rules?
 
 **A:** Rules have access to:
+
 - **Project data**: operator, machine, position, etc.
 - **Compound jobs**: NC file operations and commands
 - **Tools**: Tool definitions and parameters
@@ -186,6 +195,7 @@ Future versions will support external rule configuration files.
 ### Q: The system says "No projects found" - what's wrong?
 
 **A:** Check these common issues:
+
 1. **Path configuration**: Verify the scan path in `config/Settings.js`
 2. **File permissions**: Ensure the application can read the directories
 3. **Network connectivity**: Test access to network drives
@@ -194,6 +204,7 @@ Future versions will support external rule configuration files.
 ### Q: Why are some projects being skipped?
 
 **A:** Projects may be skipped if:
+
 - They don't contain valid JSON structure
 - Required fields (operator, machine, etc.) are missing
 - The JSON file is corrupted or unreadable
@@ -204,6 +215,7 @@ Check the logs for specific error messages about skipped projects.
 ### Q: The system is using too much memory - how do I fix this?
 
 **A:** Try these solutions:
+
 1. **Increase scan interval**: Process fewer projects simultaneously
 2. **Reduce concurrent processing**: Limit parallel operations
 3. **Clean up old logs**: Remove large log files
@@ -217,7 +229,7 @@ For production environments, monitor memory usage and consider upgrading hardwar
 
 ```javascript
 app: {
-  logLevel: "debug"  // Shows detailed execution information
+  logLevel: "debug"; // Shows detailed execution information
 }
 ```
 
@@ -226,6 +238,7 @@ Debug logs show rule execution details, file processing steps, and performance t
 ### Q: Results aren't being saved - what's wrong?
 
 **A:** Check these issues:
+
 1. **Write permissions**: Ensure the application can write to result directories
 2. **Disk space**: Verify sufficient disk space is available
 3. **Path validity**: Check that result paths are valid and accessible
@@ -236,6 +249,7 @@ Debug logs show rule execution details, file processing steps, and performance t
 ### Q: How many projects can the system handle?
 
 **A:** Performance depends on:
+
 - **Project complexity**: Number of operations and tools
 - **Rule complexity**: Computational requirements of quality checks
 - **Hardware**: CPU, memory, and storage performance
@@ -250,6 +264,7 @@ Typical performance: 50-100 projects per minute on standard hardware.
 ### Q: How do I optimize performance?
 
 **A:** Consider these optimizations:
+
 1. **Increase scan intervals** for high-volume environments
 2. **Use local storage** instead of network drives when possible
 3. **Implement result caching** for unchanged projects
@@ -261,6 +276,7 @@ Typical performance: 50-100 projects per minute on standard hardware.
 ### Q: Can I integrate this with other systems?
 
 **A:** Yes, several integration options:
+
 - **File-based**: Monitor result.json files from external systems
 - **HTTP API**: Future versions will include REST API
 - **Database**: Future versions will support database backends
@@ -269,6 +285,7 @@ Typical performance: 50-100 projects per minute on standard hardware.
 ### Q: How do I backup the system?
 
 **A:** Backup these components:
+
 - **Configuration files**: `config/` directory
 - **Custom rules**: Any rules you've added in `rules/`
 - **Logs**: `logs/` directory for historical data
@@ -283,6 +300,7 @@ The application code can be restored from the repository.
 ### Q: How do I update the system?
 
 **A:** For updates:
+
 1. **Stop the service** if running as a service
 2. **Backup configuration** and custom rules
 3. **Pull latest code** from repository
@@ -297,6 +315,7 @@ Always test updates in a development environment first.
 ### Q: What security considerations should I be aware of?
 
 **A:** Key security aspects:
+
 - **File access**: System needs read access to project directories
 - **Network drives**: Secure network authentication may be required
 - **Service account**: Run with minimal required permissions
@@ -310,6 +329,7 @@ Always test updates in a development environment first.
 ### Q: How is sensitive data handled?
 
 **A:** The system:
+
 - Only processes manufacturing/technical data
 - Does not collect personal information
 - Stores results locally (no external transmission)
@@ -320,6 +340,7 @@ Always test updates in a development environment first.
 ### Q: How do I get support?
 
 **A:** Support resources:
+
 - **Documentation**: Comprehensive guides in `/docs` directory
 - **Logs**: Check application logs for detailed error information
 - **Community**: Create issues in the project repository
@@ -328,6 +349,7 @@ Always test updates in a development environment first.
 ### Q: How often should I maintain the system?
 
 **A:** Regular maintenance tasks:
+
 - **Weekly**: Review logs for errors or performance issues
 - **Monthly**: Clean up old log files and results
 - **Quarterly**: Review and update quality rules as needed
@@ -336,6 +358,7 @@ Always test updates in a development environment first.
 ### Q: What logs should I monitor?
 
 **A:** Key log patterns to watch:
+
 - **ERROR**: Critical failures requiring immediate attention
 - **WARN**: Potential issues that should be investigated
 - **High processing times**: May indicate performance problems
@@ -344,6 +367,7 @@ Always test updates in a development environment first.
 ### Q: How do I report a bug?
 
 **A:** When reporting issues, include:
+
 - **System information**: OS, Node.js version, application version
 - **Configuration**: Relevant configuration settings (sanitized)
 - **Log excerpts**: Error messages and surrounding context
