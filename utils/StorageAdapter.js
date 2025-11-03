@@ -1,5 +1,5 @@
 /**
- * Storage abstraction layer for json_scanner
+ * Storage abstraction layer for JSONScanner
  * Supports both local JSON files and MongoDB
  * Same pattern as ClampingPlateManagerService
  */
@@ -224,7 +224,7 @@ class LocalJSONAdapter {
       return data;
     }
 
-    // Simple filtering for json_scanner needs
+    // Simple filtering for JSONScanner needs
     return data.filter((item) => {
       return Object.keys(filter).every((key) => {
         if (key.includes(".")) {

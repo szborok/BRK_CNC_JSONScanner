@@ -39,7 +39,7 @@ const config = {
   // MongoDB connection (when storage.type is 'mongodb' or 'auto')
   mongodb: {
     uri: process.env.MONGODB_URI || "mongodb://localhost:27017",
-    database: process.env.MONGODB_DATABASE || "cnc_scanner", // json_scanner database
+    database: process.env.MONGODB_DATABASE || "cnc_scanner", // JSONScanner database
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -51,7 +51,7 @@ const config = {
 
   // Data retention settings (as per your requirements)
   dataRetention: {
-    // json_scanner data - keep for 1 week as per your requirements
+    // JSONScanner data - keep for 1 week as per your requirements
     scanResults: {
       retentionDays: 7,
       autoCleanup: true,

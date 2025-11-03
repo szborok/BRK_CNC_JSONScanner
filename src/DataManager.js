@@ -1,6 +1,6 @@
 /**
- * Data Manager for json_scanner
- * Wraps StorageAdapter to provide json_scanner specific data operations
+ * Data Manager for JSONScanner
+ * Wraps StorageAdapter to provide JSONScanner specific data operations
  * Supports both local JSON files and MongoDB storage
  */
 

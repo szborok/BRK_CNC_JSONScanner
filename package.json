@@ -1,7 +1,7 @@
 {
-  "name": "json-scanner",
+  "name": "jsonscanner",
   "version": "1.0.0",
-  "description": "CNC JSON Scanner with dual storage support",
+  "description": "CNC JSONScanner with dual storage support",
   "main": "main.js",
   "dependencies": {
     "chalk": "^4.1.2",

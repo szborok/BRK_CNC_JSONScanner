@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// Quick test script for json_scanner storage functionality
+// Quick test script for JSONScanner storage functionality
 
 const DataManager = require("./src/DataManager");
 
 async function testLocalStorage() {
-  console.log("🧪 Testing json_scanner with LOCAL storage...");
+  console.log("🧪 Testing JSONScanner with LOCAL storage...");
 
   try {
     // Test local storage
@@ -38,7 +38,7 @@ async function testLocalStorage() {
     console.log("✅ Health check:", health.status);
 
     await dataManager.disconnect();
-    console.log("✅ json_scanner LOCAL storage test PASSED\n");
+    console.log("✅ JSONScanner LOCAL storage test PASSED\n");
 
     return true;
   } catch (error) {
@@ -48,7 +48,7 @@ async function testLocalStorage() {
 }
 
 async function testMongoStorage() {
-  console.log("🧪 Testing json_scanner with MONGODB storage...");
+  console.log("🧪 Testing JSONScanner with MONGODB storage...");
 
   try {
     // Test MongoDB storage (will fallback to local if MongoDB not available)
@@ -82,7 +82,7 @@ async function testMongoStorage() {
     console.log("✅ Health check:", health.status, `(${health.type})`);
 
     await dataManager.disconnect();
-    console.log("✅ json_scanner MONGODB storage test PASSED\n");
+    console.log("✅ JSONScanner MONGODB storage test PASSED\n");
 
     return true;
   } catch (error) {
@@ -92,7 +92,7 @@ async function testMongoStorage() {
 }
 
 async function runTests() {
-  console.log("🚀 Starting json_scanner storage tests...\n");
+  console.log("🚀 Starting JSONScanner storage tests...\n");
 
   const localResult = await testLocalStorage();
   const mongoResult = await testMongoStorage();
@@ -102,10 +102,10 @@ async function runTests() {
   console.log(`  MongoDB Storage: ${mongoResult ? "✅ PASS" : "❌ FAIL"}`);
 
   if (localResult && mongoResult) {
-    console.log("\n🎉 All json_scanner storage tests PASSED!");
+    console.log("\n🎉 All JSONScanner storage tests PASSED!");
     process.exit(0);
   } else {
-    console.log("\n💥 Some json_scanner storage tests FAILED!");
+    console.log("\n💥 Some JSONScanner storage tests FAILED!");
     process.exit(1);
   }
 }

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// Simple test for both json_scanner and ClampingPlateManager storage
+// Simple test for both JSONScanner and ClampingPlateManager storage
 
 console.log("🚀 Quick Storage Tests for CNC Management Tools\n");
 
 async function testJsonScanner() {
-  console.log("📊 Testing json_scanner...");
+  console.log("📊 Testing JSONScanner...");
 
   try {
     const DataManager = require("./src/DataManager");
@@ -45,11 +45,11 @@ async function testJsonScanner() {
     await dm2.disconnect();
 
     console.log(`  ✅ Auto: ${health2.type} storage (${health2.status})`);
-    console.log("  ✅ json_scanner storage tests PASSED\n");
+    console.log("  ✅ JSONScanner storage tests PASSED\n");
 
     return true;
   } catch (error) {
-    console.log(`  ❌ json_scanner test FAILED: ${error.message}\n`);
+    console.log(`  ❌ JSONScanner test FAILED: ${error.message}\n`);
     return false;
   }
 }
@@ -106,16 +106,16 @@ async function testClampingPlateManager() {
 }
 
 async function runTests() {
-  // Start from json_scanner directory
+  // Start from JSONScanner directory
   process.chdir(
-    "/Users/sovi/Library/Mobile Documents/com~apple~CloudDocs/Data/personal_Fun/Coding/Projects/json_scanner"
+    "/Users/sovi/Library/Mobile Documents/com~apple~CloudDocs/Data/personal_Fun/Coding/Projects/JSONScanner"
   );
 
   const jsonResult = await testJsonScanner();
   const plateResult = await testClampingPlateManager();
 
   console.log("📈 Final Results:");
-  console.log(`  json_scanner: ${jsonResult ? "✅ PASS" : "❌ FAIL"}`);
+  console.log(`  JSONScanner: ${jsonResult ? "✅ PASS" : "❌ FAIL"}`);
   console.log(`  ClampingPlateManager: ${plateResult ? "✅ PASS" : "❌ FAIL"}`);
 
   if (jsonResult && plateResult) {

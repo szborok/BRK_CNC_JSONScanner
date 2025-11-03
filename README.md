@@ -1,10 +1,10 @@
-# JSON Scanner - Manufacturing Quality Control System
+# JSONScanner - Manufacturing Quality Control System
 
 A sophisticated automated system for scanning, analyzing, and validating manufacturing project data with configurable rule-based quality control checks.
 
 ## 🚀 Overview
 
-The JSON Scanner is designed to automatically process manufacturing project JSON files, apply configurable quality control rules, and generate detailed analysis results. It supports both automated continuous monitoring and manual processing modes.
+The JSONScanner is designed to automatically process manufacturing project JSON files, apply configurable quality control rules, and generate detailed analysis results. It supports both automated continuous monitoring and manual processing modes.
 
 ### Key Features
 
@@ -18,7 +18,7 @@ The JSON Scanner is designed to automatically process manufacturing project JSON
 ## 📁 Project Structure
 
 ```
-json_scanner/
+JSONScanner/
 ├── config/                 # Configuration files
 │   └── Settings.js         # Application settings and paths
 ├── src/                    # Core application source
@@ -64,7 +64,7 @@ json_scanner/
 
 ```bash
 git clone <repository-url>
-cd json_scanner
+cd JSONScanner
 ```
 
 2. Install dependencies:
