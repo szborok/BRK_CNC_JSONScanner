@@ -14,6 +14,9 @@ The JSONScanner is designed to automatically process manufacturing project JSON 
 - **📊 Comprehensive Reporting**: Clean, structured result files for frontend integration
 - **⚡ Real-time Processing**: Live monitoring with countdown timers and detailed logging
 - **🔧 Flexible Configuration**: Easy configuration for different environments and use cases
+- **🔐 Read-Only Operation**: Complete read-only processing using temporary file copies
+- **🔍 Change Detection**: Intelligent change detection using file dates and hash comparison
+- **🧹 Automatic Cleanup**: Automatic cleanup of temporary files on session end
 
 ## 📁 Project Structure
 
@@ -113,8 +116,12 @@ node main.js --manual --operator "jane.smith"
 | -------------------- | ------------------------------------ | -------------------------------------- |
 | `--force`            | Reprocess even if result files exist | `node main.js --force`                 |
 | `--manual`           | Enable manual processing mode        | `node main.js --manual`                |
-| `--operator <name>`  | Filter projects by operator          | `node main.js --operator "user123"`    |
-| `--path <directory>` | Specify custom scan path             | `node main.js --path "/data/projects"` |
+| `--auto`             | Enable automatic processing mode     | `node main.js --auto`                  |
+| `--project <path>`   | Specify custom project path         | `node main.js --project "/data/proj"`  |
+| `--test-readonly`    | Test read-only functionality        | `node main.js --test-readonly`         |
+| `--cleanup`          | Clean up generated result files     | `node main.js --cleanup`               |
+| `--cleanup-stats`    | Show cleanup statistics              | `node main.js --cleanup-stats`         |
+| `--clear-errors`     | Clear fatal error markers           | `node main.js --clear-errors`          |
 
 ## 📊 Output & Results
 
@@ -151,6 +158,45 @@ Detailed operation logs are saved in `logs/app-YYYY-MM-DD.log` with:
 - Project processing status
 - Rule execution results
 - Error details and warnings
+
+## 🔐 Read-Only Operation
+
+JSONScanner operates in a completely read-only manner to ensure original files are never modified:
+
+### How It Works
+
+1. **File Discovery**: Scanner finds original JSON and NC files in the specified directories
+2. **Temporary Copying**: All discovered files are copied to a temporary session directory
+3. **Safe Processing**: All analysis and processing occurs on the temporary copies
+4. **Change Detection**: System monitors original files for changes using file dates and hash comparison
+5. **Result Storage**: Analysis results are saved to separate result files and database
+6. **Automatic Cleanup**: Temporary files are automatically cleaned up when the session ends
+
+### Key Benefits
+
+- **🛡️ Data Safety**: Original files are never at risk of modification or corruption
+- **⚡ Performance**: Only changed files are re-copied during subsequent scans
+- **🔍 Transparency**: Easy to verify that originals remain untouched
+- **🧹 Clean Operation**: No temporary files left behind
+- **📊 Change Tracking**: Detailed logging of what files have changed between scans
+
+### Testing Read-Only Functionality
+
+```bash
+# Test the read-only functionality
+npm run test-readonly
+
+# Run the interactive demo
+npm run demo-readonly
+```
+
+### Temporary File Management
+
+- **Session Directory**: Each scanning session gets a unique temporary directory
+- **File Tracking**: System tracks all copied files with hash verification
+- **Change Detection**: Compares modification dates and file hashes
+- **Cleanup**: Automatic cleanup on normal exit or session termination
+- **Old Session Cleanup**: Automatically removes temporary directories older than 24 hours
 
 ## ⚙️ Configuration
 

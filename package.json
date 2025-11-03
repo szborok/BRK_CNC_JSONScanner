@@ -11,6 +11,8 @@
     "start": "node main.js",
     "auto": "node main.js --auto",
     "manual": "node main.js --manual",
-    "cleanup": "node main.js --cleanup"
+    "cleanup": "node main.js --cleanup",
+    "test-readonly": "node main.js --test-readonly",
+    "demo-readonly": "node demo-readonly.js"
   }
 }

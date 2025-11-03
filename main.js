@@ -16,6 +16,7 @@ function parseArguments() {
     cleanup: false,
     cleanupStats: false,
     cleanupInteractive: false,
+    testReadOnly: false,
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -49,6 +50,9 @@ function parseArguments() {
       case "--clear-errors":
         options.clearErrors = true;
         break;
+      case "--test-readonly":
+        options.testReadOnly = true;
+        break;
       case "--help":
         showHelp();
         process.exit(0);
@@ -75,6 +79,7 @@ Options:
   --project <path>     Scan specific project path (manual mode only)
   --force              Force reprocess even if result files exist
   --clear-errors       Clear fatal error markers before processing
+  --test-readonly      Test read-only functionality with temp file operations
   --help               Show this help message
 
 Test Mode Information:
@@ -97,8 +102,95 @@ Examples:
   node main.js --cleanup-stats (shows what would be deleted)
   node main.js --cleanup-interactive (asks for confirmation)
   node main.js --clear-errors
+  node main.js --test-readonly (test read-only temp file operations)
   node main.js --manual (will prompt for path in production mode)
   `);
+}
+
+// Test read-only functionality
+async function testReadOnlyFunctionality() {
+  const TempFileManager = require("./utils/TempFileManager");
+  const fs = require('fs');
+  const path = require('path');
+  
+  try {
+    Logger.logInfo("🧪 Starting read-only functionality test...");
+    
+    const tempManager = new TempFileManager();
+    const testDataPath = config.getScanPath();
+    
+    if (!testDataPath) {
+      Logger.logError("No test data path available for read-only test");
+      return;
+    }
+    
+    if (!fs.existsSync(testDataPath)) {
+      Logger.logError(`Test data path does not exist: ${testDataPath}`);
+      return;
+    }
+    
+    Logger.logInfo(`📂 Testing with path: ${testDataPath}`);
+    
+    // Find some test files
+    const testFiles = [];
+    const findFiles = (dir) => {
+      const items = fs.readdirSync(dir);
+      for (const item of items.slice(0, 3)) { // Limit to first 3 items
+        const fullPath = path.join(dir, item);
+        const stats = fs.statSync(fullPath);
+        
+        if (stats.isFile() && (item.endsWith('.json') || item.endsWith('.txt'))) {
+          testFiles.push(fullPath);
+        } else if (stats.isDirectory() && testFiles.length < 2) {
+          try {
+            findFiles(fullPath);
+          } catch (err) {
+            // Skip directories we can't read
+          }
+        }
+        
+        if (testFiles.length >= 2) break;
+      }
+    };
+    
+    findFiles(testDataPath);
+    
+    if (testFiles.length === 0) {
+      Logger.logWarn("No test files found in test data path");
+      return;
+    }
+    
+    Logger.logInfo(`📄 Found ${testFiles.length} test file(s) to copy`);
+    
+    // Test copying files to temp
+    for (const testFile of testFiles) {
+      Logger.logInfo(`📋 Testing copy: ${path.basename(testFile)}`);
+      const tempPath = await tempManager.copyToTemp(testFile);
+      Logger.logInfo(`✅ Copied to: ${tempPath}`);
+    }
+    
+    // Get session info
+    const sessionInfo = tempManager.getSessionInfo();
+    Logger.logInfo(`📊 Session info:`);
+    Logger.logInfo(`   - Session ID: ${sessionInfo.sessionId}`);
+    Logger.logInfo(`   - Temp path: ${sessionInfo.sessionPath}`);
+    Logger.logInfo(`   - Tracked files: ${sessionInfo.trackedFiles}`);
+    
+    // Test change detection
+    Logger.logInfo("🔍 Testing change detection...");
+    const changes = await tempManager.detectChanges();
+    Logger.logInfo(`📝 Change detection result: ${changes.summary}`);
+    
+    // Cleanup
+    Logger.logInfo("🧹 Cleaning up test session...");
+    tempManager.cleanup();
+    
+    Logger.logInfo("✅ Read-only functionality test completed successfully!");
+    
+  } catch (error) {
+    Logger.logError(`❌ Read-only test failed: ${error.message}`);
+    Logger.logError(`Stack trace: ${error.stack}`);
+  }
 }
 
 // Start the JSON scanner application
@@ -125,6 +217,13 @@ async function main() {
         Logger.logInfo("✅ Cleanup completed successfully");
       }
 
+      process.exit(0);
+    }
+
+    // Handle read-only test mode
+    if (options.testReadOnly) {
+      Logger.logInfo("🧪 Testing read-only functionality...");
+      await testReadOnlyFunctionality();
       process.exit(0);
     }
 

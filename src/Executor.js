@@ -66,9 +66,9 @@ class Executor {
         `🔄 Auto Scan #${scanCount} - Starting at ${scanStartTime.toLocaleTimeString()}`
       );
 
-      // Clear previous projects and scan
+      // Clear previous projects and scan with temp file management
       this.scanner.projects = [];
-      this.scanner.performScan();
+      await this.scanner.performScan();
 
       const projects = this.scanner.getProjects();
       const scanEndTime = new Date();
@@ -77,6 +77,10 @@ class Executor {
       logInfo(
         `✅ Auto Scan #${scanCount} - Completed at ${scanEndTime.toLocaleTimeString()} (took ${scanDuration}ms)`
       );
+
+      // Log temp session info
+      const tempInfo = this.scanner.getTempSessionInfo();
+      logInfo(`📁 Temp session: ${tempInfo.sessionId} (${tempInfo.trackedFiles} files tracked)`);
 
       if (projects.length > 0) {
         logInfo(
@@ -212,7 +216,7 @@ class Executor {
         `Starting manual mode (${config.app.testMode ? "TEST" : "PRODUCTION"})`
       );
 
-      // Use the scanner's path resolution method
+      // Use the scanner's path resolution method with async support
       await this.scanner.scanWithPathResolution();
 
       const projects = this.scanner.getProjects();
@@ -224,14 +228,19 @@ class Executor {
 
       logInfo(`Found ${projects.length} project(s) to process in manual mode.`);
 
-      // Process all found projects
+      // Log temp session info
+      const tempInfo = this.scanner.getTempSessionInfo();
+      logInfo(`📁 Temp session: ${tempInfo.sessionId} (${tempInfo.trackedFiles} files tracked)`);
+
+      // Process all projects
       for (const project of projects) {
         if (project.status === "ready") {
+          logInfo(`📋 Processing project: ${project.getFullName()}`);
           await this.processProject(project);
         }
       }
 
-      logInfo("Manual mode processing completed.");
+      logInfo("✅ Manual mode processing completed.");
     } catch (err) {
       logError(`Manual mode failed: ${err.message}`);
     }

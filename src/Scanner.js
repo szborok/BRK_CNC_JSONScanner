@@ -2,6 +2,7 @@
 /**
  * Handles automatic or manual scanning of project directories.
  * Detects new JSON files and initializes Project instances.
+ * Uses TempFileManager for read-only operations on original files.
  */
 
 const fs = require("fs");
@@ -10,11 +11,17 @@ const config = require("../config");
 const { logInfo, logWarn, logError } = require("../utils/Logger");
 const { getDirectories } = require("../utils/FileUtils");
 const Project = require("./Project");
+const TempFileManager = require("../utils/TempFileManager");
 
 class Scanner {
   constructor() {
     this.projects = [];
     this.running = false;
+    this.tempManager = new TempFileManager();
+    this.scannedPaths = new Set(); // Track what we've scanned
+    
+    // Cleanup old temp sessions on startup
+    TempFileManager.cleanupOldSessions();
   }
 
   /**
@@ -25,6 +32,7 @@ class Scanner {
   start() {
     this.running = true;
     logInfo(`Scanner started in ${config.app.autorun ? "AUTO" : "MANUAL"} mode`);
+    logInfo(`Temp session: ${this.tempManager.sessionId}`);
 
     // In AUTO mode, the Executor controls scanning timing
     // In MANUAL mode, scanning happens on-demand
@@ -36,14 +44,19 @@ class Scanner {
   stop() {
     this.running = false;
     logWarn("Scanner stopped after finishing current project.");
+    
+    // Cleanup temp files
+    this.tempManager.cleanup();
+    logInfo("Temporary files cleaned up.");
   }
 
   /**
    * Perform one scan of the data directory.
    * Detects new project folders matching the naming pattern.
+   * Uses temp file copies for read-only processing.
    * @param {string} customPath - Custom path for manual mode (optional)
    */
-  performScan(customPath = null) {
+  async performScan(customPath = null) {
     try {
       // Get the appropriate scan path based on mode and test settings
       const scanPath = customPath || config.getScanPath();
@@ -66,10 +79,28 @@ class Scanner {
         return [];
       }
 
+      // Check for changes in previously scanned paths
+      if (this.scannedPaths.has(scanPath)) {
+        logInfo(`🔄 Checking for changes in previously scanned path: ${scanPath}`);
+        const changes = await this.tempManager.detectChanges();
+        
+        if (changes.hasChanges) {
+          logInfo(`📝 ${changes.summary}`);
+          await this.tempManager.updateChangedFiles(changes);
+        } else {
+          logInfo("✅ No changes detected since last scan.");
+          return this.projects; // Return existing projects if no changes
+        }
+      } else {
+        // First time scanning this path
+        this.scannedPaths.add(scanPath);
+        logInfo(`📂 First scan of path: ${scanPath}`);
+      }
+
       const dirs = getDirectories(scanPath);
       
       // Recursively scan all directories to find JSON files
-      const allJsonFiles = this.findAllJsonFiles(scanPath);
+      const allJsonFiles = await this.findAllJsonFiles(scanPath);
       
       if (allJsonFiles.length === 0) {
         logWarn("No JSON files found in any subdirectories.");
@@ -85,13 +116,15 @@ class Scanner {
       for (const [projectKey, jsonFiles] of projectGroups) {
         for (const jsonFile of jsonFiles) {
           try {
-            // Create a project for each JSON file found
+            // Create a project for each JSON file found using temp path
             const projectPath = this.getProjectPathFromJsonFile(jsonFile);
             const project = new Project(projectPath);
             
-            // Set the JSON file path directly since we found it
-            project.jsonFilePath = jsonFile.fullPath;
-            project.machineFolder = path.dirname(jsonFile.fullPath);
+            // Set the temp JSON file path (projects will work with temp copies)
+            project.jsonFilePath = jsonFile.tempPath;
+            project.originalJsonFilePath = jsonFile.fullPath; // Keep reference to original
+            project.machineFolder = path.dirname(jsonFile.tempPath);
+            project.originalMachineFolder = path.dirname(jsonFile.fullPath);
             project.position = jsonFile.position;
             
             // Check if project has fatal errors and should be skipped
@@ -100,7 +133,7 @@ class Scanner {
               continue;
             }
             
-            // Load JSON data directly
+            // Load JSON data from temp copy
             const loaded = project.loadJsonData();
             if (loaded) {
               // Check if already processed (unless force reprocessing is enabled)
@@ -112,7 +145,7 @@ class Scanner {
               project.isValid = true;
               project.status = "ready";
               this.projects.push(project);
-              logInfo(`Added project "${jsonFile.projectName}" with ${project.getTotalJobCount()} operations, ${project.compoundJobs.size} NC files`);
+              logInfo(`Added project "${jsonFile.projectName}" with ${project.getTotalJobCount()} operations, ${project.compoundJobs.size} NC files (using temp copy)`);
               totalProjectsProcessed++;
             }
           } catch (err) {
@@ -152,6 +185,72 @@ class Scanner {
    */
   getProjects() {
     return this.projects;
+  }
+
+  /**
+   * Get temp file manager session information.
+   */
+  getTempSessionInfo() {
+    return this.tempManager.getSessionInfo();
+  }
+
+  /**
+   * Check for changes and rescan if needed.
+   * @param {string[]} specificPaths - Optional array of specific paths to check
+   * @returns {Promise<Object>} - Change detection results
+   */
+  async checkForChanges(specificPaths = null) {
+    try {
+      const changes = await this.tempManager.detectChanges(specificPaths);
+      
+      if (changes.hasChanges) {
+        logInfo(`🔄 Changes detected: ${changes.summary}`);
+        
+        // Update temp copies for changed files
+        await this.tempManager.updateChangedFiles(changes);
+        
+        // Clear existing projects that might be affected
+        this.projects = this.projects.filter(project => {
+          const originalPath = project.originalJsonFilePath;
+          return !changes.changedFiles.some(change => change.path === originalPath) &&
+                 !changes.newFiles.includes(originalPath) &&
+                 !changes.deletedFiles.includes(originalPath);
+        });
+        
+        logInfo("Updated temp copies and cleared affected projects for rescanning.");
+      }
+      
+      return changes;
+    } catch (err) {
+      logError(`Change detection failed: ${err.message}`);
+      throw err;
+    }
+  }
+
+  /**
+   * Force a rescan by clearing temp files and rescanning.
+   * @param {string} customPath - Custom path for manual mode (optional)
+   */
+  async forceRescan(customPath = null) {
+    try {
+      logInfo("🔄 Forcing complete rescan...");
+      
+      // Clear existing data
+      this.projects = [];
+      this.scannedPaths.clear();
+      
+      // Cleanup and recreate temp manager
+      this.tempManager.cleanup();
+      this.tempManager = new TempFileManager();
+      
+      // Perform fresh scan
+      await this.performScan(customPath);
+      
+      logInfo("✅ Force rescan completed.");
+    } catch (err) {
+      logError(`Force rescan failed: ${err.message}`);
+      throw err;
+    }
   }
 
   /**
@@ -206,13 +305,14 @@ class Scanner {
 
   /**
    * Recursively finds all JSON files in the given directory tree.
+   * Creates temp copies for read-only processing.
    * @param {string} rootPath - Root directory to start searching
    * @returns {Array} - Array of JSON file objects with metadata
    */
-  findAllJsonFiles(rootPath) {
+  async findAllJsonFiles(rootPath) {
     const jsonFiles = [];
     
-    const scanDirectory = (dirPath) => {
+    const scanDirectory = async (dirPath) => {
       try {
         const items = fs.readdirSync(dirPath, { withFileTypes: true });
         
@@ -221,7 +321,7 @@ class Scanner {
           
           if (item.isDirectory()) {
             // Recursively scan subdirectories
-            scanDirectory(fullPath);
+            await scanDirectory(fullPath);
           } else if (item.isFile() && item.name.endsWith('.json')) {
             // Skip generated files
             if (item.name.includes('BRK_fixed') || item.name.includes('BRK_result')) {
@@ -231,7 +331,23 @@ class Scanner {
             // Extract project information from filename and path
             const fileInfo = this.extractProjectInfoFromPath(fullPath, item.name);
             if (fileInfo) {
-              jsonFiles.push(fileInfo);
+              try {
+                // Create temp copy of the JSON file
+                const tempPath = await this.tempManager.copyToTemp(fullPath);
+                fileInfo.tempPath = tempPath;
+                
+                // Also copy the entire project directory if it contains NC files
+                const projectDir = this.getProjectPathFromJsonFile(fileInfo);
+                if (projectDir && projectDir !== path.dirname(fullPath)) {
+                  const tempProjectDir = await this.tempManager.copyToTemp(projectDir);
+                  fileInfo.tempProjectDir = tempProjectDir;
+                }
+                
+                jsonFiles.push(fileInfo);
+                logInfo(`📄 Copied to temp: ${item.name} → ${path.basename(tempPath)}`);
+              } catch (err) {
+                logError(`Failed to copy ${fullPath} to temp: ${err.message}`);
+              }
             }
           }
         }
@@ -240,7 +356,7 @@ class Scanner {
       }
     };
     
-    scanDirectory(rootPath);
+    await scanDirectory(rootPath);
     return jsonFiles;
   }
 
