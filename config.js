@@ -110,12 +110,7 @@ const config = {
     },
     // Production mode paths (for live operation)
     production: {
-      productionDataPath: path.join(
-        __dirname,
-        "data",
-        "test_data",
-        "production"
-      ), // Will be created if doesn't exist
+      productionDataPath: "C:\\Production\\CNC_Data", // Production CNC data directory
       manualPath: null, // Will be provided by user in manual mode
     },
     // General paths
