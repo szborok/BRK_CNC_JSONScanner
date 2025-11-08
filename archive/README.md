@@ -4,30 +4,30 @@ This directory contains the original standalone executable files that have been 
 
 ## Files Moved to Archive
 
-| Original File | New Flag | Description |
-|---------------|----------|-------------|
-| `debug.js` | `--debug` | Debug utilities and log viewing |
-| `demo-readonly.js` | `--demo-readonly` | Read-only functionality demo |
-| `demo-temp-only.js` | `--demo-temp` | Complete temp-only processing demo |
-| `quick_test.js` | `--test-quick` | Quick storage tests |
-| `test_storage.js` | `--test-storage` | Detailed storage functionality tests |
+| Original File       | New Flag          | Description                          |
+| ------------------- | ----------------- | ------------------------------------ |
+| `debug.js`          | `--debug`         | Debug utilities and log viewing      |
+| `demo-readonly.js`  | ~~`--demo-readonly`~~ | ⚠️ **REMOVED** - Redundant (all demos are read-only by design) |
+| `demo-temp-only.js` | `--demo-temp`     | Complete temp processing demo (with auto-cleanup) |
+| `quick_test.js`     | `--test-quick`    | Quick storage tests                  |
+| `test_storage.js`   | `--test-storage`  | Detailed storage functionality tests |
 
 ## Migration Complete
 
 ✅ **Before**: Multiple executable files in root directory  
-✅ **After**: Single `main.js` entry point with organized flags  
+✅ **After**: Single `main.js` entry point with organized flags
 
 ## Usage Examples
 
 ```bash
 # Old way (archived)
 node debug.js
-node demo-readonly.js
+node demo-readonly.js  # ← This functionality removed as redundant
 node quick_test.js
 
 # New way (current)
 node main.js --debug
-node main.js --demo-readonly
+node main.js --demo-temp     # ← All demos are read-only by design
 node main.js --test-quick
 ```
 

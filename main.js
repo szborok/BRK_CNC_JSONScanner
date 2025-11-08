@@ -22,7 +22,6 @@ function parseArguments() {
     workingFolder: null,
     // Debug and demo flags
     debug: false,
-    demoReadonly: false,
     demoTemp: false,
     testQuick: false,
     testStorage: false,
@@ -76,9 +75,6 @@ function parseArguments() {
       case "--debug":
         options.debug = true;
         break;
-      case "--demo-readonly":
-        options.demoReadonly = true;
-        break;
       case "--demo-temp":
         options.demoTemp = true;
         break;
@@ -121,8 +117,7 @@ Options:
   
 Development & Testing:
   --debug              Debug utilities and log viewing
-  --demo-readonly      Run read-only functionality demo
-  --demo-temp          Run complete temp-only processing demo
+  --demo-temp          Run complete temp processing demo (read-only by design)
   --test-quick         Run quick storage tests
   --test-storage       Run detailed storage functionality tests
   --help               Show this help message
@@ -308,7 +303,9 @@ async function main() {
     // Apply working folder override if provided
     if (options.workingFolder) {
       config.app.userDefinedWorkingFolder = options.workingFolder;
-      console.log(`📁 Using user-defined working folder: ${options.workingFolder}`);
+      console.log(
+        `📁 Using user-defined working folder: ${options.workingFolder}`
+      );
     }
 
     // Handle cleanup modes
@@ -348,12 +345,6 @@ async function main() {
     if (options.debug) {
       Logger.logInfo("🐛 Starting debug utilities...");
       await runDebugUtilities();
-      process.exit(0);
-    }
-
-    if (options.demoReadonly) {
-      Logger.logInfo("🧪 Running read-only demo...");
-      await runDemoReadonly();
       process.exit(0);
     }
 
@@ -443,181 +434,68 @@ process.on("SIGTERM", () => {
 
 // Debug and demo function implementations
 async function runDebugUtilities() {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require("fs");
+  const path = require("path");
 
   function showLogFiles() {
     const logsDir = Logger.getLogsDirectory();
-    
+
     if (!fs.existsSync(logsDir)) {
-      console.log('📁 No logs directory found.');
+      console.log("📁 No logs directory found.");
       return;
     }
-    
-    const logFiles = fs.readdirSync(logsDir).filter(file => file.endsWith('.log'));
-    
+
+    const logFiles = fs
+      .readdirSync(logsDir)
+      .filter((file) => file.endsWith(".log"));
+
     if (logFiles.length === 0) {
-      console.log('📝 No log files found.');
+      console.log("📝 No log files found.");
       return;
     }
-    
-    console.log('📝 Available log files:');
+
+    console.log("📝 Available log files:");
     logFiles.forEach((file, index) => {
       const filePath = path.join(logsDir, file);
       const stats = fs.statSync(filePath);
-      console.log(`  ${index + 1}. ${file} (${Math.round(stats.size / 1024)}KB) - ${stats.mtime.toLocaleString()}`);
+      console.log(
+        `  ${index + 1}. ${file} (${Math.round(
+          stats.size / 1024
+        )}KB) - ${stats.mtime.toLocaleString()}`
+      );
     });
   }
 
   function showLatestLogs(lines = 50) {
     const logFile = Logger.getLogFilePath();
-    
+
     if (!fs.existsSync(logFile)) {
-      console.log('📝 No current log file found.');
+      console.log("📝 No current log file found.");
       return;
     }
-    
-    const content = fs.readFileSync(logFile, 'utf8');
-    const logLines = content.split('\n').filter(line => line.trim());
+
+    const content = fs.readFileSync(logFile, "utf8");
+    const logLines = content.split("\n").filter((line) => line.trim());
     const recentLines = logLines.slice(-lines);
-    
+
     console.log(`📝 Latest ${recentLines.length} log entries:`);
-    console.log('═'.repeat(80));
-    recentLines.forEach(line => console.log(line));
+    console.log("═".repeat(80));
+    recentLines.forEach((line) => console.log(line));
   }
 
-  console.log('🐛 JSONScanner Debug Utilities');
-  console.log('==============================\n');
-  
+  console.log("🐛 JSONScanner Debug Utilities");
+  console.log("==============================\n");
+
   showLogFiles();
-  console.log('');
+  console.log("");
   showLatestLogs(20);
-}
-
-async function runDemoReadonly() {
-  const fs = require("fs");
-  const TempFileManager = require("./utils/TempFileManager");
-
-  console.log("🧪 JSONScanner Read-Only Functionality Demo");
-  console.log("==========================================\n");
-
-  const tempManager = new TempFileManager();
-
-  try {
-    // Find test source data
-    const testDataPath = config.app.testMode 
-      ? config.paths.test.testDataPathAuto 
-      : config.paths.production.productionDataPath;
-
-    if (!fs.existsSync(testDataPath)) {
-      console.log(`❌ Test data path not found: ${testDataPath}`);
-      return;
-    }
-
-    console.log(`📂 Scanning test source data: ${testDataPath}\n`);
-    
-    // Find JSON files
-    const jsonFiles = [];
-    function findJsonFiles(dir) {
-      const items = fs.readdirSync(dir);
-      for (const item of items) {
-        const fullPath = path.join(dir, item);
-        if (fs.statSync(fullPath).isDirectory()) {
-          findJsonFiles(fullPath);
-        } else if (item.endsWith('.json')) {
-          jsonFiles.push(fullPath);
-        }
-      }
-    }
-    
-    findJsonFiles(testDataPath);
-    
-    if (jsonFiles.length === 0) {
-      console.log("❌ No JSON files found for demo");
-      return;
-    }
-
-    console.log(`✅ Found ${jsonFiles.length} JSON file(s) for demo:\n`);
-
-    // Demo the read-only copying process
-    console.log("🔄 Step 1: Copying files to temporary location (READ-ONLY)");
-    console.log("--------------------------------------------------------");
-    
-    for (const jsonFile of jsonFiles.slice(0, 2)) { // Limit to 2 files for demo
-      const originalSize = fs.statSync(jsonFile).size;
-      const tempPath = await tempManager.copyFile(jsonFile);
-      const tempSize = fs.statSync(tempPath).size;
-      
-      console.log(`📄 Processing: ${path.basename(jsonFile)} (${originalSize} bytes)`);
-      console.log(`   → Copied to temp: ${path.basename(tempPath)}`);
-      console.log(`   → Size verification: ${originalSize === tempSize ? '✅ Match' : '❌ Mismatch'}`);
-      console.log(`   → Original remains untouched: ✅ Yes\n`);
-    }
-
-    console.log("📊 Step 2: Session Information");
-    console.log("------------------------------");
-    console.log(`Session ID: ${tempManager.sessionId}`);
-    console.log(`Temp Directory: ${tempManager.tempDir}`);
-    console.log(`Files Tracked: ${tempManager.trackedFiles.length}`);
-    
-    if (tempManager.trackedFiles.length > 0) {
-      console.log("Tracked Paths:");
-      tempManager.trackedFiles.slice(0, 3).forEach(file => {
-        console.log(`   - ${path.basename(file)}`);
-      });
-    }
-
-    console.log("\n🔍 Step 3: Change Detection");
-    console.log("---------------------------");
-    console.log("Checking for changes in original files...");
-    const hasChanges = await tempManager.detectChanges();
-    console.log(`Result: ${hasChanges ? 'Changes detected' : 'No changes detected'}`);
-
-    console.log("\n📋 Step 4: Processing Pattern (Read-Only)");
-    console.log("-----------------------------------------");
-    console.log("✅ Original files are NEVER modified");
-    console.log("✅ All processing uses temporary copies");
-    console.log("✅ Results are saved separately (database/result files)");
-    console.log("✅ Change detection compares file dates/hashes");
-    console.log("✅ Automatic cleanup on session end");
-
-    console.log("\n🔄 Step 5: Normal Operation Flow");
-    console.log("--------------------------------");
-    console.log("1. Scanner finds original JSON files");
-    console.log("2. Files are copied to temp directory");
-    console.log("3. All analysis works with temp copies");
-    console.log("4. Results saved to database/result files");
-    console.log("5. Original files remain completely untouched");
-    console.log("6. Next scan checks for changes via dates/hashes");
-    console.log("7. Only changed files are re-copied to temp");
-    console.log("8. Temp files cleaned up on exit");
-
-    console.log("\n🧹 Step 6: Cleanup");
-    console.log("------------------");
-    console.log("Cleaning up demo session...");
-    await tempManager.cleanup();
-    console.log("Temp directory removed: ✅ Yes");
-    console.log("Original files still intact: ✅ Yes");
-
-    console.log("\n🎉 Demo completed successfully!");
-    console.log("\n🔐 Key Benefits:");
-    console.log("   • Complete read-only operation");
-    console.log("   • No risk of modifying original files");
-    console.log("   • Efficient change detection");
-    console.log("   • Automatic cleanup");
-    console.log("   • Safe parallel processing");
-
-  } catch (error) {
-    console.error("❌ Demo failed:", error.message);
-    await tempManager.cleanup();
-  }
 }
 
 async function runDemoTemp() {
   const path = require("path");
   const Scanner = require("./src/Scanner");
   const Executor = require("./src/Executor");
-  
+
   console.log("🔐 JSONScanner Complete Temp-Only Processing Demo");
   console.log("🗂️  NEW: Organized BRK CNC Management Dashboard Structure");
   console.log("================================================\n");
@@ -637,39 +515,52 @@ async function runDemoTemp() {
     // Initialize scanner and executor
     const scanner = new Scanner(dataManager);
     executor = new Executor(dataManager);
-    
+
     console.log("📊 Session Information:");
-    console.log(`   - Session ID: ${scanner.tempManager?.sessionId || 'N/A'}`);
-    console.log(`   - Temp Directory: ${scanner.tempManager?.tempDir || 'N/A'}`);
-    console.log(`   - Results Directory: ${scanner.tempManager?.resultsPath || 'N/A'}`);
+    console.log(`   - Session ID: ${scanner.tempManager?.sessionId || "N/A"}`);
+    console.log(
+      `   - Temp Directory: ${scanner.tempManager?.tempDir || "N/A"}`
+    );
+    console.log(
+      `   - Results Directory: ${scanner.tempManager?.resultsPath || "N/A"}`
+    );
     console.log("");
 
     console.log("🔄 Step 1: Scanning and copying original files to temp...");
     const results = await scanner.forceRescan(testDataPath);
-    
-    console.log(`✅ Found ${results.projects.length} project(s) copied to temp`);
+
+    console.log(
+      `✅ Found ${results.projects.length} project(s) copied to temp`
+    );
     console.log(`   - Files tracked: ${results.totalFiles || 0}`);
     console.log("");
 
     if (results.projects.length > 0) {
       console.log("🔄 Step 2: Processing projects (all in temp)...");
-      
+
       // Process first project as example
       const firstProject = results.projects[0];
       console.log(`📋 Processing: ${firstProject.name}`);
-      console.log(`   - Working with temp JSON: ${path.basename(firstProject.jsonPath)}`);
-      
+      console.log(
+        `   - Working with temp JSON: ${path.basename(firstProject.jsonPath)}`
+      );
+
       await executor.processProject(firstProject.jsonPath, firstProject.name);
       console.log("✅ Results saved to temp folder");
       console.log("");
     }
 
     console.log("📋 Step 3: Checking organized temp session contents...");
-    console.log("   📁 BRK CNC Management Dashboard/JSONScanner structure created");
-    console.log(`   📂 Session: ${scanner.tempManager?.sessionId || 'N/A'}`);
+    console.log(
+      "   📁 BRK CNC Management Dashboard/JSONScanner structure created"
+    );
+    console.log(`   📂 Session: ${scanner.tempManager?.sessionId || "N/A"}`);
     console.log(`   - Total tracked files: ${results.totalFiles || 0}`);
-    console.log(`   - Result files created: ${scanner.tempManager?.getResultFiles()?.length || 'N/A'}`);
-
+    console.log(
+      `   - Result files created: ${
+        scanner.tempManager?.getResultFiles()?.length || "N/A"
+      }`
+    );
   } catch (error) {
     console.error("❌ Demo failed:", error.message);
   } finally {
@@ -677,6 +568,9 @@ async function runDemoTemp() {
     if (executor) {
       await executor.stop();
     }
+    
+    // Clean the test_processed_data folder but keep the folder structure
+    await cleanDemoWorkingFolder();
     console.log("✅ Demo cleanup completed");
   }
 }
@@ -707,7 +601,7 @@ async function runTestQuick() {
 
       const testProjectMongo = {
         projectName: "test_mongo_quick",
-        fileName: "test.json", 
+        fileName: "test.json",
         status: "active",
       };
 
@@ -716,7 +610,6 @@ async function runTestQuick() {
     } catch (mongoError) {
       console.log("⚠️  JSONScanner MongoDB: SKIPPED (not available)");
     }
-
   } catch (error) {
     console.error("❌ JSONScanner tests failed:", error.message);
   }
@@ -773,9 +666,47 @@ async function runTestStorage() {
     console.log("✅ Scan result saved successfully");
 
     console.log("\n🎉 All storage tests passed!");
-
   } catch (error) {
     console.error("❌ Storage test failed:", error.message);
+  }
+}
+
+// Clean demo working folder but preserve directory structure
+async function cleanDemoWorkingFolder() {
+  const fs = require("fs");
+  const path = require("path");
+
+  try {
+    const testProcessedDataPath = config.app.testProcessedDataPath;
+    if (!fs.existsSync(testProcessedDataPath)) {
+      console.log("   📁 Test processed data folder doesn't exist - nothing to clean");
+      return;
+    }
+
+    const brkFolder = path.join(testProcessedDataPath, "BRK CNC Management Dashboard");
+    if (!fs.existsSync(brkFolder)) {
+      console.log("   📁 No demo data found - folder is already clean");
+      return;
+    }
+
+    // Remove all contents of the BRK folder but keep the folder structure
+    const jsonScannerFolder = path.join(brkFolder, "JSONScanner");
+    if (fs.existsSync(jsonScannerFolder)) {
+      // Remove contents but keep the JSONScanner folder
+      fs.rmSync(jsonScannerFolder, { recursive: true, force: true });
+      console.log("   🧹 Cleaned demo temp data (kept folder structure)");
+    }
+
+    // If BRK folder is now empty, remove it
+    const brkContents = fs.readdirSync(brkFolder);
+    if (brkContents.length === 0) {
+      fs.rmSync(brkFolder, { recursive: true, force: true });
+      console.log("   📁 Removed empty BRK folder");
+    }
+
+    console.log("   ✅ Demo working folder cleaned");
+  } catch (error) {
+    console.log(`   ⚠️  Warning: Could not clean demo folder - ${error.message}`);
   }
 }
 
