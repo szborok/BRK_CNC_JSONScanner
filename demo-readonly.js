@@ -18,18 +18,18 @@ async function demonstrateReadOnlyFeatures() {
   const tempManager = new TempFileManager();
 
   try {
-    // Find test data
-    const testDataDir = path.join(__dirname, "test_data");
+    // Find test source data
+    const testSourceDataDir = path.join(__dirname, "data", "test_source_data");
 
-    if (!fs.existsSync(testDataDir)) {
+    if (!fs.existsSync(testSourceDataDir)) {
       console.log("❌ Test data directory not found");
       console.log(
-        "📂 Please ensure test_data directory exists with sample JSON files"
+        "📂 Please ensure test_source_data directory exists with sample JSON files"
       );
       return;
     }
 
-    console.log(`📂 Scanning test data: ${testDataDir}\n`);
+    console.log(`📂 Scanning test source data: ${testSourceDataDir}\n`);
 
     // Find JSON files
     const jsonFiles = [];
@@ -58,11 +58,13 @@ async function demonstrateReadOnlyFeatures() {
       }
     };
 
-    findJsonFiles(testDataDir);
+    findJsonFiles(testSourceDataDir);
 
     if (jsonFiles.length === 0) {
       console.log("⚠️  No JSON files found in test data");
-      console.log("📄 Please add some JSON files to test_data directory");
+      console.log(
+        "📄 Please add some JSON files to test_source_data directory"
+      );
       return;
     }
 

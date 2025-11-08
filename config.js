@@ -19,7 +19,7 @@ const config = {
     operationTimeoutWarning: 5000, // Warn if single operation takes longer than 5 seconds
     usePersistentTempFolder: true, // Use persistent temp folder with original structure
     forceReprocess: false, // true = reprocess even if result file exists, false = skip processed files
-    
+
     // Read-only processing settings (like ToolManager)
     tempBaseName: "BRK CNC Management Dashboard", // Organized temp folder name
     userDefinedWorkingFolder: null, // User can override temp location
@@ -98,13 +98,13 @@ const config = {
       testDataPathAuto: path.join(
         __dirname,
         "data",
-        "test_data",
+        "test_source_data",
         "testPathHumming_auto"
       ),
       testDataPathManual: path.join(
         __dirname,
         "data",
-        "test_data",
+        "test_source_data",
         "testPathOne_manual"
       ),
     },
@@ -114,7 +114,7 @@ const config = {
       manualPath: null, // Will be provided by user in manual mode
     },
     // General paths
-    dataRoot: path.join(__dirname, "data", "test_data"),
+    dataRoot: path.join(__dirname, "data", "test_source_data"),
   },
 
   // File filtering for temp operations

@@ -27,13 +27,14 @@ async function demonstrateTempOnlyProcessing() {
     // Create executor
     executor = new Executor(dataManager);
 
-    // Get test data path
-    const testDataPath = path.join(
+    // Get test source data path
+    const testSourceDataPath = path.join(
       __dirname,
-      "test_data",
+      "data",
+      "test_source_data",
       "testPathHumming_auto"
     );
-    console.log(`📂 Using test data: ${testDataPath}\n`);
+    console.log(`📂 Using test source data: ${testSourceDataPath}\n`);
 
     // Get scanner for session info
     const scanner = executor.scanner;
@@ -48,7 +49,7 @@ async function demonstrateTempOnlyProcessing() {
     console.log("🔄 Step 1: Scanning and copying original files to temp...");
 
     // Perform scan (this copies files to temp)
-    await scanner.performScan(testDataPath);
+    await scanner.performScan(testSourceDataPath);
 
     const projects = scanner.getProjects();
     console.log(`✅ Found ${projects.length} project(s) copied to temp`);
