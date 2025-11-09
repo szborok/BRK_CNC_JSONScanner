@@ -568,7 +568,7 @@ async function runDemoTemp() {
     if (executor) {
       await executor.stop();
     }
-    
+
     // Clean the test_processed_data folder but keep the folder structure
     await cleanDemoWorkingFolder();
     console.log("✅ Demo cleanup completed");
@@ -679,11 +679,16 @@ async function cleanDemoWorkingFolder() {
   try {
     const testProcessedDataPath = config.app.testProcessedDataPath;
     if (!fs.existsSync(testProcessedDataPath)) {
-      console.log("   📁 Test processed data folder doesn't exist - nothing to clean");
+      console.log(
+        "   📁 Test processed data folder doesn't exist - nothing to clean"
+      );
       return;
     }
 
-    const brkFolder = path.join(testProcessedDataPath, "BRK CNC Management Dashboard");
+    const brkFolder = path.join(
+      testProcessedDataPath,
+      "BRK CNC Management Dashboard"
+    );
     if (!fs.existsSync(brkFolder)) {
       console.log("   📁 No demo data found - folder is already clean");
       return;
@@ -706,7 +711,9 @@ async function cleanDemoWorkingFolder() {
 
     console.log("   ✅ Demo working folder cleaned");
   } catch (error) {
-    console.log(`   ⚠️  Warning: Could not clean demo folder - ${error.message}`);
+    console.log(
+      `   ⚠️  Warning: Could not clean demo folder - ${error.message}`
+    );
   }
 }
 

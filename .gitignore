@@ -3,10 +3,9 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 
-# Logs
-logs/
+# Logs (keep package-lock.json for production consistency)
+logs/*.log
 *.log
 
 # Runtime data
@@ -55,21 +54,28 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
-# Project specific
+# Project specific temp files
 temp/
 *.tmp
+*.cache
 
-# Generated files (BRK files)
+# Generated analysis files (BRK files)
 *_BRK_fixed.json
 *_BRK_result.json
 
 # Read-only processing temp folders
 BRK_CNC_Management_Dashboard/
 "BRK CNC Management Dashboard"/
+data/test_processed_data/
 
-# Session files
+# Session and tracking files
 *.session
 
-# Test artifacts
+# Test and development artifacts
 test_output/
 test_results/
+archive/
+
+# Development logs (keep recent production logs)
+logs/app-2025-10-*.log
+logs/app-2025-11-0[1-4].log
