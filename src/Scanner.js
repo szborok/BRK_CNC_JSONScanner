@@ -11,7 +11,6 @@ const config = require("../config");
 const { logInfo, logWarn, logError } = require("../utils/Logger");
 const { getDirectories } = require("../utils/FileUtils");
 const Project = require("./Project");
-const TempFileManager = require("../utils/TempFileManager");
 const PersistentTempManager = require("../utils/PersistentTempManager");
 
 class Scanner {
@@ -286,12 +285,9 @@ class Scanner {
       this.projects = [];
       this.scannedPaths.clear();
 
-      // Cleanup and recreate temp manager
+      // Cleanup and recreate temp manager (always use PersistentTempManager for BRK structure)
       this.tempManager.cleanup();
-      const customTempBasePath = config.app.testMode
-        ? config.app.testProcessedDataPath
-        : null;
-      this.tempManager = new TempFileManager("JSONScanner", customTempBasePath);
+      this.tempManager = new PersistentTempManager("JSONScanner");
 
       // Perform fresh scan
       await this.performScan(customPath);

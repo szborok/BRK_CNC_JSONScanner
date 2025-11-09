@@ -603,10 +603,23 @@ class Project {
 
   /**
    * Gets analysis results for web app display.
-   * @returns {Object} - Formatted results for frontend
+   * @returns {Object} - Formatted results for frontend (Dashboard-ready format)
    */
   getAnalysisResults() {
-    return {
+    // Dashboard-ready format (ScanResult interface)
+    const dashboardFormat = {
+      id: `${this.getFullName()}_${Date.now()}`, // Generate unique ID
+      filename: this.getFullName(),
+      processedAt: this.analysisResults.processedAt,
+      results: {
+        rulesApplied: this.getRulesApplied(),
+        violations: this.getViolations(),
+      },
+      status: this.analysisResults.summary.overallStatus,
+    };
+
+    // Legacy format for backward compatibility (kept for reference)
+    const legacyFormat = {
       project: this.getFullName(),
       operator: this.operator,
       machine: this.machine,
@@ -614,12 +627,12 @@ class Project {
       hypermillFilePath: this.hypermillFilePath,
       summary: this.analysisResults.summary,
       rules: this.getRulesForDisplay(),
-      // Removed compoundJobs and tools arrays to keep result files clean
-      // compoundJobs: this.getCompoundJobsSummary(),
-      // tools: this.getToolsSummary(),
       processedAt: this.analysisResults.processedAt,
       status: this.analysisResults.status,
     };
+
+    // Return dashboard format
+    return dashboardFormat;
   }
 
   /**
@@ -644,6 +657,69 @@ class Project {
     });
 
     return rulesArray.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  /**
+   * Gets list of rules that were actually executed.
+   * @returns {Array<string>} - Array of rule names that ran
+   */
+  getRulesApplied() {
+    const rulesApplied = [];
+
+    this.analysisResults.rules.forEach((ruleResult) => {
+      if (ruleResult.run) {
+        rulesApplied.push(ruleResult.name);
+      }
+    });
+
+    return rulesApplied.sort();
+  }
+
+  /**
+   * Gets violations in dashboard-ready format.
+   * @returns {Array} - Array of violation objects with rule, message, location
+   */
+  getViolations() {
+    const violations = [];
+
+    this.analysisResults.rules.forEach((ruleResult) => {
+      // Only include rules that ran and failed
+      if (ruleResult.run && !ruleResult.passed && ruleResult.failures) {
+        ruleResult.failures.forEach((failure) => {
+          violations.push({
+            rule: ruleResult.name,
+            message: failure.message || ruleResult.description,
+            location: this.formatFailureLocation(failure),
+          });
+        });
+      }
+    });
+
+    return violations;
+  }
+
+  /**
+   * Formats failure location from failure object.
+   * @param {Object} failure - Failure object from rule
+   * @returns {string} - Formatted location string
+   */
+  formatFailureLocation(failure) {
+    const parts = [];
+
+    if (failure.ncFile) {
+      parts.push(`NC: ${failure.ncFile}`);
+    }
+    if (failure.program) {
+      parts.push(`Program: ${failure.program}`);
+    }
+    if (failure.item && typeof failure.item === "string") {
+      parts.push(failure.item);
+    }
+    if (failure.type) {
+      parts.push(`Type: ${failure.type}`);
+    }
+
+    return parts.length > 0 ? parts.join(", ") : "N/A";
   }
 
   /**

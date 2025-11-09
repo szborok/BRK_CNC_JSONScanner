@@ -20,9 +20,10 @@ function parseArguments() {
     listResults: false,
     preserveResults: false,
     workingFolder: null,
-    // Debug and demo flags
+    // Debug and test flags
     debug: false,
-    demoTemp: false,
+    test: false,
+    testRuns: 1, // Number of test runs (default 1)
     testQuick: false,
     testStorage: false,
   };
@@ -75,8 +76,17 @@ function parseArguments() {
       case "--debug":
         options.debug = true;
         break;
-      case "--demo-temp":
-        options.demoTemp = true;
+      case "--test":
+        options.test = true;
+        // Check if next argument is a number (e.g., --test --3)
+        if (
+          args[i + 1] &&
+          args[i + 1].startsWith("--") &&
+          !isNaN(args[i + 1].slice(2))
+        ) {
+          options.testRuns = parseInt(args[i + 1].slice(2));
+          i++; // Skip next argument
+        }
         break;
       case "--test-quick":
         options.testQuick = true;
@@ -117,7 +127,8 @@ Options:
   
 Development & Testing:
   --debug              Debug utilities and log viewing
-  --demo-temp          Run complete temp processing demo (read-only by design)
+  --test               Run single test with cleanup (clean working folder after)
+  --test --N           Run N test cycles with no cleanup between runs (e.g., --test --3)
   --test-quick         Run quick storage tests
   --test-storage       Run detailed storage functionality tests
   --help               Show this help message
@@ -348,9 +359,16 @@ async function main() {
       process.exit(0);
     }
 
-    if (options.demoTemp) {
-      Logger.logInfo("🔐 Running temp-only demo...");
-      await runDemoTemp();
+    if (options.test) {
+      if (options.testRuns === 1) {
+        Logger.logInfo("🧪 Running single test with cleanup...");
+        await runTest();
+      } else {
+        Logger.logInfo(
+          `🧪 Running ${options.testRuns} test cycles (no cleanup between runs)...`
+        );
+        await runMultipleTests(options.testRuns);
+      }
       process.exit(0);
     }
 
@@ -491,19 +509,25 @@ async function runDebugUtilities() {
   showLatestLogs(20);
 }
 
-async function runDemoTemp() {
+async function runTest() {
   const path = require("path");
   const Scanner = require("./src/Scanner");
   const Executor = require("./src/Executor");
 
-  console.log("🔐 JSONScanner Complete Temp-Only Processing Demo");
-  console.log("🗂️  NEW: Organized BRK CNC Management Dashboard Structure");
+  console.log("🧪 JSONScanner Single Test Run");
+  console.log("🗂️  BRK CNC Management Dashboard Structure");
+  console.log("📌 Note: Test data preserved for inspection");
   console.log("================================================\n");
 
   let dataManager = null;
   let executor = null;
+  let originalAutorun = null;
 
   try {
+    // Temporarily disable autorun for demo mode
+    originalAutorun = config.app.autorun;
+    config.app.autorun = false;
+
     // Initialize data storage
     dataManager = new DataManager();
     await dataManager.initialize();
@@ -527,25 +551,27 @@ async function runDemoTemp() {
     console.log("");
 
     console.log("🔄 Step 1: Scanning and copying original files to temp...");
-    const results = await scanner.forceRescan(testDataPath);
+    await scanner.forceRescan(testDataPath);
 
-    console.log(
-      `✅ Found ${results.projects.length} project(s) copied to temp`
-    );
-    console.log(`   - Files tracked: ${results.totalFiles || 0}`);
+    // Get projects from scanner after scan
+    const projects = scanner.getProjects();
+
+    console.log(`✅ Found ${projects.length} project(s) copied to temp`);
     console.log("");
 
-    if (results.projects.length > 0) {
+    if (projects.length > 0) {
       console.log("🔄 Step 2: Processing projects (all in temp)...");
 
       // Process first project as example
-      const firstProject = results.projects[0];
+      const firstProject = projects[0];
       console.log(`📋 Processing: ${firstProject.name}`);
       console.log(
-        `   - Working with temp JSON: ${path.basename(firstProject.jsonPath)}`
+        `   - Working with temp JSON: ${path.basename(
+          firstProject.jsonPath || "unknown"
+        )}`
       );
 
-      await executor.processProject(firstProject.jsonPath, firstProject.name);
+      await executor.processProject(firstProject);
       console.log("✅ Results saved to temp folder");
       console.log("");
     }
@@ -555,23 +581,20 @@ async function runDemoTemp() {
       "   📁 BRK CNC Management Dashboard/JSONScanner structure created"
     );
     console.log(`   📂 Session: ${scanner.tempManager?.sessionId || "N/A"}`);
-    console.log(`   - Total tracked files: ${results.totalFiles || 0}`);
-    console.log(
-      `   - Result files created: ${
-        scanner.tempManager?.getResultFiles()?.length || "N/A"
-      }`
-    );
+    console.log(`   - Total projects processed: ${projects.length}`);
+    console.log("   - Results saved to temp directory");
   } catch (error) {
     console.error("❌ Demo failed:", error.message);
   } finally {
-    console.log("\n🧹 Cleaning up demo session...");
+    console.log("\n🔄 Data preserved for future test runs");
     if (executor) {
       await executor.stop();
     }
 
-    // Clean the test_processed_data folder but keep the folder structure
-    await cleanDemoWorkingFolder();
-    console.log("✅ Demo cleanup completed");
+    // Restore original autorun setting
+    config.app.autorun = originalAutorun;
+
+    console.log("✅ Test run completed (data preserved)");
   }
 }
 
@@ -668,6 +691,106 @@ async function runTestStorage() {
     console.log("\n🎉 All storage tests passed!");
   } catch (error) {
     console.error("❌ Storage test failed:", error.message);
+  }
+}
+
+async function runMultipleTests(numRuns) {
+  const path = require("path");
+  const Scanner = require("./src/Scanner");
+  const Executor = require("./src/Executor");
+
+  console.log(`🧪 JSONScanner Multiple Test Runs (${numRuns} cycles)`);
+  console.log("🗂️  BRK CNC Management Dashboard Structure");
+  console.log("📌 Note: No cleanup between runs - data accumulates");
+  console.log("================================================\n");
+
+  let dataManager = null;
+  let executor = null;
+  let originalAutorun = null;
+
+  try {
+    // Temporarily disable autorun for test mode
+    originalAutorun = config.app.autorun;
+    config.app.autorun = false;
+
+    // Initialize data storage
+    dataManager = new DataManager();
+    await dataManager.initialize();
+
+    // Get test source data path
+    const testDataPath = config.paths.test.testDataPathAuto;
+    console.log(`📂 Using test source data: ${testDataPath}\n`);
+
+    // Initialize scanner and executor
+    const scanner = new Scanner(dataManager);
+    executor = new Executor(dataManager);
+
+    console.log("📊 Session Information:");
+    console.log(`   - Session ID: ${scanner.tempManager?.sessionId || "N/A"}`);
+    console.log(
+      `   - Temp Directory: ${scanner.tempManager?.tempDir || "N/A"}`
+    );
+    console.log(
+      `   - Results Directory: ${scanner.tempManager?.resultsPath || "N/A"}`
+    );
+    console.log("");
+
+    // Run multiple test cycles
+    for (let runNumber = 1; runNumber <= numRuns; runNumber++) {
+      console.log(
+        `🔄 Test Run ${runNumber}/${numRuns}: Scanning and processing...`
+      );
+
+      await scanner.forceRescan(testDataPath);
+
+      // Get projects from scanner after scan
+      const projects = scanner.getProjects();
+
+      console.log(
+        `✅ Run ${runNumber}: Found ${projects.length} project(s) copied to temp`
+      );
+
+      if (projects.length > 0) {
+        // Process first project as example
+        const firstProject = projects[0];
+        console.log(`📋 Processing: ${firstProject.name}`);
+        console.log(
+          `   - Working with temp JSON: ${path.basename(
+            firstProject.jsonPath || "unknown"
+          )}`
+        );
+
+        await executor.processProject(firstProject);
+        console.log(`✅ Run ${runNumber}: Results saved to temp folder`);
+      }
+
+      if (runNumber < numRuns) {
+        console.log("   🔄 Continuing to next run (no cleanup)...\n");
+      }
+    }
+
+    console.log(`\n📋 All ${numRuns} test runs completed`);
+    console.log(
+      "   📁 BRK CNC Management Dashboard/JSONScanner structure maintained"
+    );
+    console.log(`   📂 Session: ${scanner.tempManager?.sessionId || "N/A"}`);
+    console.log("   - Results saved to temp directory");
+    console.log("");
+    console.log("🔄 Data preserved for future test runs");
+  } catch (error) {
+    console.error("❌ Test run failed:", error.message);
+  } finally {
+    console.log("\n🧹 Stopping executor (no data cleanup)...");
+    if (executor) {
+      await executor.stop();
+    }
+
+    // Restore original autorun setting
+    if (originalAutorun !== null) {
+      config.app.autorun = originalAutorun;
+    }
+
+    console.log("✅ Test run completed (data preserved)");
   }
 }
 
