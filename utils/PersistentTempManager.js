@@ -37,7 +37,7 @@ class PersistentTempManager {
     this.appPath = path.join(this.tempBasePath, this.appName);
 
     if (config.app.usePersistentTempFolder) {
-      this.sessionPath = path.join(this.appPath, "persistent");
+      this.sessionPath = this.appPath; // Work directly in app folder
     } else {
       // Fallback to session-based approach
       this.sessionId = this.generateSessionId();

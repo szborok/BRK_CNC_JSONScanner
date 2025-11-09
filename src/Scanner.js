@@ -24,15 +24,9 @@ class Scanner {
       ? config.app.testProcessedDataPath
       : null;
 
-    // Choose temp manager based on configuration
-    if (config.app.usePersistentTempFolder) {
-      this.tempManager = new PersistentTempManager("JSONScanner");
-      logInfo("Using persistent temp folder with original structure");
-    } else {
-      this.tempManager = new TempFileManager("JSONScanner", customTempBasePath);
-      // Cleanup old temp sessions on startup
-      TempFileManager.cleanupOldSessions("JSONScanner");
-    }
+    // Always use PersistentTempManager for consistent BRK structure
+    this.tempManager = new PersistentTempManager("JSONScanner");
+    logInfo("Using persistent temp folder with original structure");
 
     this.scannedPaths = new Set(); // Track what we've scanned
 
