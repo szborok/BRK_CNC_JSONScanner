@@ -29,6 +29,15 @@ jspm_packages/
 # Output of 'npm pack'
 *.tgz
 
+# Test data (use centralized CNC_TestData repository instead)
+data/test_data/
+test_data/
+**/test_data/
+
+# Working data and temp files  
+working_data/
+BRK*CNC*Management*Dashboard/
+
 # Yarn Integrity file
 .yarn-integrity
 

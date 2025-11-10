@@ -7,15 +7,14 @@
     "chalk": "^4.1.2"
   },
   "scripts": {
-    "postinstall": "node scripts/setup-test-data.js",
-    "pretest": "node scripts/setup-test-data.js",
     "setup-test-data": "node scripts/setup-test-data.js",
     "start": "node main.js --auto",
     "auto": "node main.js --auto",
     "manual": "node main.js --manual",
     "setup": "node main.js --setup",
     "cleanup": "node main.js --cleanup",
-    "test": "node main.js --test",
+    "test": "node scripts/setup-test-data.js && node main.js --test",
+    "test:no-setup": "node main.js --test",
     "list-results": "node main.js --list-results",
     "export-results": "node main.js --export-results"
   },
