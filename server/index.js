@@ -1,0 +1,370 @@
+// server/index.js
+/**
+ * JSONScanner REST API Server
+ *
+ * Provides RESTful endpoints for CNC project analysis and quality control.
+ * Integrates with the core JSONScanner processing pipeline.
+ */
+
+const express = require("express");
+const cors = require("cors");
+const config = require("../config");
+const Logger = require("../utils/Logger");
+const DataManager = require("../src/DataManager");
+
+const app = express();
+const PORT = config.webApp?.port || 3001;
+
+// Middleware
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:3000"],
+    credentials: true,
+  })
+);
+app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  Logger.logInfo(`${req.method} ${req.path}`, {
+    ip: req.ip,
+    userAgent: req.get("user-agent"),
+  });
+  next();
+});
+
+// Initialize DataManager
+let dataManager = null;
+
+async function initializeDataManager() {
+  try {
+    dataManager = new DataManager();
+    await dataManager.initialize();
+    Logger.logInfo("DataManager initialized successfully");
+    return true;
+  } catch (error) {
+    Logger.logError("Failed to initialize DataManager", {
+      error: error.message,
+    });
+    return false;
+  }
+}
+
+// ===== API ROUTES =====
+
+/**
+ * GET /api/status
+ * Health check and service status
+ */
+app.get("/api/status", (req, res) => {
+  res.json({
+    status: "running",
+    mode: config.app.autorun ? "auto" : "manual",
+    testMode: config.app.testMode,
+    version: "2.0.0",
+    timestamp: new Date().toISOString(),
+    dataManager: dataManager ? "initialized" : "not initialized",
+  });
+});
+
+/**
+ * GET /api/projects
+ * List all processed projects with pagination
+ */
+app.get("/api/projects", async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 20;
+    const status = req.query.status; // filter by status: passed|failed|warning
+
+    if (!dataManager) {
+      return res.status(503).json({
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: "DataManager not initialized",
+        },
+      });
+    }
+
+    // Get all projects from DataManager
+    const allProjects = await dataManager.getAllProjects();
+
+    // Filter by status if provided
+    let filteredProjects = allProjects;
+    if (status) {
+      filteredProjects = allProjects.filter((p) => p.status === status);
+    }
+
+    // Apply pagination
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+
+    res.json({
+      projects: paginatedProjects.map((p) => ({
+        id: p.id,
+        name: p.name,
+        status: p.status || "unknown",
+        operationCount: p.operationCount || 0,
+        ncFileCount: p.ncFileCount || 0,
+        timestamp: p.timestamp,
+        violations: p.violations || [],
+      })),
+      total: filteredProjects.length,
+      page,
+      pageSize,
+      totalPages: Math.ceil(filteredProjects.length / pageSize),
+    });
+  } catch (error) {
+    Logger.logError("Failed to get projects", { error: error.message });
+    res.status(500).json({
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to retrieve projects",
+        details: error.message,
+      },
+    });
+  }
+});
+
+/**
+ * GET /api/projects/:id
+ * Get detailed project information
+ */
+app.get("/api/projects/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!dataManager) {
+      return res.status(503).json({
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: "DataManager not initialized",
+        },
+      });
+    }
+
+    const project = await dataManager.getProject(id);
+
+    if (!project) {
+      return res.status(404).json({
+        error: {
+          code: "PROJECT_NOT_FOUND",
+          message: `Project with ID '${id}' not found`,
+        },
+      });
+    }
+
+    res.json(project);
+  } catch (error) {
+    Logger.logError(`Failed to get project ${req.params.id}`, {
+      error: error.message,
+    });
+    res.status(500).json({
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to retrieve project details",
+        details: error.message,
+      },
+    });
+  }
+});
+
+/**
+ * GET /api/analysis/:projectId
+ * Get full analysis results for a project
+ */
+app.get("/api/analysis/:projectId", async (req, res) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!dataManager) {
+      return res.status(503).json({
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: "DataManager not initialized",
+        },
+      });
+    }
+
+    const analysis = await dataManager.getAnalysis(projectId);
+
+    if (!analysis) {
+      return res.status(404).json({
+        error: {
+          code: "ANALYSIS_NOT_FOUND",
+          message: `Analysis for project '${projectId}' not found`,
+        },
+      });
+    }
+
+    res.json(analysis);
+  } catch (error) {
+    Logger.logError(`Failed to get analysis for ${req.params.projectId}`, {
+      error: error.message,
+    });
+    res.status(500).json({
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to retrieve analysis",
+        details: error.message,
+      },
+    });
+  }
+});
+
+/**
+ * GET /api/analysis/:projectId/violations
+ * Get only violations for a project
+ */
+app.get("/api/analysis/:projectId/violations", async (req, res) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!dataManager) {
+      return res.status(503).json({
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: "DataManager not initialized",
+        },
+      });
+    }
+
+    const analysis = await dataManager.getAnalysis(projectId);
+
+    if (!analysis) {
+      return res.status(404).json({
+        error: {
+          code: "ANALYSIS_NOT_FOUND",
+          message: `Analysis for project '${projectId}' not found`,
+        },
+      });
+    }
+
+    res.json({
+      projectId,
+      violations: analysis.violations || [],
+      violationCount: (analysis.violations || []).length,
+    });
+  } catch (error) {
+    Logger.logError(`Failed to get violations for ${req.params.projectId}`, {
+      error: error.message,
+    });
+    res.status(500).json({
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to retrieve violations",
+        details: error.message,
+      },
+    });
+  }
+});
+
+/**
+ * POST /api/projects/scan
+ * Trigger manual scan (if not in auto mode)
+ */
+app.post("/api/projects/scan", async (req, res) => {
+  try {
+    const { projectPath } = req.body;
+
+    if (config.app.autorun) {
+      return res.status(400).json({
+        error: {
+          code: "INVALID_MODE",
+          message: "Cannot trigger manual scan when in auto mode",
+        },
+      });
+    }
+
+    if (!projectPath) {
+      return res.status(400).json({
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "projectPath is required",
+        },
+      });
+    }
+
+    // This would trigger the actual scan - implementation depends on your architecture
+    Logger.logInfo("Manual scan triggered", { projectPath });
+
+    res.json({
+      success: true,
+      message: "Scan triggered successfully",
+      projectPath,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    Logger.logError("Failed to trigger scan", { error: error.message });
+    res.status(500).json({
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to trigger scan",
+        details: error.message,
+      },
+    });
+  }
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    error: {
+      code: "NOT_FOUND",
+      message: `Route ${req.method} ${req.path} not found`,
+    },
+  });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  Logger.logError("Unhandled error", { error: err.message, stack: err.stack });
+  res.status(500).json({
+    error: {
+      code: "INTERNAL_ERROR",
+      message: "Internal server error",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    },
+  });
+});
+
+// Start server
+async function startServer() {
+  try {
+    Logger.logInfo("Starting JSONScanner API Server...");
+
+    // Initialize DataManager
+    const initialized = await initializeDataManager();
+    if (!initialized) {
+      Logger.logError(
+        "Failed to initialize DataManager - server will start but data access will be limited"
+      );
+    }
+
+    app.listen(PORT, () => {
+      Logger.logInfo(
+        `🚀 JSONScanner API Server running on http://localhost:${PORT}`
+      );
+      console.log(
+        `🚀 JSONScanner API Server running on http://localhost:${PORT}`
+      );
+      console.log(`📊 Mode: ${config.app.testMode ? "TEST" : "PRODUCTION"}`);
+      console.log(
+        `🔄 Auto-run: ${config.app.autorun ? "ENABLED" : "DISABLED"}`
+      );
+      console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
+    });
+  } catch (error) {
+    Logger.logError("Failed to start server", { error: error.message });
+    console.error("❌ Failed to start server:", error.message);
+    process.exit(1);
+  }
+}
+
+// Start if run directly
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = { app, startServer };

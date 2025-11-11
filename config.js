@@ -9,7 +9,7 @@ const path = require("path");
 const config = {
   // Application settings
   app: {
-    testMode: true, // true = use test data paths, false = use production paths
+    testMode: false, // true = use test data paths, false = use production paths
     autorun: true, // true = automatic scanning and execution, false = manual mode
     scanIntervalMs: 60000, // How often the autorun scanner checks for new JSONs (60 seconds)
     logLevel: "info", // can be: 'debug', 'info', 'warn', 'error'
@@ -36,11 +36,11 @@ const config = {
 
   // Web app settings (for future web service)
   webApp: {
-    port: 3000,
+    port: 3001,
     enableAuth: true,
     sessionSecret: "your-secret-key-here", // Change in production
     maxFileSize: "10MB",
-    allowedOrigins: ["http://localhost:3000"],
+    allowedOrigins: ["http://localhost:5173", "http://localhost:3000"],
   },
 
   // Storage settings - supports both local and MongoDB

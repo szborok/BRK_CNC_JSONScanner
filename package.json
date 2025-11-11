@@ -4,7 +4,9 @@
   "description": "CNC JSONScanner with organized temp structure for BRK CNC Management Dashboard",
   "main": "main.js",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   },
   "scripts": {
     "postinstall": "node scripts/setup-test-data.js",
@@ -17,7 +19,8 @@
     "cleanup": "node main.js --cleanup",
     "test": "node main.js --test",
     "list-results": "node main.js --list-results",
-    "export-results": "node main.js --export-results"
+    "export-results": "node main.js --export-results",
+    "serve": "node server/index.js"
   },
   "keywords": [
     "cnc",
