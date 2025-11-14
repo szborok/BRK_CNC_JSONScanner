@@ -15,16 +15,10 @@ class PersistentTempManager {
   constructor(appName = "JSONScanner") {
     // Support user-defined working folder like ToolManager
     if (config.app.userDefinedWorkingFolder) {
-      this.tempBasePath = path.join(
-        config.app.userDefinedWorkingFolder,
-        config.app.tempBaseName || "BRK CNC Management Dashboard"
-      );
+      this.tempBasePath = config.app.userDefinedWorkingFolder;
     } else if (config.app.testMode && config.app.testProcessedDataPath) {
       // Use test_processed_data path for test mode
-      this.tempBasePath = path.join(
-        config.app.testProcessedDataPath,
-        config.app.tempBaseName || "BRK CNC Management Dashboard"
-      );
+      this.tempBasePath = config.app.testProcessedDataPath;
     } else {
       // Create persistent temp folder structure
       this.tempBasePath = path.join(
@@ -34,7 +28,7 @@ class PersistentTempManager {
     }
 
     this.appName = appName;
-    this.appPath = path.join(this.tempBasePath, this.appName);
+    this.appPath = path.join(this.tempBasePath, "BRK CNC Management Dashboard", this.appName);
 
     if (config.app.usePersistentTempFolder) {
       this.sessionPath = this.appPath; // Work directly in app folder

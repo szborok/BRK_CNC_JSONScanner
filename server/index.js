@@ -80,6 +80,7 @@ app.get("/api/projects", async (req, res) => {
     const status = req.query.status; // filter by status: passed|failed|warning
 
     if (!dataManager) {
+      Logger.logError("❌ API Request Failed: DataManager not initialized");
       return res.status(503).json({
         error: {
           code: "SERVICE_UNAVAILABLE",
@@ -89,7 +90,9 @@ app.get("/api/projects", async (req, res) => {
     }
 
     // Get all projects from DataManager
+    Logger.logInfo("📡 Dashboard requested projects list");
     const allProjects = await dataManager.getAllProjects();
+    Logger.logInfo(`📊 Returning ${allProjects.length} projects to Dashboard`);
 
     // Filter by status if provided
     let filteredProjects = allProjects;
@@ -102,7 +105,7 @@ app.get("/api/projects", async (req, res) => {
     const endIndex = startIndex + pageSize;
     const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
 
-    res.json({
+    const response = {
       projects: paginatedProjects.map((p) => ({
         id: p.id,
         name: p.name,
@@ -116,7 +119,16 @@ app.get("/api/projects", async (req, res) => {
       page,
       pageSize,
       totalPages: Math.ceil(filteredProjects.length / pageSize),
-    });
+    };
+    
+    // Log first 2 projects as sample
+    if (response.projects.length > 0) {
+      Logger.logInfo(`📦 Sample project data: ${JSON.stringify(response.projects.slice(0, 2), null, 2)}`);
+    } else {
+      Logger.logWarn("⚠️ No projects found to return to Dashboard!");
+    }
+
+    res.json(response);
   } catch (error) {
     Logger.logError("Failed to get projects", { error: error.message });
     res.status(500).json({
@@ -279,24 +291,42 @@ app.post("/api/config", async (req, res) => {
       });
     }
 
+    Logger.logInfo("📡 Received configuration from Dashboard", {
+      testMode,
+      workingFolder,
+      scanPaths,
+    });
+
     // Update configuration
     config.app.testMode = testMode;
     config.app.autorun = true; // Activate scanning
 
+    // Set the working folder path if provided
     if (workingFolder) {
       config.app.userDefinedWorkingFolder = workingFolder;
+      Logger.logInfo(`📁 Working folder set to: ${workingFolder}`);
     }
 
     if (scanPaths?.jsonFiles) {
       config.paths.test.testDataPathAuto = scanPaths.jsonFiles;
     }
 
-    Logger.logInfo("Configuration updated from Dashboard", {
+    Logger.logInfo("✅ Configuration updated from Dashboard", {
       testMode,
       autorun: true,
-      workingFolder,
+      workingFolder: config.app.userDefinedWorkingFolder,
       scanPaths,
     });
+
+    // Reinitialize DataManager with new config
+    if (dataManager) {
+      try {
+        await dataManager.initialize();
+        Logger.logInfo("✅ DataManager reinitialized with new paths");
+      } catch (error) {
+        Logger.logWarn("⚠️ Failed to reinitialize DataManager", { error: error.message });
+      }
+    }
 
     // Start Executor if not already running
     if (!executor) {
