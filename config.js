@@ -5,14 +5,18 @@
  */
 
 const path = require("path");
+const { loadConfig } = require("../BRK_CNC_CORE/utils/configScanner");
+
+// Try to load system-wide config
+const systemConfig = loadConfig();
 
 const config = {
   // Application settings
   app: {
-    testMode: false, // true = use test data paths, false = use production paths (set by Dashboard config)
+    testMode: systemConfig ? !systemConfig.isConfigured : false, // Use production if configured
     autorun: false, // true = automatic scanning and execution, false = manual mode (activated by Dashboard config)
     scanIntervalMs: 60000, // How often the autorun scanner checks for new JSONs (60 seconds)
-    logLevel: "info", // can be: 'debug', 'info', 'warn', 'error'
+    logLevel: systemConfig?.advanced?.logLevel || "info", // can be: 'debug', 'info', 'warn', 'error'
     enableDetailedLogging: true,
     enableProgressReporting: true, // Show progress during bulk file operations
     progressReportInterval: 10, // Report progress every N files during bulk operations
@@ -22,16 +26,16 @@ const config = {
 
     // Read-only processing settings (like ToolManager)
     tempBaseName: "BRK CNC Management Dashboard", // Organized temp folder name
-    userDefinedWorkingFolder: path.join(
+    userDefinedWorkingFolder: systemConfig?.storage?.tempPath || path.join(
       __dirname,
       "..",
       "BRK_CNC_CORE",
       "test-data",
       "working_data"
-    ), // Default to test-data working folder
+    ), // Use system config or default to test-data
 
     // Test mode temp processing settings - points to centralized BRK_CNC_CORE test-data
-    testProcessedDataPath: path.join(
+    testProcessedDataPath: systemConfig?.storage?.basePath || path.join(
       __dirname,
       "..",
       "BRK_CNC_CORE",

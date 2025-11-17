@@ -30,17 +30,29 @@ class DataManager {
     }
   }
 
-  // Save scan results with metadata
+  /**
+   * Save scan results with metadata
+   * @param {import('./Project')} project - Project instance
+   * @param {Object} analysisResults - Analysis results object
+   * @returns {Promise<Object>} Scan result object
+   */
   async saveScanResult(project, analysisResults) {
+    if (!project || typeof project.getFullName !== 'function') {
+      throw new Error(`Invalid project object passed to saveScanResult: ${typeof project}`);
+    }
+    if (!project.projectPath) {
+      throw new Error(`Project missing projectPath property: ${project.getFullName?.() || 'unknown'}`);
+    }
+    
     try {
       const scanResult = {
-        projectPath: project.getProjectPath(),
+        projectPath: project.projectPath,
         projectName: project.getFullName(),
         analysisResults: analysisResults,
         timestamp: new Date().toISOString(),
         success: true,
-        rulesApplied: analysisResults.rules?.length || 0,
-        issuesFound: analysisResults.issues?.length || 0,
+        rulesApplied: analysisResults?.rules?.length || 0,
+        issuesFound: analysisResults?.issues?.length || 0,
       };
 
       // Save to traditional result file
@@ -49,40 +61,41 @@ class DataManager {
       logInfo(`💾 Scan result saved: ${project.getFullName()}`);
       return scanResult;
     } catch (error) {
-      logError(
-        `Failed to save scan result for ${project.getFullName()}:`,
-        error
-      );
+      logError(`Failed to save scan result for ${project.getFullName()}: ${error.message}`);
       throw error;
     }
   }
 
-  // Backward compatibility: save traditional result file
+  /**
+   * Save traditional result file
+   * @param {import('./Project')} project - Project instance
+   * @param {Object} analysisResults - Analysis results object
+   * @returns {Promise<string|null>} Path to saved file
+   */
   async saveTraditionalResultFile(project, analysisResults) {
     try {
-      const resultPath = project.getResultFilePath();
+      const TempFileManager = require("../utils/TempFileManager");
+      const tempManager = new TempFileManager();
 
-      if (!resultPath) {
-        return null;
-      }
+      // Generate result filename based on project name
+      const projectName = project.getFullName();
+      const resultFileName = `${projectName}_BRK_result.json`;
 
-      // Ensure directory exists
-      const dir = path.dirname(resultPath);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
+      logInfo(`Attempting to save result: ${resultFileName}`);
 
-      // Write the result file
-      fs.writeFileSync(
-        resultPath,
+      // Save to temp manager's results folder
+      const tempResultPath = tempManager.saveToTemp(
+        resultFileName,
         JSON.stringify(analysisResults, null, 2),
-        "utf8"
+        "result"
       );
 
-      return resultPath;
+      logInfo(`✅ Result file saved to temp: ${tempResultPath}`);
+      return tempResultPath;
     } catch (error) {
-      logError(`Failed to save traditional result file:`, error);
-      return null;
+      logError(`Failed to save traditional result file for ${project.getFullName()}: ${error.message}`);
+      logError(`Stack: ${error.stack}`);
+      throw error;
     }
   }
 

@@ -108,7 +108,16 @@ class Executor {
   /**
    * Process a project: analyze -> rule check -> results.
    */
+  /**
+   * Process a single project through the full pipeline
+   * @param {import('./Project')} project - Project instance to process
+   * @returns {Promise<void>}
+   */
   async processProject(project) {
+    if (!project || typeof project.getFullName !== 'function') {
+      throw new Error(`Invalid project object passed to processProject: ${typeof project}`);
+    }
+    
     try {
       logInfo(`Processing project: ${project.getFullName()}`);
 

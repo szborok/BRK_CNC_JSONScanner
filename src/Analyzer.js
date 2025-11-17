@@ -66,6 +66,7 @@ class Analyzer {
       // Basic auto-fixes
       content = content
         .replace(/,\s*([}\]])/g, "$1") // remove trailing commas
+        // eslint-disable-next-line no-control-regex
         .replace(/[\u0000-\u0019]+/g, ""); // remove control characters
 
       try {

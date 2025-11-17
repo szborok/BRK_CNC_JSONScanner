@@ -56,7 +56,7 @@ async function initializeDataManager() {
 
 /**
  * GET /api/status
- * Health check and service status
+ * Get server status and health
  */
 app.get("/api/status", (req, res) => {
   res.json({
@@ -67,6 +67,36 @@ app.get("/api/status", (req, res) => {
     timestamp: new Date().toISOString(),
     dataManager: dataManager ? "initialized" : "not initialized",
   });
+});
+
+/**
+ * GET /api/config
+ * Get system configuration (filesystem config if exists)
+ */
+app.get("/api/config", (req, res) => {
+  try {
+    const configScanner = require('../../BRK_CNC_CORE/utils/configScanner');
+    const systemConfig = configScanner.loadConfig();
+    
+    if (systemConfig) {
+      res.json(systemConfig);
+    } else {
+      res.status(404).json({
+        error: {
+          code: "CONFIG_NOT_FOUND",
+          message: "System configuration file not found or not configured"
+        }
+      });
+    }
+  } catch (error) {
+    Logger.logError("Failed to load system config", { error: error.message });
+    res.status(500).json({
+      error: {
+        code: "CONFIG_ERROR",
+        message: "Failed to load configuration"
+      }
+    });
+  }
 });
 
 /**
@@ -280,7 +310,7 @@ app.get("/api/analysis/:projectId/violations", async (req, res) => {
  */
 app.post("/api/config", async (req, res) => {
   try {
-    const { testMode, scanPaths, workingFolder } = req.body;
+    const { testMode, scanPaths, workingFolder, autoRun = false } = req.body;
 
     if (typeof testMode !== "boolean") {
       return res.status(400).json({
@@ -299,7 +329,7 @@ app.post("/api/config", async (req, res) => {
 
     // Update configuration
     config.app.testMode = testMode;
-    config.app.autorun = true; // Activate scanning
+    config.app.autorun = autoRun; // Only activate scanning if explicitly requested
 
     // Set the working folder path if provided
     if (workingFolder) {
@@ -313,8 +343,8 @@ app.post("/api/config", async (req, res) => {
 
     Logger.logInfo("✅ Configuration updated from Dashboard", {
       testMode,
-      autorun: true,
-      workingFolder: config.app.userDefinedWorkingFolder,
+      autorun: autoRun,
+      workingFolder,
       scanPaths,
     });
 
@@ -328,8 +358,8 @@ app.post("/api/config", async (req, res) => {
       }
     }
 
-    // Start Executor if not already running
-    if (!executor) {
+    // Start Executor only if autoRun is true
+    if (autoRun && !executor) {
       Logger.logInfo("Starting Executor after config update...");
       executor = new Executor(dataManager);
       executor.start().catch((error) => {
@@ -386,8 +416,51 @@ app.post("/api/projects/scan", async (req, res) => {
       });
     }
 
-    // This would trigger the actual scan - implementation depends on your architecture
+    const fs = require('fs');
+    if (!fs.existsSync(projectPath)) {
+      return res.status(400).json({
+        error: {
+          code: "INVALID_PATH",
+          message: `Path does not exist: ${projectPath}`,
+        },
+      });
+    }
+
     Logger.logInfo("Manual scan triggered", { projectPath });
+
+    // Execute scan asynchronously
+    setImmediate(async () => {
+      const Executor = require("../src/Executor");
+      const executor = new Executor(dataManager);
+
+      try {
+        Logger.logInfo(`🔍 Starting scan for: ${projectPath}`);
+        
+        // Initialize scanner
+        await executor.scanner.start();
+        
+        // Perform scan on the specified path
+        await executor.scanner.performScan(projectPath);
+        
+        // Get discovered projects
+        const projects = executor.scanner.getProjects();
+        Logger.logInfo(`📊 Found ${projects.length} project(s) to process`);
+
+        // Process each discovered project
+        for (const project of projects) {
+          if (project.status === "ready") {
+            await executor.processProject(project);
+          }
+        }
+
+        // Clean up
+        executor.scanner.stop();
+        
+        Logger.logInfo(`✅ Scan completed: ${projects.length} projects processed`);
+      } catch (error) {
+        Logger.logError("Background scan failed", { error: error.message, stack: error.stack });
+      }
+    });
 
     res.json({
       success: true,
@@ -418,7 +491,7 @@ app.use((req, res) => {
 });
 
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   Logger.logError("Unhandled error", { error: err.message, stack: err.stack });
   res.status(500).json({
     error: {
@@ -453,7 +526,7 @@ async function startServer() {
       Logger.logInfo("Executor started successfully");
     }
 
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       Logger.logInfo(
         `🚀 JSONScanner API Server running on http://localhost:${PORT}`
       );
@@ -465,6 +538,19 @@ async function startServer() {
         `🔄 Auto-run: ${config.app.autorun ? "ENABLED" : "DISABLED"}`
       );
       console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
+    });
+    
+    // Handle port binding errors
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        Logger.logError(`❌ Port ${PORT} is already in use. Please stop the conflicting service.`);
+        console.error(`❌ Port ${PORT} is already in use. Please stop the conflicting service.`);
+        process.exit(1);
+      } else {
+        Logger.logError(`❌ Server error: ${err.message}`);
+        console.error(`❌ Server error: ${err.message}`);
+        process.exit(1);
+      }
     });
   } catch (error) {
     Logger.logError("Failed to start server", { error: error.message });

@@ -17,11 +17,15 @@ class Results {
 
   /**
    * Saves project analysis results to storage (database + temp file).
-   * @param {Project} project - The project instance
+   * @param {import('./Project')} project - The project instance
    * @param {Object} analysisResults - Analysis results from project.getAnalysisResults()
-   * @returns {string|null} - Storage ID or file path, null if failed
+   * @returns {Promise<string|null>} Storage ID or file path, null if failed
    */
   async saveProjectResults(project, analysisResults) {
+    if (!project || typeof project.getFullName !== 'function') {
+      throw new Error(`Invalid project object passed to saveProjectResults: ${typeof project}`);
+    }
+    
     try {
       // Save to modern storage (DataManager) - skip in test mode to avoid errors
       let storageId = null;

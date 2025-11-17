@@ -100,11 +100,11 @@ class Project {
       }
 
       this.status = "no_targets";
-      if (operatorFilter) {
-        logInfo(
-          `No valid files found for operator "${operatorFilter}" in project "${this.name}"`
-        );
-      }
+      // if (operatorFilter) {
+      //   logInfo(
+      //     `No valid files found for operator "${operatorFilter}" in project "${this.name}"`
+      //   );
+      // }
       return false;
     } catch (err) {
       // Most initialization errors are probably fatal (missing files, corrupt structure, etc.)
@@ -548,7 +548,7 @@ class Project {
       details.type = "job";
       // Try to find which NC file contains this job
       for (const [programName, ncFile] of this.compoundJobs) {
-        const job = ncFile.jobs.find((j) => j.number == failedItem);
+        const job = ncFile.jobs.find((j) => j.number === failedItem);
         if (job) {
           details.programName = programName;
           details.jobDescription = job.description;
