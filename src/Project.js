@@ -598,6 +598,8 @@ class Project {
       rulesFailed: Array.from(this.analysisResults.rules.values()).filter(
         (r) => r.run && !r.passed
       ).length,
+      totalOperations: this.getTotalJobCount(),
+      totalNCFiles: this.compoundJobs.size,
     };
   }
 
@@ -616,6 +618,10 @@ class Project {
         violations: this.getViolations(),
       },
       status: this.analysisResults.summary.overallStatus,
+      summary: {
+        totalOperations: this.analysisResults.summary.totalOperations || 0,
+        totalNCFiles: this.analysisResults.summary.totalNCFiles || 0,
+      },
     };
 
     // Legacy format for backward compatibility (kept for reference)

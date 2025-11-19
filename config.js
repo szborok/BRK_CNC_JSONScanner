@@ -14,7 +14,8 @@ const config = {
   // Application settings
   app: {
     testMode: systemConfig ? !systemConfig.isConfigured : false, // Use production if configured
-    autorun: false, // true = automatic scanning and execution, false = manual mode (activated by Dashboard config)
+    // Auto-run configuration
+  autorun: false, // Set to true to enable automatic scanning without Dashboard activation
     scanIntervalMs: 60000, // How often the autorun scanner checks for new JSONs (60 seconds)
     logLevel: systemConfig?.advanced?.logLevel || "info", // can be: 'debug', 'info', 'warn', 'error'
     enableDetailedLogging: true,
