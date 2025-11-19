@@ -348,16 +348,6 @@ app.post("/api/config", async (req, res) => {
       scanPaths,
     });
 
-    // Reinitialize DataManager with new config
-    if (dataManager) {
-      try {
-        await dataManager.initialize();
-        Logger.logInfo("✅ DataManager reinitialized with new paths");
-      } catch (error) {
-        Logger.logWarn("⚠️ Failed to reinitialize DataManager", { error: error.message });
-      }
-    }
-
     // Start Executor only if autoRun is true
     if (autoRun && !executor) {
       Logger.logInfo("Starting Executor after config update...");
