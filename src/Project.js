@@ -612,10 +612,13 @@ class Project {
     const dashboardFormat = {
       id: `${this.getFullName()}_${Date.now()}`, // Generate unique ID
       filename: this.getFullName(),
+      machine: this.machine,
+      operator: this.operator,
       processedAt: this.analysisResults.processedAt,
       results: {
         rulesApplied: this.getRulesApplied(),
         violations: this.getViolations(),
+        rules: this.getRulesForDisplay(),
       },
       status: this.analysisResults.summary.overallStatus,
       summary: {
@@ -954,6 +957,45 @@ class CompoundJob {
    */
   get operations() {
     return this.jobs;
+  }
+
+  /**
+   * Check if project uses any tools from the specified category.
+   * @param {string} category - Tool category name (from config.toolCategories)
+   * @returns {boolean} - True if project uses tools from this category
+   */
+  hasToolCategory(category) {
+    for (const tool of this.tools.values()) {
+      if (tool.category === category) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Check if project has operations of specified type.
+   * @param {string} operationType - Operation type to check (lowercase)
+   * @returns {boolean} - True if project has this operation type
+   */
+  hasOperationType(operationType) {
+    const searchTerm = operationType.toLowerCase();
+    
+    for (const compoundJob of this.compoundJobs.values()) {
+      for (const job of compoundJob.jobs) {
+        const jobType = (job.featureName || job.type || '').toLowerCase();
+        
+        // Match common operation type variations
+        if (jobType.includes(searchTerm) ||
+            searchTerm.includes(jobType) ||
+            (searchTerm === 'helical drilling' && jobType.includes('helical')) ||
+            (searchTerm === 'contour' && (jobType.includes('contour') || jobType.includes('kontur'))) ||
+            (searchTerm === 'plane' && (jobType.includes('plane') || jobType.includes('surface')))) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
 

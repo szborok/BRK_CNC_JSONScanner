@@ -133,12 +133,15 @@ class DataManager {
               allProjects.push({
                 id: projectName,
                 name: projectName,
+                machine: data.machine || null,
+                operator: data.operator || null,
                 status: this._determineStatus(data),
                 operationCount: data.summary?.totalOperations || 0,
                 ncFileCount: data.summary?.totalNCFiles || 0,
                 timestamp:
                   data.timestamp || fs.statSync(filePath).mtime.toISOString(),
                 violations: data.violations || [],
+                rulesApplied: data.results?.rulesApplied || [],
               });
             } catch (error) {
               logWarn(`Failed to read result file ${file}:`, error.message);
@@ -174,12 +177,15 @@ class DataManager {
               allProjects.push({
                 id: projectName,
                 name: projectName,
+                machine: data.machine || null,
+                operator: data.operator || null,
                 status: this._determineStatus(data),
                 operationCount: data.summary?.totalOperations || 0,
                 ncFileCount: data.summary?.totalNCFiles || 0,
                 timestamp:
                   data.timestamp || fs.statSync(filePath).mtime.toISOString(),
                 violations: data.violations || [],
+                rulesApplied: data.results?.rulesApplied || [],
                 session: session,
               });
             } catch (error) {

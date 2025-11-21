@@ -23,7 +23,7 @@ const config = {
     progressReportInterval: 10, // Report progress every N files during bulk operations
     operationTimeoutWarning: 5000, // Warn if single operation takes longer than 5 seconds
     usePersistentTempFolder: true, // Use persistent temp folder with original structure
-    forceReprocess: false, // true = reprocess even if result file exists, false = skip processed files
+    forceReprocess: true, // true = reprocess even if result file exists, false = skip processed files
 
     // Read-only processing settings (like ToolManager)
     tempBaseName: "BRK CNC Management Dashboard", // Organized temp folder name
