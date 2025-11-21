@@ -138,15 +138,16 @@ app.get("/api/projects", async (req, res) => {
     const response = {
       projects: paginatedProjects.map((p) => ({
         id: p.id,
-        name: p.name,
-        machine: p.machine || null,
-        operator: p.operator || null,
+        filename: p.name,
+        machine: p.machine || "Unknown",
+        operator: p.operator || "Unknown",
+        scanType: p.scanType || "auto",
+        processedAt: p.timestamp,
         status: p.status || "unknown",
-        operationCount: p.operationCount || 0,
-        ncFileCount: p.ncFileCount || 0,
-        timestamp: p.timestamp,
-        violations: p.violations || [],
-        rulesApplied: p.rulesApplied || [],
+        results: {
+          rulesApplied: p.rulesApplied || [],
+          violations: p.violations || []
+        }
       })),
       total: filteredProjects.length,
       page,

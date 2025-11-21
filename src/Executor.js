@@ -38,7 +38,10 @@ class Executor {
       `Executor started (${config.app.autorun ? "AUTO" : "MANUAL"} mode).`
     );
 
-    this.scanner.start();
+    // Scanner is stub - skip start call
+    if (this.scanner && typeof this.scanner.start === 'function') {
+      this.scanner.start();
+    }
 
     if (config.app.autorun) {
       await this.runAutorunCycle();
