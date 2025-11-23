@@ -8,14 +8,12 @@ const config = require("../config");
 const { logInfo, logWarn, logError } = require("../utils/Logger");
 const Scanner = require("./Scanner");
 const Analyzer = require("./Analyzer");
-const RuleEngine = require("./RuleEngine");
 const Results = require("./Results");
 
 class Executor {
   constructor(dataManager = null) {
     this.scanner = new Scanner();
     this.analyzer = new Analyzer();
-    this.ruleEngine = new RuleEngine();
     this.results = new Results(dataManager, this.scanner.tempManager);
     this.dataManager = dataManager;
     this.isRunning = false;
@@ -143,22 +141,11 @@ class Executor {
         return;
       }
 
-      // Step 2: Execute rules
-      const ruleResults = this.ruleEngine.executeRules(project);
-
-      // Step 3: Store analysis results in project
-      project.setAnalysisResults(ruleResults);
-
-      // Step 4: Save results to file
+      // Step 2: Save scanner results (metadata only - no rules)
       this.results.saveProjectResults(project, project.getAnalysisResults());
 
-      // Step 5: Log summary for monitoring
-      this.logProjectSummary(project, project.getAnalysisResults());
-
       logInfo(
-        `Project completed: ${project.getFullName()} - Status: ${
-          project.analysisResults.summary.overallStatus
-        }`
+        `Project completed: ${project.getFullName()} - Status: copied`
       );
       project.status = "completed";
     } catch (err) {
@@ -309,33 +296,7 @@ class Executor {
    * @param {Project} project - The processed project
    * @param {Object} ruleResults - Rule execution results
    */
-  logProjectSummary(project, ruleResults) {
-    const { summary } = ruleResults;
-    const status = summary?.overallStatus?.toUpperCase() || "UNKNOWN";
-
-    logInfo(`\n📋 Analysis Summary for ${project.getFullName()}`);
-    logInfo(`  Overall Status: ${status}`);
-
-    if (summary) {
-      logInfo(
-        `  Rules: ${summary.rulesPassed || 0} passed, ${
-          summary.rulesFailed || 0
-        } failed, ${
-          (summary.rulesRun || 0) -
-          (summary.rulesPassed || 0) -
-          (summary.rulesFailed || 0)
-        } not applicable`
-      );
-      logInfo(
-        `  Project Stats: ${project.compoundJobs.size} NC files, ${project.tools.size} tools`
-      );
-
-      // Show failed rules for immediate attention
-      if (summary.rulesFailed > 0) {
-        logInfo(`  ❌ Failed Rules: Check result file for details`);
-      }
-    }
-  }
+  // logProjectSummary removed - rule analysis moved to JSONAnalyzer service
 
   /**
    * Stop after current work is done.

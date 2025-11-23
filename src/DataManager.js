@@ -48,11 +48,9 @@ class DataManager {
       const scanResult = {
         projectPath: project.projectPath,
         projectName: project.getFullName(),
-        analysisResults: analysisResults,
         timestamp: new Date().toISOString(),
         success: true,
-        rulesApplied: analysisResults?.rules?.length || 0,
-        issuesFound: analysisResults?.issues?.length || 0,
+        status: "copied",
       };
 
       // Save to traditional result file
@@ -136,13 +134,11 @@ class DataManager {
                 machine: data.machine || null,
                 operator: data.metadata?.operator || data.operator || null,
                 scanType: data.metadata?.scanType || "auto",
-                status: this._determineStatus(data),
+                status: data.status || "copied",
                 operationCount: data.summary?.totalOperations || 0,
                 ncFileCount: data.summary?.totalNCFiles || 0,
                 timestamp:
-                  data.timestamp || fs.statSync(filePath).mtime.toISOString(),
-                violations: data.violations || [],
-                rulesApplied: data.results?.rulesApplied || [],
+                  data.timestamp || data.processedAt || fs.statSync(filePath).mtime.toISOString(),
               });
             } catch (error) {
               logWarn(`Failed to read result file ${file}:`, error.message);
@@ -181,13 +177,11 @@ class DataManager {
                 machine: data.machine || null,
                 operator: data.metadata?.operator || data.operator || null,
                 scanType: data.metadata?.scanType || "auto",
-                status: this._determineStatus(data),
+                status: data.status || "copied",
                 operationCount: data.summary?.totalOperations || 0,
                 ncFileCount: data.summary?.totalNCFiles || 0,
                 timestamp:
-                  data.timestamp || fs.statSync(filePath).mtime.toISOString(),
-                violations: data.violations || [],
-                rulesApplied: data.results?.rulesApplied || [],
+                  data.timestamp || data.processedAt || fs.statSync(filePath).mtime.toISOString(),
                 session: session,
               });
             } catch (error) {
@@ -262,18 +256,7 @@ class DataManager {
     }
   }
 
-  _determineStatus(data) {
-    if (!data.violations || data.violations.length === 0) {
-      return "passed";
-    }
-
-    const hasErrors = data.violations.some((v) => v.severity === "error");
-    if (hasErrors) {
-      return "failed";
-    }
-
-    return "warning";
-  }
+  // Status determination removed - JSONScanner only returns "copied" status
 
   // Simplified methods for local file storage
   async getScanResults(filters = {}) {

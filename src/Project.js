@@ -605,190 +605,26 @@ class Project {
 
   /**
    * Gets analysis results for web app display.
-   * @returns {Object} - Formatted results for frontend (Dashboard-ready format)
+   * JSONScanner only returns metadata - no rules or violations.
+   * @returns {Object} - Formatted results for frontend (metadata only)
    */
   getAnalysisResults() {
-    // Dashboard-ready format (ScanResult interface)
-    const dashboardFormat = {
-      id: `${this.getFullName()}_${Date.now()}`, // Generate unique ID
+    // Scanner format: metadata only, no rules
+    return {
+      id: this.getFullName(),
       filename: this.getFullName(),
       machine: this.machine,
       operator: this.operator,
-      processedAt: this.analysisResults.processedAt,
-      results: {
-        rulesApplied: this.getRulesApplied(),
-        violations: this.getViolations(),
-        rules: this.getRulesForDisplay(),
-      },
-      status: this.analysisResults.summary.overallStatus,
+      processedAt: this.analysisResults.processedAt || new Date().toISOString(),
+      status: "copied", // Scanner just copies files
       summary: {
-        totalOperations: this.analysisResults.summary.totalOperations || 0,
-        totalNCFiles: this.analysisResults.summary.totalNCFiles || 0,
-      },
-    };
-
-    // Legacy format for backward compatibility (kept for reference)
-    const legacyFormat = {
-      project: this.getFullName(),
-      operator: this.operator,
-      machine: this.machine,
-      position: this.position,
-      hypermillFilePath: this.hypermillFilePath,
-      summary: this.analysisResults.summary,
-      rules: this.getRulesForDisplay(),
-      processedAt: this.analysisResults.processedAt,
-      status: this.analysisResults.status,
-    };
-
-    // Return dashboard format
-    return dashboardFormat;
-  }
-
-  /**
-   * Formats rule results for web app display.
-   * @returns {Array} - Array of rule results for frontend
-   */
-  getRulesForDisplay() {
-    const rulesArray = [];
-
-    this.analysisResults.rules.forEach((ruleResult, ruleName) => {
-      rulesArray.push({
-        name: ruleResult.name,
-        description: ruleResult.description,
-        shouldRun: ruleResult.shouldRun,
-        run: ruleResult.run,
-        passed: ruleResult.passed,
-        failureType: ruleResult.failureType,
-        violationCount: ruleResult.violationCount,
-        failures: ruleResult.failures,
-        status: this.getRuleStatus(ruleResult),
-      });
-    });
-
-    return rulesArray.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  /**
-   * Gets list of rules that were actually executed.
-   * @returns {Array<string>} - Array of rule names that ran
-   */
-  getRulesApplied() {
-    const rulesApplied = [];
-
-    this.analysisResults.rules.forEach((ruleResult) => {
-      if (ruleResult.run) {
-        rulesApplied.push(ruleResult.name);
-      }
-    });
-
-    return rulesApplied.sort();
-  }
-
-  /**
-   * Gets violations in dashboard-ready format.
-   * @returns {Array} - Array of violation objects with rule, message, location
-   */
-  getViolations() {
-    const violations = [];
-
-    this.analysisResults.rules.forEach((ruleResult) => {
-      // Only include rules that ran and failed
-      if (ruleResult.run && !ruleResult.passed && ruleResult.failures) {
-        ruleResult.failures.forEach((failure) => {
-          violations.push({
-            rule: ruleResult.name,
-            message: failure.message || ruleResult.description,
-            location: this.formatFailureLocation(failure),
-          });
-        });
-      }
-    });
-
-    return violations;
-  }
-
-  /**
-   * Formats failure location from failure object.
-   * @param {Object} failure - Failure object from rule
-   * @returns {string} - Formatted location string
-   */
-  formatFailureLocation(failure) {
-    const parts = [];
-
-    if (failure.ncFile) {
-      parts.push(`NC: ${failure.ncFile}`);
-    }
-    if (failure.program) {
-      parts.push(`Program: ${failure.program}`);
-    }
-    if (failure.item && typeof failure.item === "string") {
-      parts.push(failure.item);
-    }
-    if (failure.type) {
-      parts.push(`Type: ${failure.type}`);
-    }
-
-    return parts.length > 0 ? parts.join(", ") : "N/A";
-  }
-
-  /**
-   * Gets a human-readable status for a rule.
-   * @param {Object} ruleResult - Rule result object
-   * @returns {string} - Status string
-   */
-  getRuleStatus(ruleResult) {
-    if (!ruleResult.shouldRun) return "not_applicable";
-    if (!ruleResult.run) return "not_run";
-    if (ruleResult.passed === null) return "not_applicable";
-    if (ruleResult.passed) return "passed";
-    return "failed";
-  }
-
-  /**
-   * Gets the default rule configuration for this project.
-   * This defines rule logic and descriptions.
-   * @returns {Object} - Rule configuration object
-   */
-  getDefaultRuleConfig() {
-    return {
-      gundrill60MinLimit: {
-        description: "Gundrill tools should not exceed 60 minutes per NC file",
-        failureType: "ncfile",
-        // Custom logic: only run if project uses gundrill tools
-        logic: (project) => project.hasToolCategory("gundrill"),
-      },
-      singleToolInNC: {
-        description: "Each NC file should use only one tool",
-        failureType: "ncfile",
-        // Always run
-        logic: (project) => true,
-      },
-      M110Check: {
-        description: "M110 command required for helical drilling operations",
-        failureType: "ncfile",
-        // Only run for machines that support M110
-        logic: (project) => project.machine && project.machine.includes("DMU"),
-      },
-      timeLimitsCheck: {
-        description: "Operation time limits validation",
-        failureType: "job",
-        // Always run
-        logic: (project) => true,
-      },
-      toolReconditionCheck: {
-        description: "Tool reconditioning schedule validation",
-        failureType: "tool",
-        // Don't run for admin users
-        logic: (project) => project.operator !== "admin",
-      },
-      autoCorrection: {
-        description: "Automatic correction of common issues",
-        failureType: "project",
-        // Only run if operator has permission
-        logic: (project) => project.operator && project.operator !== "readonly",
+        totalOperations: this.analysisResults.summary?.totalOperations || 0,
+        totalNCFiles: this.analysisResults.summary?.totalNCFiles || 0,
       },
     };
   }
+
+  // Rule-related methods removed - these belong in JSONAnalyzer service
 
   /**
    * Returns a summary of compound jobs for web display.
