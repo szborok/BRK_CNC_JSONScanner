@@ -21,20 +21,27 @@ class Analyzer {
   analyzeProject(project) {
     logInfo(`Analyzing project "${project.getFullName()}"...`);
 
-    if (!project.jsonFilePath) {
+    // Scanner sets projectPath, not jsonFilePath - set it for other methods to use
+    const jsonPath = project.jsonFilePath || project.projectPath;
+    if (!jsonPath) {
       logWarn(`No JSON file found for project "${project.getFullName()}"`);
       return project;
     }
 
+    // Ensure jsonFilePath is set so getFixedFilePath() works
+    if (!project.jsonFilePath) {
+      project.jsonFilePath = jsonPath;
+    }
+
     const fixedPath = project.getFixedFilePath();
-    const fixedData = this.validateAndFixJson(project.jsonFilePath);
+    const fixedData = this.validateAndFixJson(jsonPath);
 
     if (fixedData) {
       writeJsonFile(fixedPath, fixedData);
       logInfo(`✓ Fixed JSON saved: ${path.basename(fixedPath)}`);
       project.status = "analyzed";
     } else {
-      logWarn(`⚠ Skipped invalid JSON: ${path.basename(project.jsonFilePath)}`);
+      logWarn(`⚠ Skipped invalid JSON: ${path.basename(jsonPath)}`);
       project.status = "analysis_failed";
     }
 

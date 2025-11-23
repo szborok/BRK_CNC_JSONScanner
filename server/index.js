@@ -352,13 +352,17 @@ app.post("/api/config", async (req, res) => {
       scanPaths,
     });
 
-    // Start Executor only if autoRun is true
+    // Start or stop Executor based on autoRun
     if (autoRun && !executor) {
       Logger.logInfo("Starting Executor after config update...");
       executor = new Executor(dataManager);
       executor.start().catch((error) => {
         Logger.logError("Executor error", { error: error.message });
       });
+    } else if (!autoRun && executor) {
+      Logger.logInfo("Stopping Executor (manual mode enabled)...");
+      await executor.stop();
+      executor = null;
     }
 
     res.json({
@@ -380,6 +384,46 @@ app.post("/api/config", async (req, res) => {
         message: "Failed to apply configuration",
         details: error.message,
       },
+    });
+  }
+});
+
+/**
+ * POST /api/scan
+ * Simple endpoint for AutoRunProcessor to trigger scan
+ */
+app.post("/api/scan", async (req, res) => {
+  try {
+    const scanPath = config.getScanPath();
+    const Executor = require("../src/Executor");
+    const executor = new Executor(dataManager);
+
+    await executor.scanner.start();
+    await executor.scanner.performScan(scanPath);
+    const projects = executor.scanner.getProjects();
+
+    let processed = 0;
+    for (const project of projects) {
+      if (project.status === "ready") {
+        await executor.processProject(project);
+        processed++;
+      }
+    }
+
+    executor.scanner.stop();
+
+    res.json({
+      success: true,
+      message: `${processed} projects processed`,
+      processed
+    });
+  } catch (error) {
+    Logger.logError("Scan failed", { error: error.message });
+    res.status(500).json({
+      error: {
+        code: "SCAN_FAILED",
+        message: error.message
+      }
     });
   }
 });
@@ -521,17 +565,7 @@ async function startServer() {
     }
 
     const server = app.listen(PORT, () => {
-      Logger.logInfo(
-        `🚀 JSONScanner API Server running on http://localhost:${PORT}`
-      );
-      console.log(
-        `🚀 JSONScanner API Server running on http://localhost:${PORT}`
-      );
-      console.log(`📊 Mode: ${config.app.testMode ? "TEST" : "PRODUCTION"}`);
-      console.log(
-        `🔄 Auto-run: ${config.app.autorun ? "ENABLED" : "DISABLED"}`
-      );
-      console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
+      console.log(`API Server running on http://localhost:${PORT}`);
     });
     
     // Handle port binding errors

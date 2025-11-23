@@ -60,17 +60,9 @@ class Results {
         return null;
       }
 
-      // Generate result filename based on project
-      const originalResultPath = project.getResultFilePath();
-      if (!originalResultPath) {
-        logError(
-          `Cannot generate result file path for project: ${project.getFullName()}`
-        );
-        return null;
-      }
-
-      // Create result file in organized temp folder
-      const resultFileName = path.basename(originalResultPath);
+      // Generate result filename based on project name
+      const projectName = project.getFullName();
+      const resultFileName = `${projectName}_${config.files.resultSuffix}${config.files.jsonExtension}`;
 
       // Use TempFileManager's organized save method
       const tempResultPath = this.tempManager.saveToTemp(

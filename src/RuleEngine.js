@@ -173,6 +173,12 @@ class RuleEngine {
       }
     }
 
+    // Skip data properties that aren't executable rules
+    const dataProperties = ['processedAt', 'summary', 'rules'];
+    if (dataProperties.includes(ruleName)) {
+      return false; // Silently skip - these are data properties, not rules
+    }
+
     // No logic defined, default to not running
     logWarn(`No logic defined for rule: ${ruleName}`);
     return false;

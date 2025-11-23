@@ -13,7 +13,7 @@ const { ensureDirectory, getJsonFiles } = require("../utils/FileUtils");
 class Project {
   constructor(projectPath) {
     this.projectPath = projectPath;
-    this.name = path.basename(projectPath); // e.g., "W5270NS01003"
+    this.name = path.basename(projectPath, '.json'); // e.g., "W5270NS01003" - strip .json extension
     this.position = null; // e.g., "A", "B" - extracted from JSON file name
     this.machine = null; // e.g., "DMU 100P duoblock Minus"
     this.operator = null; // e.g., "aszilagyi"
@@ -471,6 +471,12 @@ class Project {
         );
         return false; // Default to not running if logic fails
       }
+    }
+
+    // Skip data properties that aren't executable rules
+    const dataProperties = ['processedAt', 'summary', 'rules'];
+    if (dataProperties.includes(ruleName)) {
+      return false; // Silently skip - these are data properties, not rules
     }
 
     // Fallback: if no logic defined, don't run (safer default)

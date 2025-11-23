@@ -78,11 +78,29 @@ class Scanner {
     const scanRecursive = (dir) => {
       try {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
+        
+        // Check if this directory has both JSON and NC program files
+        const filesInDir = entries.filter(e => e.isFile()).map(e => e.name);
+        const hasJson = filesInDir.some(f => f.endsWith('.json'));
+        const hasNcFiles = filesInDir.some(f => 
+          f.endsWith('.nc') || f.endsWith('.NC') || 
+          f.endsWith('.h') || f.endsWith('.H') || // Heidenhain
+          f.endsWith('.mpf') || f.endsWith('.MPF') || // Siemens
+          f.endsWith('.eia') || f.endsWith('.EIA') // EIA/ISO
+        );
+        
         for (const entry of entries) {
           const fullPath = path.join(dir, entry.name);
           if (entry.isDirectory()) {
             scanRecursive(fullPath);
-          } else if (entry.isFile() && entry.name.endsWith('.json')) {
+          } else if (entry.isFile() && entry.name.endsWith('.json') && hasNcFiles) {
+            // Skip files we already processed (BRK_ prefix, _fixed, _result suffixes)
+            if (entry.name.startsWith('BRK_') || 
+                entry.name.includes('_fixed.json') || 
+                entry.name.includes('_result.json')) {
+              continue;
+            }
+            // Only include original JSON files if this folder has NC files
             jsonFiles.push(fullPath);
           }
         }
@@ -96,41 +114,108 @@ class Scanner {
   }
 
   async createProjectFromFile(jsonFilePath) {
-    const data = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+    if (!jsonFilePath) {
+      throw new Error('jsonFilePath is required');
+    }
     
     // Extract metadata from path structure
     const parts = jsonFilePath.split(path.sep);
     const fileName = path.basename(jsonFilePath, '.json');
     const machine = parts.find(p => p.includes('DMU') || p.includes('DMC') || p.includes('Trimill')) || null;
     
-    // Create Project instance
-    const project = new Project();
-    project.projectPath = jsonFilePath;
-    project.fileName = fileName;
-    project.machine = data.machine || machine;
-    project.operator = data.operator || data.user || null;
-    project.status = "ready";
+    // Extract project name (parent folder of part number)
+    const jsonFilesIndex = parts.findIndex(p => p === 'json_files');
+    const projectName = jsonFilesIndex !== -1 ? parts[jsonFilesIndex + 1] : parts[parts.length - 4] || 'Unknown_Project';
     
-    // Parse JSON structure
-    if (data.jobs && Array.isArray(data.jobs)) {
-      project.jobs = data.jobs;
+    // Check if we need to copy (file is new or modified)
+    const brkFileName = `BRK_${fileName}.json`;
+    
+    if (!this.tempManager || !this.tempManager.sessionPath) {
+      logError(`TempFileManager not initialized properly!`);
+      throw new Error(`TempFileManager not properly initialized`);
     }
     
-    // Set basic analysis results (metadata only - no rules)
-    project.setAnalysisResults({
-      processedAt: new Date().toISOString(),
-      summary: {
-        totalOperations: data.jobs ? data.jobs.length : 0,
-        totalNCFiles: data.jobs ? data.jobs.filter(j => j.type === 'ncFile').length : 0
-      },
-      rules: new Map() // Empty rules - JSONAnalyzer will add these
-    });
+    const targetPath = path.join(this.tempManager.sessionPath, projectName, machine || 'Unknown_Machine', brkFileName);
     
-    // Copy file to temp
-    const copiedPath = this.tempManager.copyToTemp(jsonFilePath, "input_json_files");
-    logInfo(`📄 Copied: ${fileName}`);
+    const sourceStats = fs.statSync(jsonFilePath);
+    let needsCopy = !fs.existsSync(targetPath);
     
-    return project;
+    if (!needsCopy) {
+      const targetStats = fs.statSync(targetPath);
+      needsCopy = sourceStats.mtime > targetStats.mtime;
+    }
+    
+    if (!needsCopy && !config.app.forceReprocess) {
+      logInfo(`⏭️  Skipped (unchanged): ${fileName}`);
+      return null; // Skip unchanged files
+    }
+    
+    // Sanitize JSON and copy to temp
+    try {
+      const rawContent = fs.readFileSync(jsonFilePath, 'utf8');
+      
+      // Fix NaN values (invalid JSON) before copying
+      let sanitized = rawContent.replace(/:\s*NaN\s*,/g, ": null,");
+      sanitized = sanitized.replace(/:\s*NaN\s*}/g, ": null}");
+      
+      // Parse to validate it's valid JSON after sanitization
+      const data = JSON.parse(sanitized);
+      
+      // Copy sanitized version to temp with BRK_ prefix in project/machine folder
+      const copiedPath = this.tempManager.saveToTemp(
+        brkFileName,
+        sanitized,
+        "input",
+        projectName,
+        machine || 'Unknown_Machine'
+      );
+      
+      if (!copiedPath) {
+        throw new Error('saveToTemp returned undefined');
+      }
+      
+      // Copy related NC/H files from same directory
+      const sourceDir = path.dirname(jsonFilePath);
+      const targetDir = path.dirname(copiedPath);
+      const relatedExtensions = ['.nc', '.h', '.tls'];
+      
+      try {
+        const filesInSourceDir = fs.readdirSync(sourceDir);
+        for (const file of filesInSourceDir) {
+          const ext = path.extname(file).toLowerCase();
+          if (relatedExtensions.includes(ext)) {
+            const sourceFile = path.join(sourceDir, file);
+            const brkTargetFile = path.join(targetDir, `BRK_${file}`);
+            fs.copyFileSync(sourceFile, brkTargetFile);
+          }
+        }
+      } catch (copyErr) {
+        logWarn(`Could not copy related files for ${fileName}: ${copyErr.message}`);
+      }
+      
+      // Create Project instance with the copied path
+      const project = new Project(copiedPath);
+      project.fileName = fileName;
+      project.machine = data.machine || machine;
+      project.operator = data.operator || data.user || null;
+      project.status = "ready";
+      
+      // Set basic analysis results
+      project.setAnalysisResults({
+        processedAt: new Date().toISOString(),
+        summary: {
+          totalOperations: data.operations ? data.operations.length : 0,
+          totalNCFiles: 0 // Will be calculated by Analyzer
+        },
+        rules: new Map()
+      });
+      
+      logInfo(`📄 Copied & sanitized: ${fileName}`);
+      return project;
+    } catch (parseError) {
+      logError(`Failed to sanitize ${fileName}: ${parseError.message}`);
+      throw parseError;
+    }
   }
 
   getProjects() {

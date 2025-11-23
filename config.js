@@ -13,9 +13,10 @@ const systemConfig = loadConfig();
 const config = {
   // Application settings
   app: {
-    mode: 'auto', // 'test' = test data + manual trigger, 'manual' = production + manual trigger, 'auto' = production + autorun
+    mode: 'manual', // 'manual' = only run when triggered via API (AutoRunProcessor manages automation)
+    autorun: false, // Explicit: no auto-scanning - AutoRunProcessor handles automation
     useTestPaths: true, // Override to use test-data paths even in auto mode
-    scanIntervalMs: 60000, // How often the autorun scanner checks for new JSONs (60 seconds)
+    scanIntervalMs: 60000, // Not used - AutoRunProcessor handles timing
     logLevel: systemConfig?.advanced?.logLevel || "info", // can be: 'debug', 'info', 'warn', 'error'
     enableDetailedLogging: true,
     enableProgressReporting: true, // Show progress during bulk file operations
@@ -149,7 +150,7 @@ const config = {
 
   // File filtering for temp operations
   tempFiles: {
-    essentialExtensions: [".json", ".h", ".tls"], // Only copy these file types
+    essentialExtensions: [".json", ".nc", ".h", ".tls"], // Copy JSON + NC files (rules need to check NC content)
     skipExtensions: [".gif", ".png", ".jpg", ".html", ".stl", ".vcproject"], // Skip these file types
     sessionTrackingExtension: ".session", // Extension for session tracking files
   },
@@ -157,8 +158,8 @@ const config = {
   // File naming
   files: {
     jsonExtension: ".json",
-    fixedSuffix: "BRK_fixed",
-    resultSuffix: "BRK_result",
+    fixedSuffix: "fixed",
+    resultSuffix: "result",
   },
 
   // Tool categories for rules

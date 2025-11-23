@@ -99,6 +99,12 @@ class Executor {
         }
       }
 
+      // Trigger downstream services if new files were found
+      if (projects.length > 0) {
+        logInfo(`🔗 Triggering downstream services for ${projects.length} new project(s)...`);
+        await this.triggerDownstreamServices();
+      }
+
       // Wait before scanning again with countdown
       if (this.isRunning && config.app.autorun) {
         await this.waitWithCountdown(config.app.scanIntervalMs, scanCount);
@@ -264,23 +270,24 @@ class Executor {
       }) at ${nextScanTime.toLocaleTimeString()}`
     );
 
-    // Show countdown every 10 seconds for intervals >= 30 seconds
+    // Show countdown at milestone intervals only (50s, 30s, 10s)
     if (totalSeconds >= 30) {
-      for (let remaining = totalSeconds; remaining > 0; remaining -= 10) {
-        if (remaining <= totalSeconds && remaining > 10) {
-          logInfo(
-            `⏳ ${remaining} seconds remaining until scan #${scanCount + 1}...`
-          );
-        }
-
-        const waitTime = Math.min(10000, remaining * 1000);
+      const milestones = [50, 30, 10].filter(m => m < totalSeconds);
+      let lastMilestone = totalSeconds;
+      
+      for (const milestone of milestones) {
+        const waitTime = (lastMilestone - milestone) * 1000;
         await new Promise((resolve) => setTimeout(resolve, waitTime));
-
-        // Check if we should stop
-        if (!this.isRunning || !config.app.autorun) {
-          return;
-        }
+        
+        if (!this.isRunning || !config.app.autorun) return;
+        
+        logInfo(`⏳ ${milestone} seconds remaining until scan #${scanCount + 1}...`);
+        lastMilestone = milestone;
       }
+      
+      // Wait remaining time to 0
+      const finalWait = lastMilestone * 1000;
+      await new Promise((resolve) => setTimeout(resolve, finalWait));
     } else {
       // For shorter intervals, just wait without countdown
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
@@ -297,6 +304,68 @@ class Executor {
    * @param {Object} ruleResults - Rule execution results
    */
   // logProjectSummary removed - rule analysis moved to JSONAnalyzer service
+
+  /**
+   * Trigger downstream services (Analyzer and ToolManager) via API
+   * Runs sequentially: Analyzer first, then ToolManager
+   * The API endpoints block until processing completes, ensuring sequential execution
+   */
+  async triggerDownstreamServices() {
+    try {
+      // Step 1: Trigger JSONAnalyzer and WAIT for completion (endpoint blocks)
+      logInfo('📡 Calling JSONAnalyzer...');
+      
+      // Retry logic for Analyzer (may not be ready yet on first scan)
+      let analyzerSuccess = false;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const analyzerResponse = await fetch('http://localhost:3005/api/trigger-scan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
+          
+          if (analyzerResponse.ok) {
+            const analyzerResult = await analyzerResponse.json();
+            logInfo(`✅ JSONAnalyzer completed: ${analyzerResult.processed || 0} project(s)`);
+            analyzerSuccess = true;
+            break;
+          } else {
+            logWarn(`⚠️ JSONAnalyzer returned status ${analyzerResponse.status} (attempt ${attempt}/3)`);
+          }
+        } catch (fetchError) {
+          if (attempt < 3) {
+            logWarn(`⚠️ JSONAnalyzer not ready yet, retrying in 3s... (attempt ${attempt}/3)`);
+            await new Promise(resolve => setTimeout(resolve, 3000));
+          } else {
+            throw fetchError;
+          }
+        }
+      }
+      
+      if (!analyzerSuccess) {
+        logWarn('⚠️ JSONAnalyzer did not respond after 3 attempts, skipping downstream trigger');
+        return;
+      }
+
+      // Step 2: Trigger ToolManager AFTER Analyzer completes
+      logInfo('📡 Calling ToolManager...');
+      const toolResponse = await fetch('http://localhost:3002/api/trigger-scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      if (toolResponse.ok) {
+        const toolResult = await toolResponse.json();
+        logInfo(`✅ ToolManager completed`);
+      } else {
+        logWarn(`⚠️ ToolManager returned status ${toolResponse.status}`);
+      }
+      
+      logInfo('🎯 All downstream services completed');
+    } catch (error) {
+      logError(`Failed to trigger downstream services: ${error.message}`);
+    }
+  }
 
   /**
    * Stop after current work is done.

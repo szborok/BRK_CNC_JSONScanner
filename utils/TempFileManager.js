@@ -46,11 +46,15 @@ class TempFileManager {
       this.sessionPath = path.join(this.appPath, this.sessionId);
     }
 
-    // Create organized subdirectories for different types of files
-    this.collectedJsonsPath = path.join(this.sessionPath, "collected_jsons");
-    this.fixedJsonsPath = path.join(this.sessionPath, "fixed_jsons");
+    // Simple structure: projects organized by name/machine with all files together
+    // No separate collected_jsons/fixed_jsons - everything in project folder
+    this.projectsPath = this.sessionPath;
     this.resultsPath = path.join(this.sessionPath, "results");
-    this.inputFilesPath = path.join(this.sessionPath, "input_files");
+    
+    // Legacy properties for compatibility
+    this.collectedJsonsPath = this.sessionPath;
+    this.fixedJsonsPath = this.sessionPath;
+    this.inputFilesPath = this.sessionPath;
 
     this.fileHashes = new Map(); // Track file hashes for change detection
     this.copyQueue = new Map(); // Track copy operations
@@ -91,24 +95,38 @@ class TempFileManager {
         logInfo(`Created session directory: ${this.sessionPath}`);
       }
 
-      // Create organized subdirectories
-      const subdirs = [
-        { path: this.collectedJsonsPath, name: "collected_jsons" },
-        { path: this.fixedJsonsPath, name: "fixed_jsons" },
-        { path: this.resultsPath, name: "results" },
-        { path: this.inputFilesPath, name: "input_files" },
-      ];
-
-      for (const subdir of subdirs) {
-        if (!fs.existsSync(subdir.path)) {
-          fs.mkdirSync(subdir.path, { recursive: true });
-          logInfo(`Created ${subdir.name} directory: ${subdir.path}`);
-        }
+      // Create results directory (project folders are created as files are copied)
+      if (!fs.existsSync(this.resultsPath)) {
+        fs.mkdirSync(this.resultsPath, { recursive: true });
+        logInfo(`Created results directory: ${this.resultsPath}`);
       }
     } catch (error) {
       logError("Failed to create temp directories:", error);
       throw error;
     }
+  }
+
+  /**
+   * Extract project folder structure from source path
+   * Expected source: json_files/ProjectName/PartNumber/Machine/file.ext
+   * Target: ProjectName/Machine/BRK_file.ext
+   */
+  extractProjectPath(sourcePath) {
+    const parts = sourcePath.split(path.sep);
+    const jsonFilesIndex = parts.findIndex(p => p === 'json_files');
+    
+    if (jsonFilesIndex === -1) {
+      // Fallback: no json_files folder, use last 3 components
+      const projectName = parts[parts.length - 4] || 'Unknown_Project';
+      const machine = parts[parts.length - 2] || 'Unknown_Machine';
+      return { projectName, machine };
+    }
+    
+    // json_files/ProjectName/PartNumber/Machine/file.ext
+    const projectName = parts[jsonFilesIndex + 1] || 'Unknown_Project';
+    const machine = parts[jsonFilesIndex + 3] || 'Unknown_Machine';
+    
+    return { projectName, machine };
   }
 
   /**
@@ -121,27 +139,23 @@ class TempFileManager {
   async copyToTemp(sourcePath, fileType = "input", preserveStructure = true) {
     try {
       const sourceStats = fs.statSync(sourcePath);
-
-      // Determine target directory based on file type
+      
+      // Extract project/machine from source path
+      const { projectName, machine } = this.extractProjectPath(sourcePath);
+      
+      // Determine target directory
       let targetBasePath;
-      switch (fileType) {
-        case "collected_json":
-          targetBasePath = this.collectedJsonsPath;
-          break;
-        case "fixed_json":
-          targetBasePath = this.fixedJsonsPath;
-          break;
-        case "result":
-          targetBasePath = this.resultsPath;
-          break;
-        case "input":
-        default:
-          targetBasePath = this.inputFilesPath;
-          break;
+      if (fileType === "result") {
+        targetBasePath = this.resultsPath;
+      } else {
+        // All files go to ProjectName/Machine/ folder
+        targetBasePath = path.join(this.sessionPath, projectName, machine);
       }
-
-      const relativePath = this.getRelativePath(sourcePath);
-      const tempPath = path.join(targetBasePath, relativePath);
+      
+      // Create BRK-prefixed filename
+      const fileName = path.basename(sourcePath);
+      const brkFileName = fileName.startsWith('BRK_') ? fileName : `BRK_${fileName}`;
+      const tempPath = path.join(targetBasePath, brkFileName);
 
       if (sourceStats.isDirectory()) {
         return await this.copyDirectoryToTemp(sourcePath, tempPath);
@@ -505,11 +519,25 @@ class TempFileManager {
    * @param {string} fileType - Type of file for organization
    * @returns {string} - Path where file was saved
    */
-  saveToTemp(filename, content, fileType = "result") {
+  saveToTemp(filename, content, fileType = "result", projectName = null, machine = null) {
     try {
-      const targetDir = this.getPathForType(fileType);
+      let targetDir;
+      if (fileType === "result") {
+        targetDir = this.resultsPath;
+      } else if (projectName && machine) {
+        // Save to project/machine folder
+        targetDir = path.join(this.sessionPath, projectName, machine);
+      } else {
+        // Fallback to old behavior
+        targetDir = this.getPathForType(fileType);
+      }
+      
+      // Ensure directory exists
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true });
+      }
+      
       const filePath = path.join(targetDir, filename);
-
       fs.writeFileSync(filePath, content, "utf8");
       logInfo(`📄 Saved ${fileType}: ${filename}`);
 
