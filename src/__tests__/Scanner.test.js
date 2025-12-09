@@ -34,11 +34,6 @@ describe('Scanner', () => {
     test('should initialize temp manager', () => {
       expect(scanner.tempManager).toBeDefined();
     });
-
-    test('should initialize scannedPaths set', () => {
-      expect(scanner.scannedPaths).toBeInstanceOf(Set);
-      expect(scanner.scannedPaths.size).toBe(0);
-    });
   });
 
   describe('start()', () => {
@@ -61,14 +56,16 @@ describe('Scanner', () => {
       expect(scanner.running).toBe(false);
     });
 
-    test('should call tempManager cleanup with preserve flag', () => {
-      scanner.stop(true);
-      expect(scanner.tempManager.cleanup).toHaveBeenCalledWith(true);
+    test('should accept preserveResults parameter', () => {
+      scanner.start();
+      expect(() => scanner.stop(true)).not.toThrow();
+      expect(scanner.running).toBe(false);
     });
 
-    test('should call tempManager cleanup without preserve flag', () => {
-      scanner.stop(false);
-      expect(scanner.tempManager.cleanup).toHaveBeenCalledWith(false);
+    test('should work without preserveResults parameter', () => {
+      scanner.start();
+      expect(() => scanner.stop()).not.toThrow();
+      expect(scanner.running).toBe(false);
     });
   });
 

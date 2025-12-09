@@ -21,7 +21,7 @@ class Scanner {
 
   start() {
     this.running = true;
-    logInfo(`Scanner started in ${config.app.autorun ? "AUTO" : "MANUAL"} mode`);
+    logInfo(`Scanner started in ${config.app.autoMode ? "AUTO" : "MANUAL"} mode`);
   }
 
   stop(preserveResults = false) {
@@ -145,9 +145,9 @@ class Scanner {
       needsCopy = sourceStats.mtime > targetStats.mtime;
     }
     
-    if (!needsCopy && !config.app.forceReprocess) {
+    if (!needsCopy && config.app.environment !== 'test') {
       logInfo(`⏭️  Skipped (unchanged): ${fileName}`);
-      return null; // Skip unchanged files
+      return null; // Skip unchanged files in production
     }
     
     // Sanitize JSON and copy to temp

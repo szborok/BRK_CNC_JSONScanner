@@ -121,6 +121,9 @@ describe('Integration Tests - Real Execution', () => {
       const scanner = new Scanner();
       scanner.start();
       
+      // Force reprocessing by clearing projects array first
+      scanner.projects = [];
+      
       await scanner.performScan(testDataPath);
       const projects = scanner.getProjects();
       

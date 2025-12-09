@@ -33,7 +33,7 @@ class Executor {
     this.isRunning = true;
 
     logInfo(
-      `Executor started (${config.app.autorun ? "AUTO" : "MANUAL"} mode).`
+      `Executor started in ${config.app.mode.toUpperCase()} mode.`
     );
 
     // Scanner is stub - skip start call
@@ -41,7 +41,7 @@ class Executor {
       this.scanner.start();
     }
 
-    if (config.app.autorun) {
+    if (config.app.mode === 'auto') {
       await this.runAutorunCycle();
     } else if (options.projectPath) {
       // Manual mode with specific project path
@@ -59,7 +59,9 @@ class Executor {
   async runAutorunCycle() {
     let scanCount = 0;
 
-    while (this.isRunning && config.app.autorun) {
+    logInfo(`🔄 Auto mode enabled - will check for new files every ${config.processing.scanIntervalMs / 1000} seconds`);
+
+    while (this.isRunning && config.app.mode === 'auto') {
       scanCount++;
       const scanStartTime = new Date();
 
@@ -106,8 +108,8 @@ class Executor {
       }
 
       // Wait before scanning again with countdown
-      if (this.isRunning && config.app.autorun) {
-        await this.waitWithCountdown(config.app.scanIntervalMs, scanCount);
+      if (this.isRunning && config.app.mode === 'auto') {
+        await this.waitWithCountdown(config.processing.scanIntervalMs, scanCount);
       }
     }
   }
@@ -184,9 +186,9 @@ class Executor {
   async runManualProject(projectPath) {
     logInfo(`Manual run requested for: ${projectPath}`);
 
-    if (config.app.autorun) {
-      logWarn("Autorun active — will pause after current project.");
-      config.app.autorun = false;
+    if (config.app.mode === 'auto') {
+      logWarn("Auto mode active — will pause after current project.");
+      config.app.mode = 'manual';
     }
 
     this.manualQueue.push({ path: projectPath });
@@ -209,8 +211,8 @@ class Executor {
       logError(`Manual project processing failed: ${err.message}`);
     }
 
-    logInfo("Manual project finished. Resuming autorun...");
-    config.app.autorun = true;
+    logInfo("Manual project finished. Resuming auto mode...");
+    config.app.mode = 'auto';
     await this.start();
   }
 
@@ -220,7 +222,7 @@ class Executor {
   async runManualMode() {
     try {
       logInfo(
-        `Starting manual mode (${config.app.testMode ? "TEST" : "PRODUCTION"})`
+        `Starting manual mode in ${config.app.environment.toUpperCase()} environment`
       );
 
       // Use the scanner's path resolution method with async support
@@ -279,7 +281,7 @@ class Executor {
         const waitTime = (lastMilestone - milestone) * 1000;
         await new Promise((resolve) => setTimeout(resolve, waitTime));
         
-        if (!this.isRunning || !config.app.autorun) return;
+        if (!this.isRunning || config.app.mode !== 'auto') return;
         
         logInfo(`⏳ ${milestone} seconds remaining until scan #${scanCount + 1}...`);
         lastMilestone = milestone;
@@ -293,7 +295,7 @@ class Executor {
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
 
-    if (this.isRunning && config.app.autorun) {
+    if (this.isRunning && config.app.mode === 'auto') {
       logInfo(`🎯 Starting scan #${scanCount + 1} now...`);
     }
   }
@@ -306,14 +308,16 @@ class Executor {
   // logProjectSummary removed - rule analysis moved to JSONAnalyzer service
 
   /**
-   * Trigger downstream services (Analyzer and ToolManager) via API
-   * Runs sequentially: Analyzer first, then ToolManager
-   * The API endpoints block until processing completes, ensuring sequential execution
+   * Trigger downstream services in sequence: JSONAnalyzer → ToolManager
+   * SEQUENTIAL FLOW: Each service completes before the next is triggered
+   * This ensures proper data flow: Scanner → Analyzer → ToolManager
    */
   async triggerDownstreamServices() {
     try {
+      logInfo('🔗 Starting sequential downstream processing chain...');
+      
       // Step 1: Trigger JSONAnalyzer and WAIT for completion (endpoint blocks)
-      logInfo('📡 Calling JSONAnalyzer...');
+      logInfo('   → 1/2: Calling JSONAnalyzer...');
       
       // Retry logic for Analyzer (may not be ready yet on first scan)
       let analyzerSuccess = false;
@@ -326,15 +330,15 @@ class Executor {
           
           if (analyzerResponse.ok) {
             const analyzerResult = await analyzerResponse.json();
-            logInfo(`✅ JSONAnalyzer completed: ${analyzerResult.processed || 0} project(s)`);
+            logInfo(`   → ✅ JSONAnalyzer completed: ${analyzerResult.processed || 0} project(s)`);
             analyzerSuccess = true;
             break;
           } else {
-            logWarn(`⚠️ JSONAnalyzer returned status ${analyzerResponse.status} (attempt ${attempt}/3)`);
+            logWarn(`   → ⚠️ JSONAnalyzer returned status ${analyzerResponse.status} (attempt ${attempt}/3)`);
           }
         } catch (fetchError) {
           if (attempt < 3) {
-            logWarn(`⚠️ JSONAnalyzer not ready yet, retrying in 3s... (attempt ${attempt}/3)`);
+            logWarn(`   → ⚠️ JSONAnalyzer not ready yet, retrying in 3s... (attempt ${attempt}/3)`);
             await new Promise(resolve => setTimeout(resolve, 3000));
           } else {
             throw fetchError;
@@ -343,12 +347,12 @@ class Executor {
       }
       
       if (!analyzerSuccess) {
-        logWarn('⚠️ JSONAnalyzer did not respond after 3 attempts, skipping downstream trigger');
+        logWarn('   → ⚠️ JSONAnalyzer did not respond after 3 attempts, skipping downstream trigger');
         return;
       }
 
       // Step 2: Trigger ToolManager AFTER Analyzer completes
-      logInfo('📡 Calling ToolManager...');
+      logInfo('   → 2/2: Calling ToolManager...');
       const toolResponse = await fetch('http://localhost:3002/api/trigger-scan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
@@ -356,12 +360,12 @@ class Executor {
       
       if (toolResponse.ok) {
         const toolResult = await toolResponse.json();
-        logInfo(`✅ ToolManager completed`);
+        logInfo(`   → ✅ ToolManager completed`);
       } else {
-        logWarn(`⚠️ ToolManager returned status ${toolResponse.status}`);
+        logWarn(`   → ⚠️ ToolManager returned status ${toolResponse.status}`);
       }
       
-      logInfo('🎯 All downstream services completed');
+      logInfo('🎯 Sequential downstream processing chain completed');
     } catch (error) {
       logError(`Failed to trigger downstream services: ${error.message}`);
     }

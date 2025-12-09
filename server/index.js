@@ -61,8 +61,8 @@ async function initializeDataManager() {
 app.get("/api/status", (req, res) => {
   res.json({
     status: "running",
-    mode: config.app.autorun ? "auto" : "manual",
-    testMode: config.app.testMode,
+    mode: config.app.mode,
+    environment: config.app.environment,
     version: "2.0.0",
     timestamp: new Date().toISOString(),
     dataManager: dataManager ? "initialized" : "not initialized",
@@ -342,7 +342,11 @@ app.post("/api/config", async (req, res) => {
     }
 
     if (scanPaths?.jsonFiles) {
+      // Ensure paths.test exists before setting property
+      if (!config.paths) config.paths = {};
+      if (!config.paths.test) config.paths.test = {};
       config.paths.test.testDataPathAuto = scanPaths.jsonFiles;
+      Logger.logInfo(`📁 Scan path set to: ${scanPaths.jsonFiles}`);
     }
 
     Logger.logInfo("✅ Configuration updated from Dashboard", {
@@ -554,14 +558,16 @@ async function startServer() {
     }
 
     // Start Executor if in auto mode
-    if (config.app.autorun) {
-      Logger.logInfo("Starting Executor in AUTO mode...");
+    if (config.app.mode === 'auto') {
+      Logger.logInfo("Starting Executor in AUTO mode (timer-based scanning)...");
       executor = new Executor(dataManager);
       // Don't await - let it run in background
       executor.start().catch((error) => {
         Logger.logError("Executor error", { error: error.message });
       });
       Logger.logInfo("Executor started successfully");
+    } else {
+      Logger.logInfo(`Running in ${config.app.mode.toUpperCase()} mode - waiting for API calls`);
     }
 
     const server = app.listen(PORT, () => {
